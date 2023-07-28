@@ -9,7 +9,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 
-export const EventItemCard = ({ event }) => {
+export const EventItemCard = ({ event, categories }) => {
   return (
     <Card
       mt={8}
@@ -53,25 +53,22 @@ export const EventItemCard = ({ event }) => {
           </Stack>
         </Stack>
         <Center mt={3}>
-          {event.categoryIds.map(
-            (category) => (
-              <Tag
-                key={category}
-                size={"sm"}
-                maxBlockSize={2}
-                bg="brand.300"
-                m={2}
-                textAlign={"center"}
-                color="blue.600"
-                fontWeight={"semibold"}
-                py={1}
-                textTransform={"uppercase"}
-              >
-                {category}
-              </Tag>
-            )
-            //console.log(label)
-          )}
+          {categories.map((category) => (
+            <Tag
+              key={category}
+              size={"sm"}
+              maxBlockSize={2}
+              bg="brand.300"
+              m={2}
+              textAlign={"center"}
+              color="blue.600"
+              fontWeight={"semibold"}
+              py={1}
+              textTransform={"uppercase"}
+            >
+              {category.name}
+            </Tag>
+          ))}
         </Center>
       </CardBody>
     </Card>
