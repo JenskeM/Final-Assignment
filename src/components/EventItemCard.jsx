@@ -34,7 +34,7 @@ export const EventItemCard = ({ event }) => {
           />
         </Center>
         <Stack mt="6" spacing="3" alignItems={"center"}>
-          <Heading size="md" textAlign={"center"}>
+          <Heading size="md" textAlign={"center"} color="brand.100">
             {event.title}
           </Heading>
           <Stack direction={"row"}>
@@ -42,7 +42,7 @@ export const EventItemCard = ({ event }) => {
               Description:
             </Text>
             <Text
-              color="blue.600"
+              color="blue.400"
               fontSize="sm"
               fontWeight={"semibold"}
               textTransform={"capitalize"}
@@ -59,10 +59,10 @@ export const EventItemCard = ({ event }) => {
                 key={category}
                 size={"sm"}
                 maxBlockSize={2}
-                bg="purple.100"
+                bg="brand.300"
                 m={2}
                 textAlign={"center"}
-                color="purple.600"
+                color="blue.600"
                 fontWeight={"semibold"}
                 py={1}
                 textTransform={"uppercase"}
