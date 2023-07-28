@@ -24,11 +24,7 @@ export const EventsPage = () => {
         columnGap={10}
       >
         {events.map((event) => {
-          return (
-            <EventItemCard key={event.id} event={event}>
-              {event.title}
-            </EventItemCard>
-          );
+          return <EventItemCard key={event.id} event={event} />;
         })}
       </Grid>
     </Box>
