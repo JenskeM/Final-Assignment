@@ -9,10 +9,13 @@ import { Root } from "./components/Root";
 //extend the theme
 const colors = {
   brand: {
-    100: "#f1356d",
-    200: "#333",
-    300: "#f2f2f2",
-    400: "#fafafa",
+    100: "#fafafa",
+    200: "#f1356d",
+    300: "#F8B195",
+    400: "#F67280",
+    500: "#C06C84",
+    600: "#6C5B7B",
+    700: "#355C7D",
   },
 };
 

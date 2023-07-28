@@ -58,7 +58,7 @@ export const EventItemCard = ({ event, categories }) => {
               key={category}
               size={"sm"}
               maxBlockSize={2}
-              bg="brand.300"
+              bg="brand.100"
               m={2}
               textAlign={"center"}
               color="blue.600"
