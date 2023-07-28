@@ -16,11 +16,10 @@ export const EventsPage = () => {
   return (
     <Box marginLeft={3}>
       <Heading>List of events</Heading>
-      <ul>
-        {events.map((event) => {
-          return <li key={event.id}>{event.title}</li>;
-        })}
-      </ul>
+
+      {events.map((event) => {
+        return <li key={event.id}>{event.title}</li>;
+      })}
     </Box>
   );
 };
