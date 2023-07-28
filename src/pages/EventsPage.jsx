@@ -1,6 +1,7 @@
 import React from "react";
-import { Heading, Box } from "@chakra-ui/react";
+import { Heading, Box, Grid } from "@chakra-ui/react";
 import { useLoaderData } from "react-router-dom";
+import { EventItemCard } from "../components/EventItemCard";
 
 export const loader = async () => {
   const events = await fetch(`http://localhost:3000/events`);
@@ -15,11 +16,21 @@ export const EventsPage = () => {
 
   return (
     <Box marginLeft={3}>
-      <Heading>List of events</Heading>
-
-      {events.map((event) => {
-        return <li key={event.id}>{event.title}</li>;
-      })}
+      <Heading textAlign={"center"}>List of events</Heading>
+      <Grid
+        alignContent={"center"}
+        justifyContent={"center"}
+        gridTemplateColumns={"repeat(2, 1fr)"}
+        columnGap={10}
+      >
+        {events.map((event) => {
+          return (
+            <EventItemCard key={event.id} event={event}>
+              {event.title}
+            </EventItemCard>
+          );
+        })}
+      </Grid>
     </Box>
   );
 };
