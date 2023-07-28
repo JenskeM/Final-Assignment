@@ -5,8 +5,23 @@ import { EventPage } from "./pages/EventPage";
 import { EventsPage } from "./pages/EventsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
+import { GoogleFonts } from "next-google-fonts";
 
-const theme = extendTheme();
+//extend the theme
+const colors = {
+  brand: {
+    100: "#f1356d",
+    200: "#333",
+    300: "#f2f2f2",
+    400: "#fafafa",
+  },
+};
+
+const fonts = {
+  heading: "Nunito",
+};
+
+const theme = extendTheme({ colors, fonts });
 
 const router = createBrowserRouter([
   {
@@ -30,6 +45,7 @@ const router = createBrowserRouter([
 // @ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <GoogleFonts href="hhttps://fonts.googleapis.com/css2?family=Nunito&family=Permanent+Marker&display=swap" />
     <ChakraProvider theme={theme}>
       <RouterProvider router={router} />
     </ChakraProvider>

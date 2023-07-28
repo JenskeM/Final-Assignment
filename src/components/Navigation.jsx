@@ -5,13 +5,13 @@ import { Grid, GridItem, Text } from "@chakra-ui/react";
 export const Navigation = () => {
   return (
     <Grid
-      bg="orange.400"
+      bg="brand.400"
       templateColumns="repeat(8, 1fr)"
       templateRows={1}
       marginBottom={10}
       height={8}
       fontSize="xl"
-      color="white"
+      color="brand.100"
     >
       <GridItem colSpan={6} fontWeight={"bold"} paddingLeft={2}>
         <Text> My Event App</Text>
