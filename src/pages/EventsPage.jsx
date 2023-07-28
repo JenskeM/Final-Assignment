@@ -18,7 +18,9 @@ export const EventsPage = () => {
 
   return (
     <Box marginLeft={3}>
-      <Heading textAlign={"center"}>List of events</Heading>
+      <Heading textAlign={"center"} color="brand.100">
+        List of events
+      </Heading>
       <Grid
         alignContent={"center"}
         justifyContent={"center"}
