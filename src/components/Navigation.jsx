@@ -14,7 +14,7 @@ export const Navigation = () => {
       color="brand.100"
       boxShadow={"base"}
     >
-      <GridItem colSpan={6} fontWeight={"bold"} paddingLeft={2}>
+      <GridItem colSpan={6} fontWeight={"bold"} paddingLeft={3}>
         <Text> My Event App</Text>
       </GridItem>
       <GridItem colSpan={2}>
