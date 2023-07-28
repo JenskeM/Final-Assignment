@@ -1,6 +1,6 @@
 import React from "react";
 import { Heading, Box, Grid } from "@chakra-ui/react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
 
 export const loader = async () => {
@@ -34,13 +34,14 @@ export const EventsPage = () => {
           //   );
           // });
           return (
-            <EventItemCard
-              key={event.id}
-              event={event}
-              categories={event.categoryIds.map((e) => {
-                return categories.find((category) => category.id === e);
-              })}
-            />
+            <Link key={event.id} to={`/event/${event.id}`}>
+              <EventItemCard
+                event={event}
+                categories={event.categoryIds.map((e) => {
+                  return categories.find((category) => category.id === e);
+                })}
+              />
+            </Link>
           );
         })}
       </Grid>
