@@ -10,6 +10,27 @@ import {
 } from "@chakra-ui/react";
 
 export const EventItemCard = ({ event, categories }) => {
+  const getDate = (dateToChange) => {
+    const dateObject = new Date(dateToChange);
+    const year = dateObject.getFullYear();
+    const month = dateObject.getMonth() + 1;
+    const day = dateObject.getDate();
+    const formattedDate = `${day}-${month}-${year}`;
+
+    return <>{formattedDate}</>;
+  };
+
+  const getTime = (timeToChange) => {
+    const dateObject = new Date(timeToChange);
+    const hours = dateObject.getHours();
+    const minutes = dateObject.getMinutes();
+    const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+      .toString()
+      .padStart(2, "0")}`;
+
+    return <>{formattedTime}</>;
+  };
+
   return (
     <Card
       mt={8}
@@ -34,7 +55,7 @@ export const EventItemCard = ({ event, categories }) => {
           />
         </Center>
         <Stack mt="6" spacing="3" alignItems={"center"}>
-          <Heading size="md" textAlign={"center"} color="brand.100">
+          <Heading size="md" textAlign={"center"} color="brand.200">
             {event.title}
           </Heading>
           <Stack direction={"row"}>
@@ -49,6 +70,20 @@ export const EventItemCard = ({ event, categories }) => {
             >
               {" "}
               {event.description}
+            </Text>
+          </Stack>
+          <Stack direction={"row"} color="blue.600" fontSize="sm">
+            <Text>Date:</Text>
+            <Text color="blue.400" fontSize="sm" fontWeight={"semibold"}>
+              {" "}
+              {getDate(event.startTime)}
+            </Text>
+          </Stack>
+          <Stack direction={"row"} color="blue.600" fontSize="sm">
+            <Text>Time:</Text>
+            <Text color="blue.400" fontSize="sm" fontWeight={"semibold"}>
+              {" "}
+              {getTime(event.startTime)}-{getTime(event.endTime)}
             </Text>
           </Stack>
         </Stack>
