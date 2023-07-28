@@ -22,8 +22,8 @@ export const EventsPage = () => {
       <Grid
         alignContent={"center"}
         justifyContent={"center"}
-        gridTemplateColumns={"repeat(2, 1fr)"}
-        columnGap={10}
+        gridTemplateColumns={"repeat(4, 1fr)"}
+        columnGap={8}
       >
         {events.map((event) => {
           // return event.categoryIds.map((e) => {
