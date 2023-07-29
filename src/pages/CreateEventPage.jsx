@@ -1,1 +1,1 @@
-export const EventsPage = () => {};
+export const CreateEventsPage = () => {};
