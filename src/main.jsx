@@ -10,12 +10,11 @@ import { Root } from "./components/Root";
 const colors = {
   brand: {
     100: "#fafafa",
-    200: "#f1356d",
-    300: "#F8B195",
-    400: "#F67280",
-    500: "#C06C84",
-    600: "#6C5B7B",
-    700: "#355C7D",
+    200: "#eb7777",
+    300: "#ffc97f",
+    400: "#eb8291",
+    500: "#f0bbcd",
+    600: "#c9e7db",
   },
 };
 

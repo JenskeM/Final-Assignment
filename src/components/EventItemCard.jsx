@@ -36,7 +36,7 @@ export const EventItemCard = ({ event, categories }) => {
       mt={8}
       width={["300px", "340px"]}
       boxShadow="2xl"
-      bg="white"
+      bg="brand.300"
       cursor={"pointer"}
       _hover={{
         opacity: 0.6,
@@ -59,11 +59,11 @@ export const EventItemCard = ({ event, categories }) => {
             {event.title}
           </Heading>
           <Stack direction={"row"}>
-            <Text color="blue.600" fontSize="sm">
+            <Text color="brand.600" fontSize="sm">
               Description:
             </Text>
             <Text
-              color="blue.400"
+              color="brand.100"
               fontSize="sm"
               fontWeight={"semibold"}
               textTransform={"capitalize"}
@@ -72,16 +72,19 @@ export const EventItemCard = ({ event, categories }) => {
               {event.description}
             </Text>
           </Stack>
-          <Stack direction={"row"} color="blue.600" fontSize="sm">
+          <Stack direction={"row"} color="brand.600" fontSize="sm">
             <Text>Date:</Text>
-            <Text color="blue.400" fontSize="sm" fontWeight={"semibold"}>
+            <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}
-              {getDate(event.startTime)}
+              {getDate(event.startTime).props.children ===
+              getDate(event.endTime).props.children
+                ? getDate(event.startTime)
+                : `${getDate(event.startTime)} - ${getDate(event.endTime)}`}
             </Text>
           </Stack>
-          <Stack direction={"row"} color="blue.600" fontSize="sm">
+          <Stack direction={"row"} color="brand.600" fontSize="sm">
             <Text>Time:</Text>
-            <Text color="blue.400" fontSize="sm" fontWeight={"semibold"}>
+            <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}
               {getTime(event.startTime)}-{getTime(event.endTime)}
             </Text>
@@ -96,7 +99,7 @@ export const EventItemCard = ({ event, categories }) => {
               bg="brand.100"
               m={2}
               textAlign={"center"}
-              color="blue.600"
+              color="brand.600"
               fontWeight={"semibold"}
               py={1}
               textTransform={"uppercase"}
