@@ -17,7 +17,7 @@ export const EventsPage = () => {
   const { events, categories } = useLoaderData();
 
   return (
-    <Box marginLeft={3}>
+    <Box marginLeft={3} pt={10}>
       <Heading textAlign={"center"} color="brand.600">
         List of events
       </Heading>

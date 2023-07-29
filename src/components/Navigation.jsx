@@ -8,7 +8,6 @@ export const Navigation = () => {
       bg="brand.200"
       templateColumns="repeat(8, 1fr)"
       templateRows={1}
-      marginBottom={10}
       height={8}
       fontSize="xl"
       color="brand.100"
