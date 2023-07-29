@@ -52,14 +52,14 @@ export const CreateEventsPage = () => {
           rowGap={8}
         >
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"100px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Title</FormLabel>
-              <Input type="text" width={"100%"} bg={"brand.100"} />
+              <Input type="text" width={"110%"} bg={"brand.100"} />
             </Grid>
-            <FormHelperText ml="100px">Make it a fancy one.</FormHelperText>
+            <FormHelperText ml="110px">Make it a fancy one.</FormHelperText>
           </FormControl>
           <FormControl>
-            <Grid gridTemplateColumns={"100px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Description</FormLabel>
               <Textarea
                 width={"100%"}
@@ -69,25 +69,25 @@ export const CreateEventsPage = () => {
             </Grid>
           </FormControl>
           <FormControl>
-            <Grid gridTemplateColumns={"100px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Image url</FormLabel>
               <Input width={"100%"} bg={"brand.100"} />
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"100px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Location</FormLabel>
               <Input width={"100%"} bg={"brand.100"} />
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"100px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Created by</FormLabel>
-              <RadioGroup defaultValue="Itachi">
+              <RadioGroup>
                 <HStack spacing="24px">
                   {users.map((user) => {
                     return (
-                      <Radio value={user.id} key={user.id}>
+                      <Radio value={user.name} key={user.id}>
                         {user.name}
                       </Radio>
                     );
