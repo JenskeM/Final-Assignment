@@ -59,7 +59,7 @@ export const EventItemCard = ({ event, categories }) => {
             {event.title}
           </Heading>
           <Stack direction={"row"}>
-            <Text color="brand.600" fontSize="sm">
+            <Text color="brand.400" fontSize="sm">
               Description:
             </Text>
             <Text
@@ -72,7 +72,7 @@ export const EventItemCard = ({ event, categories }) => {
               {event.description}
             </Text>
           </Stack>
-          <Stack direction={"row"} color="brand.600" fontSize="sm">
+          <Stack direction={"row"} color="brand.400" fontSize="sm">
             <Text>Date:</Text>
             <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}
@@ -82,7 +82,7 @@ export const EventItemCard = ({ event, categories }) => {
                 : `${getDate(event.startTime)} - ${getDate(event.endTime)}`}
             </Text>
           </Stack>
-          <Stack direction={"row"} color="brand.600" fontSize="sm">
+          <Stack direction={"row"} color="brand.400" fontSize="sm">
             <Text>Time:</Text>
             <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}

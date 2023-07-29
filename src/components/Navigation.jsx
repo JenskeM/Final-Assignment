@@ -20,12 +20,12 @@ export const Navigation = () => {
       <GridItem colSpan={2}>
         <Grid templateColumns={"1fr 1fr"} templateRows={1} gap={1}>
           <Tooltip label="Go to the list of events">
-            <Text height={8} _hover={{ color: "blue.300" }}>
+            <Text height={8} _hover={{ color: "brand.600" }}>
               <Link to="/">Events</Link>
             </Text>
           </Tooltip>
           <Tooltip label="Go to an event">
-            <Text height={8} _hover={{ color: "blue.300" }}>
+            <Text height={8} _hover={{ color: "brand.600" }}>
               <Link to="/event/1">Event</Link>
             </Text>
           </Tooltip>
