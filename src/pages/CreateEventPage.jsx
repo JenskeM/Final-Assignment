@@ -1,13 +1,12 @@
-import { useState } from "react";
 import { useLoaderData, redirect, Form } from "react-router-dom";
 import {
   Box,
-  Grid,
+  Flex,
+  Spacer,
   Heading,
   FormControl,
   FormLabel,
   FormHelperText,
-  FormErrorMessage,
   Input,
 } from "@chakra-ui/react";
 
@@ -34,41 +33,27 @@ export const action = async ({ request }) => {
 
 export const CreateEventsPage = () => {
   // const { categories, users } = useLoaderData();
-  const [input, setInput] = useState("");
-
-  const handleInputChange = (e) => setInput(e.target.value);
-
-  const isError = input === "";
 
   return (
-    <Box bg={"brand.600"} h={"100vh"}>
-      <Heading mb={10} textAlign={"center"} color={"brand.200"} pt={10}>
+    <Box bg={"brand.600"} h={"100vh"} pt={5}>
+      <Heading mb={10} textAlign={"center"} color={"brand.200"}>
         Add a new event
       </Heading>
       <Form method="post" id="new-post-form">
         <FormControl>
-          <Grid
+          <Flex
             ml={"500px"}
             mr={"500px"}
-            alignContent={"center"}
+            alignItems={"center"}
             justifyContent={"center"}
-            gridTemplateColumns={"1fr 5fr"}
-            columnGap={2}
           >
             <FormLabel>Title</FormLabel>
-            <Input
-              type="text"
-              value={input}
-              onChange={handleInputChange}
-              width={"100%"}
-              bg={"brand.100"}
-            />
-            {!isError ? (
-              <FormHelperText>Make it a fancy one.</FormHelperText>
-            ) : (
-              <FormErrorMessage>Title is required.</FormErrorMessage>
-            )}
-          </Grid>
+            <Spacer />
+            <Flex direction={"column"}>
+              <Input type="text" width={"100%"} bg={"brand.100"} />
+              <FormHelperText colspan={5}>Make it a fancy one.</FormHelperText>
+            </Flex>
+          </Flex>
         </FormControl>
       </Form>
     </Box>
