@@ -1,13 +1,16 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
 import {
   Box,
-  Flex,
-  Spacer,
+  Grid,
   Heading,
   FormControl,
   FormLabel,
   FormHelperText,
   Input,
+  Textarea,
+  RadioGroup,
+  HStack,
+  Radio,
 } from "@chakra-ui/react";
 
 export const loader = async () => {
@@ -32,7 +35,7 @@ export const action = async ({ request }) => {
 };
 
 export const CreateEventsPage = () => {
-  // const { categories, users } = useLoaderData();
+  const { users } = useLoaderData();
 
   return (
     <Box bg={"brand.600"} h={"100vh"} pt={5}>
@@ -40,21 +43,60 @@ export const CreateEventsPage = () => {
         Add a new event
       </Heading>
       <Form method="post" id="new-post-form">
-        <FormControl>
-          <Flex
-            ml={"500px"}
-            mr={"500px"}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <FormLabel>Title</FormLabel>
-            <Spacer />
-            <Flex direction={"column"}>
+        <Grid
+          ml={"500px"}
+          mr={"500px"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          gridTemplateColumns={"1fr"}
+          rowGap={8}
+        >
+          <FormControl isRequired>
+            <Grid gridTemplateColumns={"100px 300px"}>
+              <FormLabel>Title</FormLabel>
               <Input type="text" width={"100%"} bg={"brand.100"} />
-              <FormHelperText colspan={5}>Make it a fancy one.</FormHelperText>
-            </Flex>
-          </Flex>
-        </FormControl>
+            </Grid>
+            <FormHelperText ml="100px">Make it a fancy one.</FormHelperText>
+          </FormControl>
+          <FormControl>
+            <Grid gridTemplateColumns={"100px 300px"}>
+              <FormLabel>Description</FormLabel>
+              <Textarea
+                width={"100%"}
+                bg={"brand.100"}
+                placeholder="Please, add some info of the event"
+              />
+            </Grid>
+          </FormControl>
+          <FormControl>
+            <Grid gridTemplateColumns={"100px 300px"}>
+              <FormLabel>Image url</FormLabel>
+              <Input width={"100%"} bg={"brand.100"} />
+            </Grid>
+          </FormControl>
+          <FormControl isRequired>
+            <Grid gridTemplateColumns={"100px 300px"}>
+              <FormLabel>Location</FormLabel>
+              <Input width={"100%"} bg={"brand.100"} />
+            </Grid>
+          </FormControl>
+          <FormControl isRequired>
+            <Grid gridTemplateColumns={"100px 300px"}>
+              <FormLabel>Created by</FormLabel>
+              <RadioGroup defaultValue="Itachi">
+                <HStack spacing="24px">
+                  {users.map((user) => {
+                    return (
+                      <Radio value={user.id} key={user.id}>
+                        {user.name}
+                      </Radio>
+                    );
+                  })}
+                </HStack>
+              </RadioGroup>
+            </Grid>
+          </FormControl>
+        </Grid>
       </Form>
     </Box>
   );
