@@ -5,13 +5,13 @@ import { Grid, GridItem, Text, Tooltip } from "@chakra-ui/react";
 export const Navigation = () => {
   return (
     <Grid
-      bg="brand.100"
+      bg="brand.200"
       templateColumns="repeat(8, 1fr)"
       templateRows={1}
       marginBottom={10}
       height={8}
       fontSize="xl"
-      color="brand.200"
+      color="brand.100"
       boxShadow={"base"}
     >
       <GridItem colSpan={6} fontWeight={"bold"} paddingLeft={3}>
