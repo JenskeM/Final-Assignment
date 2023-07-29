@@ -37,6 +37,11 @@ export const action = async ({ request }) => {
 
 export const CreateEventsPage = () => {
   const { categories, users } = useLoaderData();
+  const options = Object.entries(categories).map(([key, value]) => ({
+    value: value.name,
+    label: value.name,
+    key: key,
+  }));
 
   return (
     <Box bg={"brand.600"} h={"100vh"} pt={5}>
@@ -88,7 +93,7 @@ export const CreateEventsPage = () => {
                 <HStack spacing="24px">
                   {users.map((user) => {
                     return (
-                      <Radio value={user.name} key={user.id}>
+                      <Radio value={user.name} key={user.id} colorScheme="red">
                         {user.name}
                       </Radio>
                     );
@@ -100,11 +105,10 @@ export const CreateEventsPage = () => {
           <FormControl isRequired>
             <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Category</FormLabel>
-              <MultiSelect
-                width={"100%"}
-                bg={"brand.100"}
-                options={["Jip", "Janneke"]}
-              />
+              <FormControl bg={"brand.100"} rounded="md">
+                <MultiSelect width={"100%"} options={options} />
+                {/* {console.log(options)} */}
+              </FormControl>
             </Grid>
           </FormControl>
         </Grid>
