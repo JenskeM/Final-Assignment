@@ -1,4 +1,5 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
+import { MultiSelect } from "chakra-multiselect";
 import {
   Box,
   Grid,
@@ -35,7 +36,7 @@ export const action = async ({ request }) => {
 };
 
 export const CreateEventsPage = () => {
-  const { users } = useLoaderData();
+  const { categories, users } = useLoaderData();
 
   return (
     <Box bg={"brand.600"} h={"100vh"} pt={5}>
@@ -94,6 +95,16 @@ export const CreateEventsPage = () => {
                   })}
                 </HStack>
               </RadioGroup>
+            </Grid>
+          </FormControl>
+          <FormControl isRequired>
+            <Grid gridTemplateColumns={"110px 300px"}>
+              <FormLabel>Category</FormLabel>
+              <MultiSelect
+                width={"100%"}
+                bg={"brand.100"}
+                options={["Jip", "Janneke"]}
+              />
             </Grid>
           </FormControl>
         </Grid>

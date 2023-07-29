@@ -1,5 +1,4 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { MultiSelectTheme } from "chakra-multiselect";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -28,11 +27,7 @@ const fonts = {
   body: "Nunito",
 };
 
-const theme = extendTheme({
-  colors,
-  fonts,
-  components: { MultiSelect: MultiSelectTheme },
-});
+const theme = extendTheme({ colors, fonts });
 
 const router = createBrowserRouter([
   {
