@@ -128,16 +128,17 @@ export const CreateEventsPage = () => {
               <FormControl bg={"brand.100"} rounded="md">
                 <MultiSelect
                   options={categoriesOptions}
-                  value={selectedCategories.map((e) => {
-                    return chosenCategories.push(
-                      categories.find((category) => category.name === e).id
-                    );
-                  })}
+                  value={selectedCategories}
                   onChange={handleMultiselectChange}
                   name="categoryIds"
                 />
                 {/* {console.log(selectedCategories)} */}
-                {/* {console.log(chosenCategories)} */}
+                {selectedCategories.map((e) => {
+                  return chosenCategories.push(
+                    categories.find((category) => category.name === e).id
+                  );
+                })}
+                {console.log(chosenCategories)}
               </FormControl>
             </Grid>
           </FormControl>
