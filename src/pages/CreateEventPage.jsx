@@ -12,9 +12,11 @@ import {
   RadioGroup,
   HStack,
   Radio,
-  Select,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
@@ -40,28 +42,14 @@ export const action = async ({ request }) => {
 export const CreateEventsPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const { categories, users } = useLoaderData();
+  const [startDateTime, setStartDateTime] = useState(new Date());
+  const [endDateTime, setEndDateTime] = useState(new Date());
 
   const categoriesOptions = Object.entries(categories).map(([key, value]) => ({
     value: value.name,
     label: value.name,
     key: key,
   }));
-
-  const hourOptions = [];
-  for (let i = 0; i <= 24; i++) {
-    const value = i.toString().padStart(2, "0"); //To make all the notations in a two-digit notation
-    const label = i.toString().padStart(2, "0");
-    const key = i;
-    hourOptions.push({ value, label, key });
-  }
-
-  const minuteOptions = [];
-  for (let i = 0; i <= 60; i++) {
-    const value = i.toString().padStart(2, "0"); //To make all the notations in a two-digit notation
-    const label = i.toString().padStart(2, "0");
-    const key = i;
-    minuteOptions.push({ value, label, key });
-  }
 
   const handleMultiselectChange = (selected) => {
     setSelectedCategories(selected);
@@ -140,54 +128,29 @@ export const CreateEventsPage = () => {
           </FormControl>
           <FormControl isRequired>
             <Grid
-              gridTemplateColumns={"110px 150px 150px"}
+              gridTemplateColumns={"110px 200px 200px"}
               alignItems={"center"}
             >
-              <FormLabel>Start time</FormLabel>
-              <Select bg={"brand.100"} placeholder="Select hour">
-                {hourOptions.map((hour) => {
-                  return (
-                    <option value={hour.value} key={hour.key}>
-                      {hour.label}
-                    </option>
-                  );
-                })}
-              </Select>
-              <Select bg={"brand.100"} placeholder="Select minute">
-                {minuteOptions.map((minute) => {
-                  return (
-                    <option value={minute.value} key={minute.key}>
-                      {minute.label}
-                    </option>
-                  );
-                })}
-              </Select>
-            </Grid>
-          </FormControl>
-          <FormControl isRequired>
-            <Grid
-              gridTemplateColumns={"110px 150px 150px"}
-              alignItems={"center"}
-            >
-              <FormLabel>End time</FormLabel>
-              <Select bg={"brand.100"} placeholder="Select hour">
-                {hourOptions.map((hour) => {
-                  return (
-                    <option value={hour.value} key={hour.key}>
-                      {hour.label}
-                    </option>
-                  );
-                })}
-              </Select>
-              <Select bg={"brand.100"} placeholder="Select minute">
-                {minuteOptions.map((minute) => {
-                  return (
-                    <option value={minute.value} key={minute.key}>
-                      {minute.label}
-                    </option>
-                  );
-                })}
-              </Select>
+              <FormLabel>Date and Time</FormLabel>
+              <DatePicker
+                selectStart
+                selected={startDateTime}
+                onChange={(date) => setStartDateTime(date)}
+                showTimeSelect
+                dateFormat="d, MMM, yyyy h:mmaa"
+              />
+
+              <DatePicker
+                fontSize="10px"
+                selectsEnd
+                selected={endDateTime}
+                onChange={(date) => setEndDateTime(date)}
+                endDate={endDateTime}
+                startDate={startDateTime}
+                minDate={startDateTime}
+                showTimeSelect
+                dateFormat="d, MMM, yyyy h:mmaa"
+              />
             </Grid>
           </FormControl>
         </Grid>
