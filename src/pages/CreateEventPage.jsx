@@ -96,7 +96,7 @@ export const CreateEventsPage = () => {
           <FormControl isRequired>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Location</FormLabel>
-              <Input bg={"brand.100"} />
+              <Input bg={"brand.100"} name="location" />
             </Grid>
           </FormControl>
           <FormControl isRequired>
