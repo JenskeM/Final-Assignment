@@ -12,6 +12,8 @@ import {
   RadioGroup,
   HStack,
   Radio,
+  Button,
+  Center,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -127,32 +129,45 @@ export const CreateEventsPage = () => {
           </FormControl>
           <FormControl isRequired>
             <Grid
-              gridTemplateColumns={"110px 200px 200px"}
+              gridTemplateColumns={"110px 180px 180px"}
               alignItems={"center"}
             >
-              <FormLabel>Date and Time</FormLabel>
-              <DatePicker
-                selectStart
-                selected={startDateTime}
-                onChange={(date) => setStartDateTime(date)}
-                showTimeSelect
-                dateFormat="d, MMM, yyyy h:mmaa"
-              />
-
-              <DatePicker
-                fontSize="10px"
-                selectsEnd
-                selected={endDateTime}
-                onChange={(date) => setEndDateTime(date)}
-                endDate={endDateTime}
-                startDate={startDateTime}
-                minDate={startDateTime}
-                showTimeSelect
-                dateFormat="d, MMM, yyyy h:mmaa"
-              />
+              <FormLabel>Date/Time</FormLabel>
+              <div style={{ fontSize: "0.9em" }}>
+                <DatePicker
+                  selectStart
+                  selected={startDateTime}
+                  onChange={(date) => setStartDateTime(date)}
+                  showTimeSelect
+                  dateFormat=" d MMM yy h:mmaa"
+                />
+              </div>
+              <div style={{ fontSize: "0.9em" }}>
+                <DatePicker
+                  selectsEnd
+                  selected={endDateTime}
+                  onChange={(date) => setEndDateTime(date)}
+                  endDate={endDateTime}
+                  startDate={startDateTime}
+                  minDate={startDateTime}
+                  showTimeSelect
+                  dateFormat=" d MMM yy h:mmaa"
+                />
+              </div>
             </Grid>
           </FormControl>
         </Grid>
+        <Center>
+          <Button
+            type="submit"
+            mt={10}
+            bg="brand.200"
+            color="brand.100"
+            _hover={{ background: "brand.300" }}
+          >
+            Add event
+          </Button>
+        </Center>
       </Form>
     </Box>
   );
