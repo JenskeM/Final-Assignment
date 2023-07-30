@@ -13,6 +13,7 @@ import {
   HStack,
   Radio,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
@@ -36,12 +37,17 @@ export const action = async ({ request }) => {
 };
 
 export const CreateEventsPage = () => {
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const { categories, users } = useLoaderData();
   const options = Object.entries(categories).map(([key, value]) => ({
     value: value.name,
     label: value.name,
     key: key,
   }));
+
+  const handleMultiselectChange = (selected) => {
+    setSelectedOptions(selected);
+  };
 
   return (
     <Box bg={"brand.600"} h={"100vh"} pt={5}>
@@ -106,8 +112,13 @@ export const CreateEventsPage = () => {
             <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Category</FormLabel>
               <FormControl bg={"brand.100"} rounded="md">
-                <MultiSelect width={"100%"} options={options} />
-                {/* {console.log(options)} */}
+                <MultiSelect
+                  width={"100%"}
+                  options={options}
+                  value={selectedOptions}
+                  onChange={handleMultiselectChange}
+                />
+                {/* {console.log(selectedOptions)} */}
               </FormControl>
             </Grid>
           </FormControl>
