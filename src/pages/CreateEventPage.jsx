@@ -15,8 +15,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
+import "./datepicker.scss";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
