@@ -12,6 +12,7 @@ import {
   RadioGroup,
   HStack,
   Radio,
+  Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -37,16 +38,33 @@ export const action = async ({ request }) => {
 };
 
 export const CreateEventsPage = () => {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const { categories, users } = useLoaderData();
-  const options = Object.entries(categories).map(([key, value]) => ({
+
+  const categoriesOptions = Object.entries(categories).map(([key, value]) => ({
     value: value.name,
     label: value.name,
     key: key,
   }));
 
+  const hourOptions = [];
+  for (let i = 0; i <= 24; i++) {
+    const value = i.toString().padStart(2, "0"); //To make all the notations in a two-digit notation
+    const label = i.toString().padStart(2, "0");
+    const key = i;
+    hourOptions.push({ value, label, key });
+  }
+
+  const minuteOptions = [];
+  for (let i = 0; i <= 60; i++) {
+    const value = i.toString().padStart(2, "0"); //To make all the notations in a two-digit notation
+    const label = i.toString().padStart(2, "0");
+    const key = i;
+    minuteOptions.push({ value, label, key });
+  }
+
   const handleMultiselectChange = (selected) => {
-    setSelectedOptions(selected);
+    setSelectedCategories(selected);
   };
 
   return (
@@ -64,9 +82,9 @@ export const CreateEventsPage = () => {
           rowGap={8}
         >
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Title</FormLabel>
-              <Input type="text" width={"110%"} bg={"brand.100"} />
+              <Input type="text" bg={"brand.100"} />
             </Grid>
             <FormHelperText ml="110px">Make it a fancy one.</FormHelperText>
           </FormControl>
@@ -74,26 +92,25 @@ export const CreateEventsPage = () => {
             <Grid gridTemplateColumns={"110px 300px"}>
               <FormLabel>Description</FormLabel>
               <Textarea
-                width={"100%"}
                 bg={"brand.100"}
                 placeholder="Please, add some info of the event"
               />
             </Grid>
           </FormControl>
           <FormControl>
-            <Grid gridTemplateColumns={"110px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Image url</FormLabel>
-              <Input width={"100%"} bg={"brand.100"} />
+              <Input bg={"brand.100"} />
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Location</FormLabel>
-              <Input width={"100%"} bg={"brand.100"} />
+              <Input bg={"brand.100"} />
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Created by</FormLabel>
               <RadioGroup>
                 <HStack spacing="24px">
@@ -109,17 +126,68 @@ export const CreateEventsPage = () => {
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"}>
+            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Category</FormLabel>
               <FormControl bg={"brand.100"} rounded="md">
                 <MultiSelect
-                  width={"100%"}
-                  options={options}
-                  value={selectedOptions}
+                  options={categoriesOptions}
+                  value={selectedCategories}
                   onChange={handleMultiselectChange}
                 />
-                {/* {console.log(selectedOptions)} */}
+                {/* {console.log(selectedCategories)} */}
               </FormControl>
+            </Grid>
+          </FormControl>
+          <FormControl isRequired>
+            <Grid
+              gridTemplateColumns={"110px 150px 150px"}
+              alignItems={"center"}
+            >
+              <FormLabel>Start time</FormLabel>
+              <Select bg={"brand.100"} placeholder="Select hour">
+                {hourOptions.map((hour) => {
+                  return (
+                    <option value={hour.value} key={hour.key}>
+                      {hour.label}
+                    </option>
+                  );
+                })}
+              </Select>
+              <Select bg={"brand.100"} placeholder="Select minute">
+                {minuteOptions.map((minute) => {
+                  return (
+                    <option value={minute.value} key={minute.key}>
+                      {minute.label}
+                    </option>
+                  );
+                })}
+              </Select>
+            </Grid>
+          </FormControl>
+          <FormControl isRequired>
+            <Grid
+              gridTemplateColumns={"110px 150px 150px"}
+              alignItems={"center"}
+            >
+              <FormLabel>End time</FormLabel>
+              <Select bg={"brand.100"} placeholder="Select hour">
+                {hourOptions.map((hour) => {
+                  return (
+                    <option value={hour.value} key={hour.key}>
+                      {hour.label}
+                    </option>
+                  );
+                })}
+              </Select>
+              <Select bg={"brand.100"} placeholder="Select minute">
+                {minuteOptions.map((minute) => {
+                  return (
+                    <option value={minute.value} key={minute.key}>
+                      {minute.label}
+                    </option>
+                  );
+                })}
+              </Select>
             </Grid>
           </FormControl>
         </Grid>
