@@ -73,7 +73,7 @@ export const CreateEventsPage = () => {
           <FormControl isRequired>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Title</FormLabel>
-              <Input type="text" bg={"brand.100"} />
+              <Input type="text" bg={"brand.100"} name="title" />
             </Grid>
             <FormHelperText ml="110px">Make it a fancy one.</FormHelperText>
           </FormControl>
@@ -83,13 +83,14 @@ export const CreateEventsPage = () => {
               <Textarea
                 bg={"brand.100"}
                 placeholder="Please, add some info of the event"
+                name="description"
               />
             </Grid>
           </FormControl>
           <FormControl>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Image url</FormLabel>
-              <Input bg={"brand.100"} />
+              <Input bg={"brand.100"} name="image" />
             </Grid>
           </FormControl>
           <FormControl isRequired>
@@ -105,7 +106,12 @@ export const CreateEventsPage = () => {
                 <HStack spacing="24px">
                   {users.map((user) => {
                     return (
-                      <Radio value={user.name} key={user.id} colorScheme="red">
+                      <Radio
+                        value={user.name}
+                        key={user.id}
+                        colorScheme="red"
+                        name="createdBy"
+                      >
                         {user.name}
                       </Radio>
                     );
@@ -122,6 +128,7 @@ export const CreateEventsPage = () => {
                   options={categoriesOptions}
                   value={selectedCategories}
                   onChange={handleMultiselectChange}
+                  name="categoryIds"
                 />
                 {/* {console.log(selectedCategories)} */}
               </FormControl>
@@ -140,6 +147,7 @@ export const CreateEventsPage = () => {
                   onChange={(date) => setStartDateTime(date)}
                   showTimeSelect
                   dateFormat=" d MMM yy h:mmaa"
+                  name="startTime"
                 />
               </div>
               <div style={{ fontSize: "0.9em" }}>
@@ -152,6 +160,7 @@ export const CreateEventsPage = () => {
                   minDate={startDateTime}
                   showTimeSelect
                   dateFormat=" d MMM yy h:mmaa"
+                  name="endTime"
                 />
               </div>
             </Grid>
