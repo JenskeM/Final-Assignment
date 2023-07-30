@@ -41,8 +41,8 @@ export const action = async ({ request }) => {
 };
 
 export const CreateEventsPage = () => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
   const { categories, users } = useLoaderData();
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
 
@@ -51,6 +51,8 @@ export const CreateEventsPage = () => {
     label: value.name,
     key: key,
   }));
+
+  const chosenCategories = [];
 
   const handleMultiselectChange = (selected) => {
     setSelectedCategories(selected);
@@ -107,7 +109,7 @@ export const CreateEventsPage = () => {
                   {users.map((user) => {
                     return (
                       <Radio
-                        value={user.name}
+                        value={user.id}
                         key={user.id}
                         colorScheme="red"
                         name="createdBy"
@@ -126,11 +128,16 @@ export const CreateEventsPage = () => {
               <FormControl bg={"brand.100"} rounded="md">
                 <MultiSelect
                   options={categoriesOptions}
-                  value={selectedCategories}
+                  value={selectedCategories.map((e) => {
+                    return chosenCategories.push(
+                      categories.find((category) => category.name === e).id
+                    );
+                  })}
                   onChange={handleMultiselectChange}
                   name="categoryIds"
                 />
                 {/* {console.log(selectedCategories)} */}
+                {/* {console.log(chosenCategories)} */}
               </FormControl>
             </Grid>
           </FormControl>
