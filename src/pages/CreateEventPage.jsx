@@ -30,6 +30,7 @@ export const loader = async () => {
 
 export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
+  console.log(formData);
   const newId = await fetch("http://localhost:3000/events", {
     method: "POST",
     body: JSON.stringify(formData),
@@ -99,7 +100,7 @@ export const CreateEventsPage = () => {
               <Input bg={"brand.100"} name="location" />
             </Grid>
           </FormControl>
-          <FormControl isRequired>
+          <FormControl>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Created by</FormLabel>
               <RadioGroup>
