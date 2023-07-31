@@ -30,10 +30,11 @@ export const loader = async () => {
 
 export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
-  console.log(formData);
+  const categoryIds = [1, 2, 3];
+  const newFormData = (formData["categoryIds"] = categoryIds);
   const newId = await fetch("http://localhost:3000/events", {
     method: "POST",
-    body: JSON.stringify(formData),
+    body: JSON.stringify(newFormData),
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
