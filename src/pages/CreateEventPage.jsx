@@ -53,6 +53,8 @@ export const CreateEventsPage = () => {
     key: key,
   }));
 
+  const chosenCategories = [];
+
   const handleMultiselectChange = (selected) => {
     setSelectedCategories(selected);
   };
@@ -133,10 +135,11 @@ export const CreateEventsPage = () => {
                 />
                 {/* {console.log(selectedCategories)} */}
                 {selectedCategories.map((e) => {
-                  return console.log(
+                  return chosenCategories.push(
                     categories.find((category) => category.name === e).id
                   );
                 })}
+                {console.log(chosenCategories)}
               </FormControl>
             </Grid>
           </FormControl>
