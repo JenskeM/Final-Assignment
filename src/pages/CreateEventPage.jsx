@@ -111,7 +111,7 @@ export const CreateEventsPage = () => {
                   {users.map((user) => {
                     return (
                       <Radio
-                        value={user.id}
+                        //value={user.id}
                         key={user.id}
                         colorScheme="red"
                         name="createdBy"
