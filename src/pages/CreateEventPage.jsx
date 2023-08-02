@@ -35,14 +35,14 @@ export const action = async ({ request }) => {
   const newFormData1 = (formData["categoryIds"] = categoryIds);
   const newFormData2 = (formData["createdBy"] = createdBy);
   console.log(formData);
-  // const newId = await fetch("http://localhost:3000/events", {
-  //   method: "POST",
-  //   body: JSON.stringify(newFormData2),
-  //   headers: { "Content-Type": "application/json" },
-  // })
-  //   .then((res) => res.json())
-  //   .then((json) => json.id);
-  // return redirect(`/event/${newId}`);
+  const newId = await fetch("http://localhost:3000/events", {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
+    .then((json) => json.id);
+  return redirect(`/event/${newId}`);
 };
 
 export const CreateEventsPage = () => {
@@ -159,7 +159,7 @@ export const CreateEventsPage = () => {
                   selected={startDateTime}
                   onChange={(date) => setStartDateTime(date)}
                   showTimeSelect
-                  dateFormat="yyyy-MM-dd'T'HH:mm:ss. SSSXXX"
+                  dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
                   name="startTime"
                 />
               </div>
@@ -172,7 +172,7 @@ export const CreateEventsPage = () => {
                   startDate={startDateTime}
                   minDate={startDateTime}
                   showTimeSelect
-                  dateFormat="yyyy-MM-dd'T'HH:mm:ss. SSSXXX"
+                  dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
                   name="endTime"
                 />
               </div>
