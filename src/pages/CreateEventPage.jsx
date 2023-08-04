@@ -84,6 +84,7 @@ export const CreateEventsPage = () => {
 
   const changeMarginLR = () => {
     setMarginLR((screenSize.width - 110 - 300) / 2);
+    console.log(screenSize.width);
     //110 is the width of the labels in the form
     //300 is the width of the controls in the form
   };
@@ -95,22 +96,33 @@ export const CreateEventsPage = () => {
       </Heading>
       <Form method="post" id="new-post-form">
         <Grid
-          ml={`${marginLR}px`}
-          mr={`${marginLR}px`}
+          ml={[0, `${marginLR}px`]}
+          mr={[0, `${marginLR}px`]}
           alignItems={"center"}
           justifyContent={"center"}
           gridTemplateColumns={"1fr"}
           rowGap={8}
         >
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
+            <Grid
+              gridTemplateColumns={
+                screenSize.width <= 360 ? 300 : "110px 300px"
+              }
+              alignItems={"center"}
+            >
               <FormLabel>Title</FormLabel>
               <Input type="text" bg={"brand.100"} name="title" />
             </Grid>
-            <FormHelperText ml="110px">Make it a fancy one.</FormHelperText>
+            <FormHelperText ml={screenSize.width <= 360 ? 0 : 110}>
+              Make it a fancy one.
+            </FormHelperText>
           </FormControl>
           <FormControl>
-            <Grid gridTemplateColumns={"110px 300px"}>
+            <Grid
+              gridTemplateColumns={
+                screenSize.width <= 360 ? "300px" : "110px 300px"
+              }
+            >
               <FormLabel>Description</FormLabel>
               <Textarea
                 bg={"brand.100"}
@@ -120,19 +132,34 @@ export const CreateEventsPage = () => {
             </Grid>
           </FormControl>
           <FormControl>
-            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
+            <Grid
+              gridTemplateColumns={
+                screenSize.width <= 360 ? 300 : "110px 300px"
+              }
+              alignItems={"center"}
+            >
               <FormLabel>Image url</FormLabel>
               <Input bg={"brand.100"} name="image" />
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
+            <Grid
+              gridTemplateColumns={
+                screenSize.width <= 360 ? 300 : "110px 300px"
+              }
+              alignItems={"center"}
+            >
               <FormLabel>Location</FormLabel>
               <Input bg={"brand.100"} name="location" />
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
+            <Grid
+              gridTemplateColumns={
+                screenSize.width <= 360 ? 300 : "110px 300px"
+              }
+              alignItems={"center"}
+            >
               <FormLabel>Created by</FormLabel>
               <Stack spacing={3}>
                 {users.map((user) => {
@@ -158,7 +185,12 @@ export const CreateEventsPage = () => {
             </Grid>
           </FormControl>
           <FormControl isRequired>
-            <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
+            <Grid
+              gridTemplateColumns={
+                screenSize.width <= 360 ? 300 : "110px 300px"
+              }
+              alignItems={"center"}
+            >
               <FormLabel>Category</FormLabel>
               <Stack>
                 {categories.map((category) => {
@@ -184,7 +216,9 @@ export const CreateEventsPage = () => {
           </FormControl>
           <FormControl isRequired>
             <Grid
-              gridTemplateColumns={"110px 300px"}
+              gridTemplateColumns={
+                screenSize.width <= 360 ? 300 : "110px 300px"
+              }
               gridTemplateRows={"1fr 1fr"}
               alignItems={"center"}
             >
