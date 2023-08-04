@@ -15,7 +15,7 @@ export const EventItemCard = ({ event, categories }) => {
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;
     const day = dateObject.getDate();
-    const formattedDate = `${day}-${month}-${year}`;
+    const formattedDate = `${day}/${month}/${year}`;
 
     return <>{formattedDate}</>;
   };
@@ -87,7 +87,14 @@ export const EventItemCard = ({ event, categories }) => {
             <Text>Time:</Text>
             <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}
-              {getTime(event.startTime)}-{getTime(event.endTime)}
+              {getDate(event.startTime).props.children ===
+              getDate(event.endTime).props.children
+                ? `${getTime(event.startTime).props.children} - ${
+                    getTime(event.endTime).props.children
+                  }`
+                : `${getTime(event.startTime).props.children} (startdate) - ${
+                    getTime(event.endTime).props.children
+                  } (enddate)`}
             </Text>
           </Stack>
         </Stack>
