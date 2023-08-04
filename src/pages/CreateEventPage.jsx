@@ -189,7 +189,7 @@ export const CreateEventsPage = () => {
               </Stack>
             </Grid>
           </FormControl>
-          <FormControl isRequired>
+          <FormControl>
             <Grid
               gridTemplateColumns={
                 screenSize.width <= 360 ? 300 : "110px 300px"
