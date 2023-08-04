@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Box, Grid, Button, Tooltip } from "@chakra-ui/react";
+import { Heading, Box, Grid, Button, Tooltip, Center } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
 
@@ -45,19 +45,21 @@ export const EventsPage = () => {
           );
         })}
       </Grid>
-      <Tooltip label={"Press the button to go to add-event-form"}>
-        <Link to={`/createEvent`}>
-          <Button
-            mt={5}
-            bg={"brand.400"}
-            color={"brand.100"}
-            boxShadow={"xl"}
-            _hover={{ backgroundColor: "brand.600" }}
-          >
-            Create new event
-          </Button>
-        </Link>
-      </Tooltip>
+      <Center pt={6}>
+        <Tooltip label={"Press the button to go to add-event-form"}>
+          <Link to={`/createEvent`}>
+            <Button
+              mt={5}
+              bg={"brand.400"}
+              color={"brand.100"}
+              boxShadow={"xl"}
+              _hover={{ backgroundColor: "brand.600" }}
+            >
+              Create new event
+            </Button>
+          </Link>
+        </Tooltip>
+      </Center>
     </Box>
   );
 };
