@@ -75,10 +75,12 @@ export const EventItemCard = ({ event, categories }) => {
           <Stack direction={"row"} color="brand.400" fontSize="sm">
             <Text>Date:</Text>
             <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
-              {" "}
               {getDate(event.startTime).props.children ===
-                getDate(event.endTime).props.children &&
-                getDate(event.startTime)}
+              getDate(event.endTime).props.children
+                ? `${getDate(event.startTime).props.children}`
+                : `${getDate(event.startTime).props.children} - ${
+                    getDate(event.endTime).props.children
+                  }`}
             </Text>
           </Stack>
           <Stack direction={"row"} color="brand.400" fontSize="sm">
@@ -92,7 +94,7 @@ export const EventItemCard = ({ event, categories }) => {
         <Center mt={3}>
           {categories.map((category) => (
             <Tag
-              key={category}
+              key={category.id}
               size={"sm"}
               maxBlockSize={2}
               bg="brand.100"
