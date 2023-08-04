@@ -77,9 +77,8 @@ export const EventItemCard = ({ event, categories }) => {
             <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}
               {getDate(event.startTime).props.children ===
-              getDate(event.endTime).props.children
-                ? getDate(event.startTime)
-                : `${getDate(event.startTime)} - ${getDate(event.endTime)}`}
+                getDate(event.endTime).props.children &&
+                getDate(event.startTime)}
             </Text>
           </Stack>
           <Stack direction={"row"} color="brand.400" fontSize="sm">
