@@ -29,10 +29,6 @@ export const loader = async () => {
 
 export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
-  // const categoryIds = [1, 2, 3];
-  // const createdBy = 1;
-  // const newFormData1 = (formData["categoryIds"] = categoryIds);
-  // const newFormData2 = (formData["createdBy"] = createdBy);
   console.log(formData);
   const newId = await fetch("http://localhost:3000/events", {
     method: "POST",
@@ -60,6 +56,7 @@ export const CreateEventsPage = () => {
       height: window.innerHeight,
     };
   }
+
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
       selectedCategories.delete(categoryId);
@@ -204,6 +201,7 @@ export const CreateEventsPage = () => {
                 {categories.map((category) => {
                   return (
                     <Checkbox
+                      name="categoryIds"
                       colorScheme="orange"
                       key={category.id}
                       isChecked={selectedCategories.has(category.id)}
