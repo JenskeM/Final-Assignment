@@ -14,6 +14,10 @@ import {
   Radio,
   Button,
   Center,
+  GridItem,
+  CheckboxGroup,
+  Checkbox,
+  Stack,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -50,12 +54,6 @@ export const CreateEventsPage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
-
-  const categoriesOptions = Object.entries(categories).map(([key, value]) => ({
-    value: value.name,
-    label: value.name,
-    key: key,
-  }));
 
   const chosenCategories = [];
 
@@ -130,26 +128,47 @@ export const CreateEventsPage = () => {
           <FormControl isRequired>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Category</FormLabel>
-              <FormControl bg={"brand.100"} rounded="md">
-                <MultiSelect
+              <FormControl rounded="md">
+                <CheckboxGroup defaultValue={[]}>
+                  <Stack>
+                    {categories.map((category) => {
+                      return (
+                        <Checkbox
+                          value={category.id}
+                          key={category.id}
+                          name="categoryIds"
+                        >
+                          {category.name}
+                        </Checkbox>
+                      );
+                    })}
+                  </Stack>
+                </CheckboxGroup>
+
+                {
+                  //Geprobeerd met de MultiSelect
+                  //maar dat is niet mogelijk i.c.m. react-router volgens mentoren
+                  /*<MultiSelect
                   options={categoriesOptions}
                   value={selectedCategories}
                   onChange={handleMultiselectChange}
                   name="categoryIds"
                 />
-                {/* {console.log(selectedCategories)} */}
+                {console.log(selectedCategories)} 
                 {selectedCategories.map((e) => {
                   return chosenCategories.push(
                     categories.find((category) => category.name === e).id
                   );
                 })}
-                {/* {console.log(chosenCategories)} */}
+                {console.log(chosenCategories)} */
+                }
               </FormControl>
             </Grid>
           </FormControl>
           <FormControl isRequired>
             <Grid
-              gridTemplateColumns={"110px 180px 180px"}
+              gridTemplateColumns={"110px 300px"}
+              gridTemplateRows={"1fr 1fr"}
               alignItems={"center"}
             >
               <FormLabel>Date/Time</FormLabel>
@@ -161,21 +180,24 @@ export const CreateEventsPage = () => {
                   showTimeSelect
                   dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
                   name="startTime"
+                  width="300px"
                 />
               </div>
-              <div style={{ fontSize: "0.9em" }}>
-                <DatePicker
-                  selectsEnd
-                  selected={endDateTime}
-                  onChange={(date) => setEndDateTime(date)}
-                  endDate={endDateTime}
-                  startDate={startDateTime}
-                  minDate={startDateTime}
-                  showTimeSelect
-                  dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
-                  name="endTime"
-                />
-              </div>
+              <GridItem colStart={2}>
+                <div style={{ fontSize: "0.9em" }}>
+                  <DatePicker
+                    selectsEnd
+                    selected={endDateTime}
+                    onChange={(date) => setEndDateTime(date)}
+                    endDate={endDateTime}
+                    startDate={startDateTime}
+                    minDate={startDateTime}
+                    showTimeSelect
+                    dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+                    name="endTime"
+                  />
+                </div>
+              </GridItem>
             </Grid>
           </FormControl>
         </Grid>
