@@ -107,15 +107,17 @@ export const CreateEventsPage = () => {
           <FormControl isRequired>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Created by</FormLabel>
-
               <Stack spacing={3}>
                 {users.map((user) => {
                   return (
                     <Radio
                       value={user.id}
                       key={user.id}
+                      colorScheme="orange"
                       isChecked={selectedUser === user.id}
                       onClick={() => setSelectedUser(user.id)}
+                      name="createdBy"
+                      sx={{ borderColor: "brand.200", background: "brand.100" }}
                     >
                       {user.name}
                     </Radio>
@@ -131,9 +133,11 @@ export const CreateEventsPage = () => {
                 {categories.map((category) => {
                   return (
                     <Checkbox
+                      colorScheme="orange"
                       key={category.id}
                       isChecked={selectedCategories.has(category.id)}
                       onChange={() => toggleCategory(category.id)}
+                      sx={{ borderColor: "brand.200" }}
                     >
                       {category.name}
                     </Checkbox>
@@ -178,7 +182,7 @@ export const CreateEventsPage = () => {
             </Grid>
           </FormControl>
         </Grid>
-        <Center>
+        <Center bg={"brand.600"} pb={10}>
           <Button
             type="submit"
             mt={10}
