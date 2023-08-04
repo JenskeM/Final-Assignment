@@ -10,7 +10,6 @@ import {
   Textarea,
   Button,
   Center,
-  GridItem,
   Checkbox,
   Stack,
   Radio,
@@ -53,6 +52,7 @@ export const CreateEventsPage = () => {
   const [endDateTime, setEndDateTime] = useState(new Date());
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [marginLR, setMarginLR] = useState();
+  const [transX, setTransX] = useState();
 
   function getCurrentDimension() {
     return {
@@ -75,18 +75,23 @@ export const CreateEventsPage = () => {
     };
     window.addEventListener("resize", updateDimension);
     changeMarginLR();
+    changeX();
 
     return () => {
       window.removeEventListener("resize", updateDimension);
       changeMarginLR();
+      changeX();
     };
   }, [screenSize]);
 
   const changeMarginLR = () => {
     setMarginLR((screenSize.width - 110 - 300) / 2);
-    console.log(screenSize.width);
     //110 is the width of the labels in the form
     //300 is the width of the controls in the form
+  };
+
+  const changeX = () => {
+    setTransX((screenSize.width - 300) / 2);
   };
 
   return (
@@ -102,6 +107,9 @@ export const CreateEventsPage = () => {
           justifyContent={"center"}
           gridTemplateColumns={"1fr"}
           rowGap={8}
+          sx={{
+            transform: screenSize.width <= 360 && `translateX(${transX}px)`,
+          }}
         >
           <FormControl isRequired>
             <Grid
@@ -219,10 +227,9 @@ export const CreateEventsPage = () => {
               gridTemplateColumns={
                 screenSize.width <= 360 ? 300 : "110px 300px"
               }
-              gridTemplateRows={"1fr 1fr"}
               alignItems={"center"}
             >
-              <FormLabel>Date/Time</FormLabel>
+              <FormLabel>Start</FormLabel>
               <div style={{ fontSize: "0.9em" }}>
                 <DatePicker
                   selectStart
@@ -234,21 +241,27 @@ export const CreateEventsPage = () => {
                   width="300px"
                 />
               </div>
-              <GridItem colStart={2}>
-                <div style={{ fontSize: "0.9em" }}>
-                  <DatePicker
-                    selectsEnd
-                    selected={endDateTime}
-                    onChange={(date) => setEndDateTime(date)}
-                    endDate={endDateTime}
-                    startDate={startDateTime}
-                    minDate={startDateTime}
-                    showTimeSelect
-                    dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
-                    name="endTime"
-                  />
-                </div>
-              </GridItem>
+            </Grid>
+            <Grid
+              gridTemplateColumns={
+                screenSize.width <= 360 ? 300 : "110px 300px"
+              }
+              alignItems={"center"}
+            >
+              <FormLabel>End</FormLabel>
+              <div style={{ fontSize: "0.9em" }}>
+                <DatePicker
+                  selectsEnd
+                  selected={endDateTime}
+                  onChange={(date) => setEndDateTime(date)}
+                  endDate={endDateTime}
+                  startDate={startDateTime}
+                  minDate={startDateTime}
+                  showTimeSelect
+                  dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+                  name="endTime"
+                />
+              </div>
             </Grid>
           </FormControl>
         </Grid>
