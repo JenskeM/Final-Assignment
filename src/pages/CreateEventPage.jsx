@@ -30,14 +30,17 @@ export const loader = async () => {
 export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
   console.log(formData);
-  const newId = await fetch("http://localhost:3000/events", {
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((res) => res.json())
-    .then((json) => json.id);
-  return redirect(`/event/${newId}`);
+  console.log(formData.createdBy);
+  formData.createdBy = Number(formData.createdBy);
+  console.log(formData);
+  // const newId = await fetch("http://localhost:3000/events", {
+  //   method: "POST",
+  //   body: JSON.stringify(formData),
+  //   headers: { "Content-Type": "application/json" },
+  // })
+  //   .then((res) => res.json())
+  //   .then((json) => json.id);
+  // return redirect(`/event/${newId}`);
 };
 
 export const CreateEventsPage = () => {
