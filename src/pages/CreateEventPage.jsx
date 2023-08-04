@@ -51,18 +51,17 @@ export const action = async ({ request }) => {
 
 export const CreateEventsPage = () => {
   const { categories, users } = useLoaderData();
-  const { user, setUser } = useState();
+  const [selectedUser, setSelectedUser] = useState();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
 
-  // const categoriesOptions = Object.entries(categories).map(([key, value]) => ({
-  //   value: value.name,
-  //   label: value.name,
-  //   key: key,
-  // }));
-
   const chosenCategories = [];
+
+  const handleChange = (event) => {
+    setSelectedUser(event.id);
+    console.log(event);
+  };
 
   const handleMultiselectChange = (selected) => {
     setSelectedCategories(selected);
@@ -114,7 +113,7 @@ export const CreateEventsPage = () => {
           <FormControl>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Created by</FormLabel>
-              <RadioGroup>
+              <RadioGroup value={selectedUser} onChange={setSelectedUser}>
                 <HStack spacing="24px">
                   {users.map((user) => {
                     return (
@@ -123,7 +122,6 @@ export const CreateEventsPage = () => {
                         key={user.id}
                         colorScheme="red"
                         name="createdBy"
-                        onClick={(e) => setUser(e.id)}
                       >
                         {user.name}
                       </Radio>
