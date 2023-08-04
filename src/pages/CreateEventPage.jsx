@@ -31,6 +31,12 @@ export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
   formData.createdBy = Number(formData.createdBy);
   formData.categoryIds = formData.categoryIds.split(",").map(Number);
+  const getArrayStart = formData.startTime.split(" ");
+  const revertDateStart = getArrayStart[0].split("-").reverse().join("-");
+  formData.startTime = revertDateStart + "T" + getArrayStart[1] + ":00.000Z";
+  const getArrayEnd = formData.endTime.split(" ");
+  const revertDateEnd = getArrayEnd[0].split("-").reverse().join("-");
+  formData.endTime = revertDateEnd + "T" + getArrayEnd[1] + ":00.000Z";
   console.log(formData);
   const newId = await fetch("http://localhost:3000/events", {
     method: "POST",
@@ -237,7 +243,7 @@ export const CreateEventsPage = () => {
                   selected={startDateTime}
                   onChange={(date) => setStartDateTime(date)}
                   showTimeSelect
-                  dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+                  dateFormat="dd-MM-yyy HH:mm"
                   name="startTime"
                   width="300px"
                 />
@@ -259,7 +265,7 @@ export const CreateEventsPage = () => {
                   startDate={startDateTime}
                   minDate={startDateTime}
                   showTimeSelect
-                  dateFormat="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"
+                  dateFormat="dd-MM-yyy HH:mm"
                   name="endTime"
                 />
               </div>
