@@ -1,5 +1,4 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
-import { MultiSelect } from "chakra-multiselect";
 import {
   Box,
   Grid,
@@ -9,15 +8,12 @@ import {
   FormHelperText,
   Input,
   Textarea,
-  RadioGroup,
-  HStack,
-  Radio,
   Button,
   Center,
   GridItem,
-  CheckboxGroup,
   Checkbox,
   Stack,
+  Radio,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -34,10 +30,10 @@ export const loader = async () => {
 
 export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
-  const categoryIds = [1, 2, 3];
-  const createdBy = 1;
-  const newFormData1 = (formData["categoryIds"] = categoryIds);
-  const newFormData2 = (formData["createdBy"] = createdBy);
+  // const categoryIds = [1, 2, 3];
+  // const createdBy = 1;
+  // const newFormData1 = (formData["categoryIds"] = categoryIds);
+  // const newFormData2 = (formData["createdBy"] = createdBy);
   console.log(formData);
   const newId = await fetch("http://localhost:3000/events", {
     method: "POST",
@@ -51,20 +47,18 @@ export const action = async ({ request }) => {
 
 export const CreateEventsPage = () => {
   const { categories, users } = useLoaderData();
+  const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [selectedUser, setSelectedUser] = useState();
-  const [selectedCategories, setSelectedCategories] = useState([]);
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
 
-  const chosenCategories = [];
-
-  const handleChange = (event) => {
-    setSelectedUser(event.id);
-    console.log(event);
-  };
-
-  const handleMultiselectChange = (selected) => {
-    setSelectedCategories(selected);
+  const toggleCategory = (categoryId) => {
+    if (selectedCategories.has(categoryId)) {
+      selectedCategories.delete(categoryId);
+    } else {
+      selectedCategories.add(categoryId);
+    }
+    setSelectedCategories(new Set(selectedCategories));
   };
 
   return (
@@ -110,65 +104,42 @@ export const CreateEventsPage = () => {
               <Input bg={"brand.100"} name="location" />
             </Grid>
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Created by</FormLabel>
-              <RadioGroup value={selectedUser} onChange={setSelectedUser}>
-                <HStack spacing="24px">
-                  {users.map((user) => {
-                    return (
-                      <Radio
-                        value={user.id}
-                        key={user.id}
-                        colorScheme="red"
-                        name="createdBy"
-                      >
-                        {user.name}
-                      </Radio>
-                    );
-                  })}
-                </HStack>
-              </RadioGroup>
+
+              <Stack spacing={3}>
+                {users.map((user) => {
+                  return (
+                    <Radio
+                      value={user.id}
+                      key={user.id}
+                      isChecked={selectedUser === user.id}
+                      onClick={() => setSelectedUser(user.id)}
+                    >
+                      {user.name}
+                    </Radio>
+                  );
+                })}
+              </Stack>
             </Grid>
           </FormControl>
           <FormControl isRequired>
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Category</FormLabel>
-              <FormControl rounded="md">
-                <CheckboxGroup>
-                  <Stack>
-                    {categories.map((category) => {
-                      return (
-                        <Checkbox
-                          value={category.id}
-                          key={category.id}
-                          name="categoryIds"
-                        >
-                          {category.name}
-                        </Checkbox>
-                      );
-                    })}
-                  </Stack>
-                </CheckboxGroup>
-
-                {
-                  //Geprobeerd met de MultiSelect
-                  //maar dat is niet mogelijk i.c.m. react-router volgens mentoren
-                  /*<MultiSelect
-                  options={categoriesOptions}
-                  value={selectedCategories}
-                  onChange={handleMultiselectChange}
-                  name="categoryIds"
-                />
-                {console.log(selectedCategories)} 
-                {selectedCategories.map((e) => {
-                  return chosenCategories.push(
-                    categories.find((category) => category.name === e).id
+              <Stack>
+                {categories.map((category) => {
+                  return (
+                    <Checkbox
+                      key={category.id}
+                      isChecked={selectedCategories.has(category.id)}
+                      onChange={() => toggleCategory(category.id)}
+                    >
+                      {category.name}
+                    </Checkbox>
                   );
                 })}
-                {console.log(chosenCategories)} */
-                }
-              </FormControl>
+              </Stack>
             </Grid>
           </FormControl>
           <FormControl isRequired>

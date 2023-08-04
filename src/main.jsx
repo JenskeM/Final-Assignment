@@ -5,8 +5,8 @@ import ReactDOM from "react-dom/client";
 import {
   CreateEventsPage,
   loader as createEventLoader,
-  //action as createEvent,
-} from "./pages/CreateTest";
+  action as createEvent,
+} from "./pages/CreateEventPage";
 import { EventPage } from "./pages/EventPage";
 import { EventsPage, loader as eventListLoader } from "./pages/EventsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -53,7 +53,7 @@ const router = createBrowserRouter([
         path: "/createEvent",
         element: <CreateEventsPage />,
         loader: createEventLoader,
-        //   action: createEvent,
+        action: createEvent,
       },
     ],
   },
