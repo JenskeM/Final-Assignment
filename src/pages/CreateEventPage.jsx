@@ -51,9 +51,16 @@ export const action = async ({ request }) => {
 
 export const CreateEventsPage = () => {
   const { categories, users } = useLoaderData();
+  const { user, setUser } = useState();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
+
+  // const categoriesOptions = Object.entries(categories).map(([key, value]) => ({
+  //   value: value.name,
+  //   label: value.name,
+  //   key: key,
+  // }));
 
   const chosenCategories = [];
 
@@ -116,6 +123,7 @@ export const CreateEventsPage = () => {
                         key={user.id}
                         colorScheme="red"
                         name="createdBy"
+                        onClick={(e) => setUser(e.id)}
                       >
                         {user.name}
                       </Radio>
@@ -129,7 +137,7 @@ export const CreateEventsPage = () => {
             <Grid gridTemplateColumns={"110px 300px"} alignItems={"center"}>
               <FormLabel>Category</FormLabel>
               <FormControl rounded="md">
-                <CheckboxGroup defaultValue={[]}>
+                <CheckboxGroup>
                   <Stack>
                     {categories.map((category) => {
                       return (
