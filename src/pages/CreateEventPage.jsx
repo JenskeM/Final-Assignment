@@ -89,7 +89,7 @@ export const CreateEventsPage = () => {
   };
 
   return (
-    <Box bg={"brand.600"} h={"100vh"} pt={5}>
+    <Box bg={"brand.600"} pt={5} pb={"200px"}>
       <Heading mb={10} textAlign={"center"} color={"brand.200"}>
         Add a new event
       </Heading>
@@ -218,7 +218,7 @@ export const CreateEventsPage = () => {
             </Grid>
           </FormControl>
         </Grid>
-        <Center bg={"brand.600"} pb={10}>
+        <Center>
           <Button
             type="submit"
             mt={10}
