@@ -15,7 +15,7 @@ import {
   Stack,
   Radio,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
 
@@ -51,7 +51,15 @@ export const CreateEventsPage = () => {
   const [selectedUser, setSelectedUser] = useState();
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [marginLR, setMarginLR] = useState();
 
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  }
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
       selectedCategories.delete(categoryId);
@@ -61,6 +69,25 @@ export const CreateEventsPage = () => {
     setSelectedCategories(new Set(selectedCategories));
   };
 
+  useEffect(() => {
+    const updateDimension = () => {
+      setScreenSize(getCurrentDimension());
+    };
+    window.addEventListener("resize", updateDimension);
+    changeMarginLR();
+
+    return () => {
+      window.removeEventListener("resize", updateDimension);
+      changeMarginLR();
+    };
+  }, [screenSize]);
+
+  const changeMarginLR = () => {
+    setMarginLR((screenSize.width - 110 - 300) / 2);
+    //110 is the width of the labels in the form
+    //300 is the width of the controls in the form
+  };
+
   return (
     <Box bg={"brand.600"} h={"100vh"} pt={5}>
       <Heading mb={10} textAlign={"center"} color={"brand.200"}>
@@ -68,8 +95,8 @@ export const CreateEventsPage = () => {
       </Heading>
       <Form method="post" id="new-post-form">
         <Grid
-          ml={"500px"}
-          mr={"500px"}
+          ml={`${marginLR}px`}
+          mr={`${marginLR}px`}
           alignItems={"center"}
           justifyContent={"center"}
           gridTemplateColumns={"1fr"}
@@ -117,7 +144,11 @@ export const CreateEventsPage = () => {
                       isChecked={selectedUser === user.id}
                       onClick={() => setSelectedUser(user.id)}
                       name="createdBy"
-                      sx={{ borderColor: "brand.200", background: "brand.100" }}
+                      sx={{
+                        borderColor: "brand.200",
+                        background: "brand.100",
+                        paddingLeft: "5px",
+                      }}
                     >
                       {user.name}
                     </Radio>
@@ -137,7 +168,12 @@ export const CreateEventsPage = () => {
                       key={category.id}
                       isChecked={selectedCategories.has(category.id)}
                       onChange={() => toggleCategory(category.id)}
-                      sx={{ borderColor: "brand.200" }}
+                      sx={{
+                        borderColor: "brand.200",
+                        backgroundColor: "brand.100",
+                        paddingLeft: "5px",
+                        borderRadius: "20px",
+                      }}
                     >
                       {category.name}
                     </Checkbox>
