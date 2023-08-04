@@ -29,18 +29,17 @@ export const loader = async () => {
 
 export const action = async ({ request }) => {
   const formData = Object.fromEntries(await request.formData());
-  console.log(formData);
-  console.log(formData.createdBy);
   formData.createdBy = Number(formData.createdBy);
+  formData.categoryIds = formData.categoryIds.split(",").map(Number);
   console.log(formData);
-  // const newId = await fetch("http://localhost:3000/events", {
-  //   method: "POST",
-  //   body: JSON.stringify(formData),
-  //   headers: { "Content-Type": "application/json" },
-  // })
-  //   .then((res) => res.json())
-  //   .then((json) => json.id);
-  // return redirect(`/event/${newId}`);
+  const newId = await fetch("http://localhost:3000/events", {
+    method: "POST",
+    body: JSON.stringify(formData),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((res) => res.json())
+    .then((json) => json.id);
+  return redirect(`/event/${newId}`);
 };
 
 export const CreateEventsPage = () => {
@@ -204,9 +203,10 @@ export const CreateEventsPage = () => {
                 {categories.map((category) => {
                   return (
                     <Checkbox
-                      name="categoryIds"
                       colorScheme="orange"
                       key={category.id}
+                      name="categoryIds"
+                      value={Array.from(selectedCategories)}
                       isChecked={selectedCategories.has(category.id)}
                       onChange={() => toggleCategory(category.id)}
                       sx={{
