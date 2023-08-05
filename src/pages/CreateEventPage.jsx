@@ -13,6 +13,7 @@ import {
   Checkbox,
   Stack,
   Radio,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
@@ -57,6 +58,7 @@ export const CreateEventsPage = () => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [marginLR, setMarginLR] = useState();
   const [transX, setTransX] = useState();
+  const toast = useToast();
 
   function getCurrentDimension() {
     return {
@@ -279,6 +281,15 @@ export const CreateEventsPage = () => {
             bg="brand.200"
             color="brand.100"
             _hover={{ background: "brand.300" }}
+            onClick={() =>
+              toast({
+                title: "Whoop whoop! Done 🎉!",
+                description: "The event you created is added.",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+              })
+            }
           >
             Add event
           </Button>
