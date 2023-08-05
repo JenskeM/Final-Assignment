@@ -15,12 +15,13 @@ import { Root } from "./components/Root";
 //extend the theme
 const colors = {
   brand: {
-    100: "#fafafa",
-    200: "#eb7777",
-    300: "#ffc97f",
-    400: "#eb8291",
-    500: "#f0bbcd",
-    600: "#c9e7db",
+    100: "#fafafa", //Off-white
+    200: "#eb7777", //Darkest pink
+    300: "#ffc97f", //Orange-ish
+    400: "#eb8291", //Middle pink
+    500: "#f0bbcd", //Light pink
+    600: "#ffe4bf", //Lighter orange
+    700: "#ffedd4", //Lightest orange
   },
 };
 

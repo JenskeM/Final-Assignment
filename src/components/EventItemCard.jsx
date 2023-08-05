@@ -107,7 +107,7 @@ export const EventItemCard = ({ event, categories }) => {
               bg="brand.100"
               m={2}
               textAlign={"center"}
-              color="brand.600"
+              color="brand.500"
               fontWeight={"semibold"}
               py={1}
               textTransform={"uppercase"}
