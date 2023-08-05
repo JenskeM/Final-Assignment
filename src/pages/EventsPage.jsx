@@ -3,12 +3,21 @@ import { Heading, Box, Grid, Button, Tooltip, Center } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
 
-export const loader = async () => {
+export const loader = async ({ inputText }) => {
+  const searchText = inputText.query.get("q");
   const events = await fetch(`http://localhost:3000/events`);
   const categories = await fetch(`http://localhost:3000/categories`);
 
+  let filteredEvents = await events.json();
+
+  if (searchText) {
+    filteredEvents = filteredEvents.filter((event) =>
+      event.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+  }
+
   return {
-    events: await events.json(),
+    events: filteredEvents,
     categories: await categories.json(),
   };
 };
@@ -17,7 +26,7 @@ export const EventsPage = () => {
   const { events, categories } = useLoaderData();
 
   return (
-    <Box marginLeft={3} pt={10}>
+    <Box pl={3} pt={10} bg="brand.700" pb={10}>
       <Heading textAlign={"center"} color="brand.400">
         List of events
       </Heading>
