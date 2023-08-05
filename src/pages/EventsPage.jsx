@@ -27,23 +27,19 @@ export const EventsPage = () => {
         gridTemplateColumns={"repeat(4, 1fr)"}
         columnGap={8}
       >
-        {events.map((event) => {
-          // return event.categoryIds.map((e) => {
-          //   return console.log(
-          //     categories.find((category) => category.id === e)
-          //   );
-          // });
-          return (
-            <Link key={event.id} to={`/event/${event.id}`}>
-              <EventItemCard
-                event={event}
-                categories={event.categoryIds.map((e) => {
-                  return categories.find((category) => category.id === e);
-                })}
-              />
-            </Link>
-          );
-        })}
+        {events &&
+          events.map((event) => {
+            return (
+              <Link key={event.id} to={`/event/${event.id}`}>
+                <EventItemCard
+                  event={event}
+                  categories={event.categoryIds.map((e) => {
+                    return categories.find((category) => category.id === e);
+                  })}
+                />
+              </Link>
+            );
+          })}
       </Grid>
       <Center pt={6}>
         <Tooltip label={"Press the button to go to add-event-form"}>

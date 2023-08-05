@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   Grid,
@@ -11,8 +11,6 @@ import {
 } from "@chakra-ui/react";
 
 export const Navigation = () => {
-  const [searchText, setSearchText] = useState("");
-
   return (
     <Grid
       bg="brand.200"
@@ -38,8 +36,6 @@ export const Navigation = () => {
             fontSize={"sm"}
             color="black"
             focusBorderColor="brand.300"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
           />
           <Tooltip label="Click to search">
             <Image
