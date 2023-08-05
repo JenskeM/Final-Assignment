@@ -63,7 +63,21 @@
       ],
       "location": "Shavasana Yoga School",
       "startTime": "2023-03-09T06:00:00.000Z",
-      "endTime": "2023-03-09T07:00:00.000Z"
+      "endTime": "2023-03-19T07:00:00.000Z"
+    },
+    {
+      "title": "Full Stack Development course",
+      "description": "Learn Front-End and Back-End",
+      "image": "https://assets.bitdegree.org/online-learning-platforms/storage/media/2018/11/What-Is-A-Full-Stack-Developer-and-Everything-You-Need-to-Know-to-Start.jpg",
+      "location": "Your own place",
+      "createdBy": 1,
+      "categoryIds": [
+        3,
+        2
+      ],
+      "startTime": "2023-08-05T06:30:00.000Z",
+      "endTime": "2023-11-30T17:30:00.000Z",
+      "id": 5
     }
   ],
   "categories": [
