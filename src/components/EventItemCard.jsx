@@ -15,7 +15,7 @@ export const EventItemCard = ({ event, categories }) => {
     const year = dateObject.getFullYear();
     const month = dateObject.getMonth() + 1;
     const day = dateObject.getDate();
-    const formattedDate = `${day}-${month}-${year}`;
+    const formattedDate = `${day}/${month}/${year}`;
 
     return <>{formattedDate}</>;
   };
@@ -75,25 +75,33 @@ export const EventItemCard = ({ event, categories }) => {
           <Stack direction={"row"} color="brand.400" fontSize="sm">
             <Text>Date:</Text>
             <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
-              {" "}
               {getDate(event.startTime).props.children ===
               getDate(event.endTime).props.children
-                ? getDate(event.startTime)
-                : `${getDate(event.startTime)} - ${getDate(event.endTime)}`}
+                ? `${getDate(event.startTime).props.children}`
+                : `${getDate(event.startTime).props.children} - ${
+                    getDate(event.endTime).props.children
+                  }`}
             </Text>
           </Stack>
           <Stack direction={"row"} color="brand.400" fontSize="sm">
             <Text>Time:</Text>
             <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}
-              {getTime(event.startTime)}-{getTime(event.endTime)}
+              {getDate(event.startTime).props.children ===
+              getDate(event.endTime).props.children
+                ? `${getTime(event.startTime).props.children} - ${
+                    getTime(event.endTime).props.children
+                  }`
+                : `${getTime(event.startTime).props.children} (startdate) - ${
+                    getTime(event.endTime).props.children
+                  } (enddate)`}
             </Text>
           </Stack>
         </Stack>
         <Center mt={3}>
           {categories.map((category) => (
             <Tag
-              key={category}
+              key={category.id}
               size={"sm"}
               maxBlockSize={2}
               bg="brand.100"
