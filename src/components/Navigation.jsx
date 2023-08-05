@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Grid,
   GridItem,
@@ -12,11 +12,6 @@ import {
 
 export const Navigation = () => {
   const [searchText, setSearchText] = useState("");
-  const navigate = useNavigate();
-
-  const handleSearch = () => {
-    navigate(`/?q=${searchText}`);
-  };
 
   return (
     <Grid
@@ -57,7 +52,6 @@ export const Navigation = () => {
                 borderRadius: "20px",
                 cursor: "pointer",
               }}
-              onClick={handleSearch}
             />
           </Tooltip>
         </Stack>
