@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Heading, Box, Grid, Button, Tooltip, Center } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
@@ -15,32 +15,64 @@ export const loader = async () => {
 
 export const EventsPage = () => {
   const { events, categories } = useLoaderData();
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
+
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  }
+
+  useEffect(() => {
+    const updateDimension = () => {
+      setScreenSize(getCurrentDimension());
+    };
+    window.addEventListener("resize", updateDimension);
+
+    return () => {
+      window.removeEventListener("resize", updateDimension);
+    };
+  }, [screenSize]);
+
+  console.log(screenSize.width);
 
   return (
     <Box pl={3} pt={10} bg="brand.700" pb={10}>
       <Heading textAlign={"center"} color="brand.400">
         List of events
       </Heading>
-      <Grid
-        alignContent={"center"}
-        justifyContent={"center"}
-        gridTemplateColumns={"repeat(4, 1fr)"}
-        columnGap={8}
-      >
-        {events &&
-          events.map((event) => {
-            return (
-              <Link key={event.id} to={`/event/${event.id}`}>
-                <EventItemCard
-                  event={event}
-                  categories={event.categoryIds.map((e) => {
-                    return categories.find((category) => category.id === e);
-                  })}
-                />
-              </Link>
-            );
-          })}
-      </Grid>
+      <Center>
+        <Grid
+          alignContent={"center"}
+          justifyContent={"center"}
+          gridTemplateColumns={
+            screenSize.width <= 700
+              ? "1fr"
+              : screenSize.width <= 1060
+              ? "repeat(2, 1fr)"
+              : screenSize.width <= 1366
+              ? "repeat(3, 1fr)"
+              : "repeat(4, 1fr)"
+          }
+          columnGap={8}
+        >
+          {events &&
+            events.map((event) => {
+              return (
+                <Link key={event.id} to={`/event/${event.id}`}>
+                  <EventItemCard
+                    event={event}
+                    categories={event.categoryIds.map((e) => {
+                      return categories.find((category) => category.id === e);
+                    })}
+                    screenSize={screenSize}
+                  />
+                </Link>
+              );
+            })}
+        </Grid>
+      </Center>
       <Center pt={6}>
         <Tooltip label={"Press the button to go to add-event-form"}>
           <Link to={`/createEvent`}>
