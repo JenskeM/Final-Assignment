@@ -7,7 +7,6 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
-  Input,
   Textarea,
   Button,
   Center,
@@ -125,15 +124,6 @@ export const CreateEventsPage = () => {
               nameText="title"
               screenSize={screenSize}
             />
-            {/* <Grid
-              gridTemplateColumns={
-                screenSize.width <= 360 ? 300 : "110px 300px"
-              }
-              alignItems={"center"}
-            >
-              <FormLabel>Title</FormLabel>
-              <Input type="text" bg={"brand.100"} name="title" />
-            </Grid> */}
             <FormHelperText ml={screenSize.width <= 360 ? 0 : 110}>
               Make it a fancy one.
             </FormHelperText>
@@ -149,30 +139,23 @@ export const CreateEventsPage = () => {
                 bg={"brand.100"}
                 placeholder="Please, add some info of the event"
                 name="description"
+                focusBorderColor="brand.300"
               />
             </Grid>
           </FormControl>
           <FormControl>
-            <Grid
-              gridTemplateColumns={
-                screenSize.width <= 360 ? 300 : "110px 300px"
-              }
-              alignItems={"center"}
-            >
-              <FormLabel>Image url</FormLabel>
-              <Input bg={"brand.100"} name="image" />
-            </Grid>
+            <InputField
+              labelText="Image url"
+              nameText="image"
+              screenSize={screenSize}
+            />
           </FormControl>
           <FormControl isRequired>
-            <Grid
-              gridTemplateColumns={
-                screenSize.width <= 360 ? 300 : "110px 300px"
-              }
-              alignItems={"center"}
-            >
-              <FormLabel>Location</FormLabel>
-              <Input bg={"brand.100"} name="location" />
-            </Grid>
+            <InputField
+              labelText="Location"
+              nameText="location"
+              screenSize={screenSize}
+            />
           </FormControl>
           <FormControl isRequired>
             <Grid

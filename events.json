@@ -78,6 +78,20 @@
       "startTime": "2023-08-05T06:30:00.000Z",
       "endTime": "2023-11-30T17:30:00.000Z",
       "id": 5
+    },
+    {
+      "title": "Dog walking",
+      "description": "Walk with many dogs",
+      "image": "https://dogsbestlife.com/wp-content/uploads/2019/05/dog-walker-vs.-pet-sitter.jpeg",
+      "location": "Park",
+      "createdBy": 2,
+      "categoryIds": [
+        1,
+        3
+      ],
+      "startTime": "2023-08-06T11:13:00.000Z",
+      "endTime": "2023-08-06T14:30:00.000Z",
+      "id": 6
     }
   ],
   "categories": [
