@@ -12,6 +12,7 @@ import {
 import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
 import { useEvent } from "../components/EventContext";
+import { ACTIONS } from "../components/eventReducer";
 
 export const loader = async () => {
   const events = await fetch(`http://localhost:3000/events`);
@@ -25,7 +26,7 @@ export const loader = async () => {
 
 export const EventsPage = () => {
   const { events, categories } = useLoaderData();
-  const { state } = useEvent();
+  const { dispatch, state } = useEvent();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [radioValue, setRadioValue] = useState("no filter");
@@ -52,6 +53,10 @@ export const EventsPage = () => {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.FILTER_CATS, payload: radioValue });
+  }, [radioValue, dispatch]);
 
   useEffect(() => {
     if (state.searchTerm === undefined || state.searchTerm === "") {
