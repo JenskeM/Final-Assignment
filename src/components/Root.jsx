@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Navigation } from "./Navigation";
 import { Menu } from "../components/Menu";
 import { Box } from "@chakra-ui/react";
+import { EventProvider } from "./EventContext";
 
 export const Root = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -12,10 +13,12 @@ export const Root = () => {
   };
 
   return (
-    <Box>
-      <Navigation toggleMenu={toggleMenu} />
-      {showMenu && <Menu />}
-      <Outlet />
-    </Box>
+    <EventProvider>
+      <Box>
+        <Navigation toggleMenu={toggleMenu} />
+        {showMenu && <Menu />}
+        <Outlet />
+      </Box>
+    </EventProvider>
   );
 };
