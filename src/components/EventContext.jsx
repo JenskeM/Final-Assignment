@@ -13,7 +13,7 @@ export const EventProvider = ({ children }) => {
   );
 };
 
-export const useEventContext = () => {
+export const useEvent = () => {
   const context = useContext(EventContext);
   if (!context) {
     throw new Error("useEventContext must be used within a EventContext");
