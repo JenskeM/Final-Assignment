@@ -1,23 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
+import eventReducer, { initialState } from "./eventReducer";
 
-export const EventContext = createContext();
-
-const initialState = {
-  searchTerm: "",
-};
-
-export const ACTIONS = {
-  FILTER_EVENTS: "filter-events",
-};
-
-const eventReducer = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.FILTER_EVENTS:
-      return { ...state, searchTerm: action.payload };
-    default:
-      return state;
-  }
-};
+const EventContext = createContext(initialState);
 
 export const EventProvider = ({ children }) => {
   const [state, dispatch] = useReducer(eventReducer, initialState);
@@ -32,9 +16,7 @@ export const EventProvider = ({ children }) => {
 export const useEventContext = () => {
   const context = useContext(EventContext);
   if (!context) {
-    throw new Error(
-      "useEventContext must be used within a EventContextProvider"
-    );
+    throw new Error("useEventContext must be used within a EventContext");
   }
   return context;
 };
