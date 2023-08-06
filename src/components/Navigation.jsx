@@ -9,13 +9,10 @@ import {
   Stack,
   Image,
 } from "@chakra-ui/react";
-import { useEventContext } from "./EventContext";
-import { ACTIONS } from "./EventContext";
 
 export const Navigation = ({ toggleMenu }) => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { state, dispatch } = useEventContext();
 
   function getCurrentDimension() {
     return {
@@ -34,10 +31,6 @@ export const Navigation = ({ toggleMenu }) => {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
-
-  const handleSearchInput = (event) => {
-    dispatch({ type: ACTIONS.FILTER_EVENTS, payload: event.target.value });
-  };
 
   return (
     <Grid
@@ -89,8 +82,6 @@ export const Navigation = ({ toggleMenu }) => {
                 fontSize={"sm"}
                 color="black"
                 focusBorderColor="brand.300"
-                value={state.searchTerm}
-                onChange={handleSearchInput}
               />
               <Tooltip label="Click to search">
                 <Image
@@ -98,11 +89,11 @@ export const Navigation = ({ toggleMenu }) => {
                   height={8}
                   p={1}
                   alignSelf={"center"}
-                  // _hover={{
-                  //   background: "brand.300",
-                  //   borderRadius: "20px",
-                  //   cursor: "pointer",
-                  // }}
+                  _hover={{
+                    background: "brand.300",
+                    borderRadius: "20px",
+                    cursor: "pointer",
+                  }}
                 />
               </Tooltip>
             </Stack>
