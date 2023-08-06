@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Heading, Box, Grid, Button, Tooltip, Center } from "@chakra-ui/react";
+import {
+  Heading,
+  Box,
+  Grid,
+  Button,
+  Tooltip,
+  Center,
+  Radio,
+  RadioGroup,
+} from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
 import { useEvent } from "../components/EventContext";
@@ -19,6 +28,7 @@ export const EventsPage = () => {
   const { state } = useEvent();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [filteredEvents, setFilteredEvents] = useState(events);
+  const [radioValue, setRadioValue] = useState("no filter");
 
   function getCurrentDimension() {
     return {
@@ -26,6 +36,11 @@ export const EventsPage = () => {
       height: window.innerHeight,
     };
   }
+
+  const catsFiltered = ["no filter"];
+  categories.map((cat) => {
+    catsFiltered.push(cat.name);
+  });
 
   useEffect(() => {
     const updateDimension = () => {
@@ -40,20 +55,58 @@ export const EventsPage = () => {
 
   useEffect(() => {
     if (state.searchTerm === undefined || state.searchTerm === "") {
-      setFilteredEvents(events);
+      if (radioValue === "no filter") {
+        setFilteredEvents(events);
+      } else {
+        const chosenCategory = categories.find(
+          (category) => category.name === radioValue
+        );
+        const eventsWithCategory = events.filter((event) =>
+          event.categoryIds.includes(chosenCategory.id)
+        );
+        setFilteredEvents(eventsWithCategory);
+      }
     } else {
       const eventInFilters = events.filter((event) =>
         event.title.toLowerCase().includes(state.searchTerm.toLowerCase())
       );
-      setFilteredEvents(eventInFilters);
+      if (radioValue === "no filter") {
+        setFilteredEvents(eventInFilters);
+      } else {
+        const chosenCategory = categories.find(
+          (category) => category.name === radioValue
+        );
+        const eventsWithCategory = eventInFilters.filter((event) =>
+          event.categoryIds.includes(chosenCategory.id)
+        );
+        setFilteredEvents(eventsWithCategory);
+      }
     }
-  }, [state.searchTerm, events]);
+  }, [state.searchTerm, events, radioValue]);
 
   return (
-    <Box pl={3} pt={10} bg="brand.700" pb={10}>
-      <Heading textAlign={"center"} color="brand.400">
+    <Box pl={3} pt={1} bg="brand.700" pb={10}>
+      <RadioGroup onChange={setRadioValue} value={radioValue} name="filterCat">
+        {catsFiltered.map((cat) => (
+          <Radio
+            key={cat}
+            value={cat}
+            pr={5}
+            colorScheme="orange"
+            sx={{
+              borderColor: "brand.200",
+              background: "brand.100",
+              paddingLeft: "5px",
+            }}
+          >
+            {cat}
+          </Radio>
+        ))}
+      </RadioGroup>
+      <Heading textAlign={"center"} color="brand.400" pt={10}>
         List of events
       </Heading>
+
       <Center>
         <Grid
           alignContent={"center"}
