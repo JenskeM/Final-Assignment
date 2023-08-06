@@ -10,8 +10,9 @@ import {
   Image,
 } from "@chakra-ui/react";
 
-export const Navigation = () => {
+export const Navigation = ({ toggleMenu }) => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   function getCurrentDimension() {
     return {
@@ -61,7 +62,11 @@ export const Navigation = () => {
               borderRadius: "20px",
               cursor: "pointer",
             }}
+            onClick={() => {
+              toggleMenu(setIsMenuOpen(!isMenuOpen));
+            }}
           />
+          {/* {console.log(isMenuOpen)} */}
         </GridItem>
       ) : (
         <>
