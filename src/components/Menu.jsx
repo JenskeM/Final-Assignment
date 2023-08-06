@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Stack, Input, Image, Text } from "@chakra-ui/react";
+import { useEvent } from "./EventContext";
+import { ACTIONS } from "./eventReducer";
 
 export const Menu = () => {
+  const { dispatch } = useEvent();
+  const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.FILTER_EVENTS, payload: searchText });
+  }, [searchText, dispatch]);
+
   return (
     <Stack bg="brand.200" pl={4} pr={4}>
       <Stack direction={"row"} height={8}>
@@ -16,6 +25,8 @@ export const Menu = () => {
           fontSize={"sm"}
           color="black"
           focusBorderColor="brand.300"
+          onChange={(e) => setSearchText(e.target.value)}
+          value={searchText}
         />
         <Image
           src="/src/assets/Search.png"
