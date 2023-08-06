@@ -52,7 +52,7 @@ export const Navigation = ({ toggleMenu }) => {
         <Text alignSelf={"center"}>The event to attend</Text>
       </GridItem>
       {screenSize.width <= 700 ? (
-        <GridItem colSpan={2} justifySelf={"right"}>
+        <GridItem colSpan={2} justifySelf={"right"} pr={2}>
           <Image
             src="/src/assets/Menu.png"
             height={8}
