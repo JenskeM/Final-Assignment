@@ -7,15 +7,17 @@ export const ACTIONS = {
   };
 
 const eventReducer = (state, action) => {
-    const {type, payload } = action
+    const {type } = action
     
     switch (type) {
         case ACTIONS.FILTER_EVENTS:
 
             return {
                 ...state,
-                searchTerm: payload.searchTerm
+                searchTerm: action.payload
             }
+        default:
+            return state
     }
 }
 

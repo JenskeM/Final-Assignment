@@ -39,7 +39,6 @@ export const EventsPage = () => {
   }, [screenSize]);
 
   useEffect(() => {
-    console.log(state.searchTerm);
     if (state.searchTerm === undefined || state.searchTerm === "") {
       setFilteredEvents(events);
     } else {
