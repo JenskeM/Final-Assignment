@@ -4,7 +4,7 @@ import { Stack, Input, Image, Text } from "@chakra-ui/react";
 
 export const Menu = () => {
   return (
-    <Stack>
+    <Stack bg="brand.200">
       <Stack direction={"row"} height={8}>
         <Input
           type="text"
