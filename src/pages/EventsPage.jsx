@@ -35,8 +35,6 @@ export const EventsPage = () => {
     };
   }, [screenSize]);
 
-  console.log(screenSize.width);
-
   return (
     <Box pl={3} pt={10} bg="brand.700" pb={10}>
       <Heading textAlign={"center"} color="brand.400">
