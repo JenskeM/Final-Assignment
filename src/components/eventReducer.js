@@ -1,9 +1,11 @@
 export const initialState = {
-    searchTerm: ""
+    searchTerm: "",
+    categorySelected: "no filter"
 }
 
 export const ACTIONS = {
     FILTER_EVENTS: "filter-events",
+    FILTER_CATS: "filter-cats"
   };
 
 const eventReducer = (state, action) => {
@@ -16,6 +18,13 @@ const eventReducer = (state, action) => {
                 ...state,
                 searchTerm: action.payload
             }
+        case ACTIONS.FILTER_CATS:
+
+            return {
+                ...state,
+                categorySelected: action.payload
+            }
+
         default:
             return state
     }

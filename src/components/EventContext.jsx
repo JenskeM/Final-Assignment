@@ -1,10 +1,10 @@
 import { createContext, useContext, useReducer } from "react";
 import eventReducer, { initialState } from "./eventReducer";
 
-const EventContext = createContext(initialState.searchTerm);
+const EventContext = createContext(initialState);
 
 export const EventProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(eventReducer, initialState.searchTerm);
+  const [state, dispatch] = useReducer(eventReducer, initialState);
 
   return (
     <EventContext.Provider value={{ state, dispatch }}>
