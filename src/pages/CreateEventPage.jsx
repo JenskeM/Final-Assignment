@@ -1,4 +1,5 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
+import { InputField } from "../components/InputField";
 import {
   Box,
   Grid,
@@ -119,7 +120,12 @@ export const CreateEventsPage = () => {
           }}
         >
           <FormControl isRequired>
-            <Grid
+            <InputField
+              labelText="Title"
+              nameText="title"
+              screenSize={screenSize}
+            />
+            {/* <Grid
               gridTemplateColumns={
                 screenSize.width <= 360 ? 300 : "110px 300px"
               }
@@ -127,7 +133,7 @@ export const CreateEventsPage = () => {
             >
               <FormLabel>Title</FormLabel>
               <Input type="text" bg={"brand.100"} name="title" />
-            </Grid>
+            </Grid> */}
             <FormHelperText ml={screenSize.width <= 360 ? 0 : 110}>
               Make it a fancy one.
             </FormHelperText>
