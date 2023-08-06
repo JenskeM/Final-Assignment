@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Heading, Box, Grid, Button, Tooltip, Center } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
+import { useEventContext } from "../components/EventContext";
 
 export const loader = async () => {
   const events = await fetch(`http://localhost:3000/events`);
@@ -16,6 +17,10 @@ export const loader = async () => {
 export const EventsPage = () => {
   const { events, categories } = useLoaderData();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const { state } = useEventContext();
+  const filteredEvents = events.filter((event) =>
+    event.name.toLowerCase().includes(state.searchTerm.toLowerCase())
+  );
 
   function getCurrentDimension() {
     return {
@@ -55,8 +60,8 @@ export const EventsPage = () => {
           }
           columnGap={8}
         >
-          {events &&
-            events.map((event) => {
+          {filteredEvents &&
+            filteredEvents.map((event) => {
               return (
                 <Link key={event.id} to={`/event/${event.id}`}>
                   <EventItemCard
