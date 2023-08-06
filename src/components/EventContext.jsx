@@ -18,5 +18,6 @@ export const useEvent = () => {
   if (!context) {
     throw new Error("useEventContext must be used within a EventContext");
   }
+  console.log("Current context state:", context.state);
   return context;
 };

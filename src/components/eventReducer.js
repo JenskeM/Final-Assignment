@@ -11,11 +11,10 @@ const eventReducer = (state, action) => {
     
     switch (type) {
         case ACTIONS.FILTER_EVENTS:
-            console.log("ACTIONS.FILTER_EVENTS", payload)
 
             return {
                 ...state,
-                searchTerm: action.payload
+                searchTerm: payload.searchTerm
             }
     }
 }

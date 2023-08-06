@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useEvent } from "./EventContext";
+import { ACTIONS } from "./eventReducer";
 import {
   Grid,
   GridItem,
@@ -13,6 +15,8 @@ import {
 export const Navigation = ({ toggleMenu }) => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { dispatch } = useEvent();
+  const [searchText, setSearchText] = useState("");
 
   function getCurrentDimension() {
     return {
@@ -31,6 +35,10 @@ export const Navigation = ({ toggleMenu }) => {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.FILTER_EVENTS, payload: searchText });
+  }, [searchText, dispatch]);
 
   return (
     <Grid
@@ -82,6 +90,8 @@ export const Navigation = ({ toggleMenu }) => {
                 fontSize={"sm"}
                 color="black"
                 focusBorderColor="brand.300"
+                onChange={(e) => setSearchText(e.target.value)}
+                value={searchText}
               />
               <Tooltip label="Click to search">
                 <Image

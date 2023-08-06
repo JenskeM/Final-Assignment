@@ -16,7 +16,7 @@ export const loader = async () => {
 
 export const EventsPage = () => {
   const { events, categories } = useLoaderData();
-  const { searchTerm } = useEvent();
+  const { state } = useEvent();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [filteredEvents, setFilteredEvents] = useState(events);
 
@@ -39,16 +39,16 @@ export const EventsPage = () => {
   }, [screenSize]);
 
   useEffect(() => {
-    const eventInFilters = events.filter((event) =>
-      event.title.includes(searchTerm)
-    );
-
-    if (searchTerm === undefined) {
+    console.log(state.searchTerm);
+    if (state.searchTerm === undefined || state.searchTerm === "") {
       setFilteredEvents(events);
     } else {
+      const eventInFilters = events.filter((event) =>
+        event.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+      );
       setFilteredEvents(eventInFilters);
     }
-  }, [searchTerm]);
+  }, [state.searchTerm, events]);
 
   return (
     <Box pl={3} pt={10} bg="brand.700" pb={10}>
