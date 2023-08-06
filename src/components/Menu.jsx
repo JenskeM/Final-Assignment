@@ -4,16 +4,18 @@ import { Stack, Input, Image, Text } from "@chakra-ui/react";
 import { useEvent } from "./EventContext";
 import { ACTIONS } from "./eventReducer";
 
-export const Menu = () => {
+export const Menu = (categories) => {
   const { dispatch } = useEvent();
   const [searchText, setSearchText] = useState("");
+
+  console.log(categories.categories);
 
   useEffect(() => {
     dispatch({ type: ACTIONS.FILTER_EVENTS, payload: searchText });
   }, [searchText, dispatch]);
 
   return (
-    <Stack bg="brand.200" pl={4} pr={4}>
+    <Stack bg="brand.200" pl={4} pr={4} space={2}>
       <Stack direction={"row"} height={8}>
         <Input
           type="text"

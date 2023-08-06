@@ -54,9 +54,11 @@ export const EventsPage = () => {
     };
   }, [screenSize]);
 
-  useEffect(() => {
-    dispatch({ type: ACTIONS.FILTER_CATS, payload: radioValue });
-  }, [radioValue, dispatch]);
+  if (screenSize.width > 700) {
+    useEffect(() => {
+      dispatch({ type: ACTIONS.FILTER_CATS, payload: radioValue });
+    }, [radioValue, dispatch]);
+  }
 
   useEffect(() => {
     if (state.searchTerm === undefined || state.searchTerm === "") {
