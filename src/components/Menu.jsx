@@ -4,7 +4,7 @@ import { Stack, Input, Image, Text } from "@chakra-ui/react";
 
 export const Menu = () => {
   return (
-    <Stack bg="brand.200">
+    <Stack bg="brand.200" pl={4} pr={4}>
       <Stack direction={"row"} height={8}>
         <Input
           type="text"
@@ -29,10 +29,10 @@ export const Menu = () => {
           }}
         />
       </Stack>
-      <Text height={8} _hover={{ color: "brand.600" }}>
+      <Text height={8} _hover={{ color: "brand.600" }} color="brand.100">
         <Link to="/">Events</Link>
       </Text>
-      <Text height={8} _hover={{ color: "brand.600" }}>
+      <Text height={8} _hover={{ color: "brand.600" }} color="brand.100">
         <Link to="/event/1">Event</Link>
       </Text>
     </Stack>
