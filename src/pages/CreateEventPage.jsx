@@ -61,7 +61,7 @@ export const CreateEventsPage = () => {
   const toast = useToast();
 
   const createBgStyle = {
-    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.98), rgba(255, 228, 191, 0.82)), url("/src/assets/BackgroundEvent.jpg")`,
+    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.95), rgba(255, 228, 191, 0.65)), url("/src/assets/BackgroundEvent.jpg")`,
     backgroundSize: "cover",
     color: "white",
     padding: "20px",
@@ -121,6 +121,7 @@ export const CreateEventsPage = () => {
           justifyContent={"center"}
           gridTemplateColumns={"1fr"}
           rowGap={8}
+          color={"black"}
           sx={{
             transform: screenSize.width <= 360 && `translateX(${transX}px)`,
           }}
@@ -274,9 +275,15 @@ export const CreateEventsPage = () => {
           <Button
             type="submit"
             mt={10}
-            bg="brand.200"
-            color="brand.100"
-            _hover={{ background: "brand.300" }}
+            bg="brand.100"
+            color="brand.400"
+            borderColor={"brand.400"}
+            borderWidth={3}
+            _hover={{
+              background: "brand.300",
+              color: "brand.100",
+              borderColor: "brand.100",
+            }}
             onClick={() =>
               toast({
                 title: "Whoop whoop! Done 🎉!",
