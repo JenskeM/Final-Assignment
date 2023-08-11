@@ -34,7 +34,7 @@ export const TYPES = {
   TEXTAREA: "text-area",
   INPUT: "input",
   DATE: "date",
-  SELECT: "select",
+  CHECKBOX: "checkbox",
 };
 
 export const EventPage = () => {
@@ -190,9 +190,11 @@ export const EventPage = () => {
                   alt="Date"
                 />
                 <EventSubItem
-                  eventItem={catsToShow}
+                  eventItem={isEditable ? event.categoryIds : catsToShow}
                   imgUrl={"/src/assets/Categories.png"}
                   alt="Categories"
+                  isEditable={isEditable}
+                  typeInput={TYPES.CHECKBOX}
                 />
               </Grid>
             </Stack>

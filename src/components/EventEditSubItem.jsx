@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { TYPES } from "../pages/EventPage";
 import {
@@ -9,7 +10,8 @@ import {
   EditableTextarea,
   EditableInput,
   EditablePreview,
-  Select,
+  Checkbox,
+  Heading,
 } from "@chakra-ui/react";
 
 export const loader = async () => {
@@ -24,6 +26,18 @@ export const loader = async () => {
 
 export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
   const { categories, users } = useLoaderData();
+  const [selectedCategories, setSelectedCategories] = useState(
+    new Set(eventItem)
+  );
+
+  const toggleCategory = (categoryId) => {
+    if (selectedCategories.has(categoryId)) {
+      selectedCategories.delete(categoryId);
+    } else {
+      selectedCategories.add(categoryId);
+    }
+    setSelectedCategories(new Set(selectedCategories));
+  };
 
   return (
     <Stack direction="row">
@@ -40,13 +54,41 @@ export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
           />
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <EditablePreview />
           {typeInput === TYPES.TEXTAREA ? (
-            <EditableTextarea bg="brand.100" />
+            <>
+              <EditablePreview />
+              <EditableTextarea bg="brand.100" />
+            </>
           ) : typeInput === TYPES.INPUT ? (
-            <EditableInput bg="brand.100" />
+            <>
+              <EditablePreview />
+              <EditableInput bg="brand.100" />
+            </>
           ) : (
-            <EditableInput bg="brand.100" />
+            <Stack direction={"row"}>
+              {categories.map((category) => {
+                const isChecked = selectedCategories.has(category.id);
+
+                return (
+                  <Checkbox
+                    colorScheme="orange"
+                    key={category.id}
+                    name="categoryIds"
+                    value={Array.from(selectedCategories)}
+                    onChange={() => toggleCategory(category.id)}
+                    isChecked={isChecked}
+                    sx={{
+                      borderColor: "brand.200",
+                      backgroundColor: "brand.100",
+                      paddingLeft: "5px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    {category.name}
+                  </Checkbox>
+                );
+              })}
+            </Stack>
           )}
         </Editable>
       </Center>
