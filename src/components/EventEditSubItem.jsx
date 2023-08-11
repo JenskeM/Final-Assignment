@@ -53,12 +53,12 @@ export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
           />
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          {typeInput === TYPES.TEXTAREA ? (
+          {typeInput === TYPES.DESCRIPTION ? (
             <>
               <EditablePreview />
               <EditableTextarea bg="brand.100" />
             </>
-          ) : typeInput === TYPES.INPUT ? (
+          ) : typeInput === TYPES.LOCATION ? (
             <>
               <EditablePreview />
               <EditableInput bg="brand.100" />

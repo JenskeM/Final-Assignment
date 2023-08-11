@@ -6,7 +6,6 @@ export const EventSubItem = ({
   eventItem,
   imgUrl,
   date,
-  alt,
   typeInput,
 }) => {
   return (
@@ -22,7 +21,7 @@ export const EventSubItem = ({
           eventItem={eventItem}
           date={date}
           imgUrl={imgUrl}
-          alt={alt}
+          typeInput={typeInput}
         />
       )}{" "}
     </>

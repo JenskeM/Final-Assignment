@@ -32,12 +32,12 @@ export const loader = async ({ params }) => {
 };
 
 export const TYPES = {
-  IMAGE: "image",
-  DESCRIPTION: "description",
-  LOCATION: "location",
-  DATE: "date",
-  CATEGORIES: "categories",
-  USER: "user",
+  IMAGE: "Image",
+  DESCRIPTION: "Description",
+  LOCATION: "Location",
+  DATE: "Date",
+  CATEGORIES: "Categories",
+  CREATOR: "Creator",
 };
 
 export const EventPage = () => {
@@ -172,28 +172,25 @@ export const EventPage = () => {
                 <EventSubItem
                   eventItem={event.description}
                   imgUrl={"/src/assets/Info.png"}
-                  alt="Description"
                   isEditable={isEditable}
-                  typeInput={TYPES.TEXTAREA}
+                  typeInput={TYPES.DESCRIPTION}
                 />{" "}
                 <EventSubItem
                   eventItem={event.location}
                   imgUrl={"/src/assets/Location.png"}
-                  alt="Location"
                   isEditable={isEditable}
-                  typeInput={TYPES.INPUT}
+                  typeInput={TYPES.LOCATION}
                 />
                 <EventSubItem
                   eventItem={[event.startTime, event.endTime]}
                   imgUrl={"/src/assets/Calendar.png"}
-                  alt="Date"
+                  typeInput={TYPES.DATE}
                 />
                 <EventSubItem
                   eventItem={isEditable ? event.categoryIds : catsToShow}
                   imgUrl={"/src/assets/Categories.png"}
-                  alt="Categories"
                   isEditable={isEditable}
-                  typeInput={TYPES.CHECKBOX}
+                  typeInput={TYPES.CATEGORIES}
                 />
               </Grid>
             </Stack>
