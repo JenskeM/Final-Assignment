@@ -137,8 +137,8 @@ export const EventPage = () => {
                   screenSize.width <= 700 ? "1fr" : "repeat(2, 1fr)"
                 }
                 gap={screenSize.width <= 700 ? 2 : 8}
-                pl={"150px"}
-                pr={"150px"}
+                p={"25px 150px 25px 150px"}
+                bg={"rgba(255, 228, 191, 0.35)"}
               >
                 <EventSubItem
                   eventItem={event.description}
