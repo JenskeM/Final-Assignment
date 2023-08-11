@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getImageSize } from "react-image-size";
 import { useLoaderData } from "react-router-dom";
-import { EventEditSubItem } from "../components/EventEditSubItem";
 import {
   Heading,
   Center,
@@ -14,8 +13,9 @@ import {
   CardBody,
   Tooltip,
   Editable,
-  EditableTextarea,
+  EditableInput,
   EditablePreview,
+  useToast,
 } from "@chakra-ui/react";
 import { EventSubItem } from "../components/EventSubItem";
 
@@ -32,10 +32,12 @@ export const loader = async ({ params }) => {
 };
 
 export const TYPES = {
-  TEXTAREA: "text-area",
-  INPUT: "input",
+  IMAGE: "image",
+  DESCRIPTION: "description",
+  LOCATION: "location",
   DATE: "date",
-  CHECKBOX: "checkbox",
+  CATEGORIES: "categories",
+  USER: "user",
 };
 
 export const EventPage = () => {
@@ -44,6 +46,7 @@ export const EventPage = () => {
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
+  const toast = useToast();
 
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
@@ -64,6 +67,19 @@ export const EventPage = () => {
     backgroundSize: "cover",
     color: "white",
     padding: "20px",
+  };
+
+  const handleClick = () => {
+    setIsEditable(!isEditable);
+    toast({
+      title: "Edit time!",
+      description: `Click on the item you want to edit🖱️. 
+                        An inputfield or checkbox will appear.
+                        Happy with all the changes? Press the Save-button in the bottom left corner.
+                        You changed your mind? No worries! Just click on the Cancel-button in the bottom left corner `,
+      duration: 6000,
+      isClosable: true,
+    });
   };
 
   useEffect(() => {
@@ -118,33 +134,14 @@ export const EventPage = () => {
               </Stack>
               <Center>
                 {isEditable ? (
-                  <Box
-                    borderColor="brand.300"
-                    borderRadius="full"
-                    boxShadow="2xl"
-                    h={imageHeight * 0.2}
-                    w={imageWidth * 0.2}
+                  <Editable
+                    textAlign={"center"}
+                    color="black"
+                    defaultValue={event.image}
                   >
-                    <Stack direction={"row"}>
-                      <Image
-                        src={event.image}
-                        borderRadius="full"
-                        h={imageHeight * 0.2}
-                        w={imageWidth * 0.2}
-                        alt={event.title}
-                      />
-                      <Tooltip label="Change the image url">
-                        <Editable color="black" defaultValue={event.image}>
-                          <EditablePreview />
-                          <EditableTextarea
-                            bg="brand.100"
-                            w={"200px"}
-                            h={imageHeight * 0.2}
-                          />
-                        </Editable>
-                      </Tooltip>
-                    </Stack>
-                  </Box>
+                    <EditablePreview />
+                    <EditableInput bg="brand.100" w={"50vw"} />
+                  </Editable>
                 ) : (
                   <Box
                     borderColor="brand.300"
@@ -159,6 +156,7 @@ export const EventPage = () => {
                       h={imageHeight * 0.2}
                       w={imageWidth * 0.2}
                       alt={event.title}
+                      cursor={isEditable && "crosshair"}
                     />
                   </Box>
                 )}
@@ -253,7 +251,7 @@ export const EventPage = () => {
                     filter: "auto",
                     blur: "0.5px",
                   }}
-                  onClick={() => setIsEditable(!isEditable)}
+                  onClick={handleClick}
                 />
               </Tooltip>
             )}
