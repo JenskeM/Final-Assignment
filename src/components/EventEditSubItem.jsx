@@ -77,12 +77,12 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
           {typeInput === TYPES.DESCRIPTION ? (
             <>
-              <EditablePreview />
+              <EditablePreview cursor={"crosshair"} />
               <EditableTextarea bg="brand.100" />
             </>
           ) : typeInput === TYPES.LOCATION ? (
             <>
-              <EditablePreview />
+              <EditablePreview cursor={"crosshair"} />
               <EditableInput bg="brand.100" />
             </>
           ) : typeInput === TYPES.CATEGORIES ? (

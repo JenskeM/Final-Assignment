@@ -141,7 +141,7 @@ export const EventPage = () => {
                     color="black"
                     defaultValue={event.image}
                   >
-                    <EditablePreview />
+                    <EditablePreview cursor={"crosshair"} />
                     <EditableInput bg="brand.100" w={"50vw"} />
                   </Editable>
                 ) : (
@@ -158,7 +158,6 @@ export const EventPage = () => {
                       h={imageHeight * 0.2}
                       w={imageWidth * 0.2}
                       alt={event.title}
-                      cursor={isEditable && "crosshair"}
                     />
                   </Box>
                 )}
