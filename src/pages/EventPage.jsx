@@ -120,21 +120,25 @@ export const EventPage = () => {
                   eventItem={event.description}
                   date={null}
                   imgUrl={"/src/assets/Info.png"}
+                  alt="Description"
                 />
                 <EventSubItem
                   eventItem={event.location}
                   date={null}
                   imgUrl={"/src/assets/Location.png"}
+                  alt="Location"
                 />
                 <EventSubItem
                   eventItem={[event.startTime, event.endTime]}
                   date={"date"}
                   imgUrl={"/src/assets/Calendar.png"}
+                  alt="Date"
                 />
                 <EventSubItem
                   eventItem={catsToShow}
                   date={null}
                   imgUrl={"/src/assets/Categories.png"}
+                  alt="Categories"
                 />
               </Stack>
             </Center>
