@@ -97,20 +97,10 @@ export const EventPage = () => {
           <CardBody>
             <Stack direction={"column"} spacing={"30px"} mb={8}>
               <Stack>
-                <Heading
-                  color="brand.100"
-                  size="lg"
-                  mt={5}
-                  textAlign={"center"}
-                >
+                <Heading color="brand.100" size="lg" textAlign={"center"}>
                   Event information:
                 </Heading>
-                <Heading
-                  color="brand.200"
-                  size="xl"
-                  mt={5}
-                  textAlign={"center"}
-                >
+                <Heading color="brand.200" size="xl" textAlign={"center"}>
                   {" "}
                   {event.title}
                 </Heading>
