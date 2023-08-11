@@ -126,16 +126,26 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
             </Stack>
           ) : editDate ? (
             <Stack direction={"column"}>
-              <Input
-                placeholder={`${getDate(eventItem[0]).props.children} 
-        ${getTime(eventItem[0]).props.children}`}
-                bg="brand.100"
-              />
-              <Input
-                placeholder={`${getDate(eventItem[1]).props.children} 
-        ${getTime(eventItem[1]).props.children}`}
-                bg="brand.100"
-              />
+              <Stack direction={"row"}>
+                <Input
+                  value={getDate(eventItem[0]).props.children}
+                  bg="brand.100"
+                />
+                <Input
+                  value={getTime(eventItem[0]).props.children}
+                  bg="brand.100"
+                />
+              </Stack>
+              <Stack direction={"row"}>
+                <Input
+                  value={getDate(eventItem[1]).props.children}
+                  bg="brand.100"
+                />
+                <Input
+                  value={getTime(eventItem[1]).props.children}
+                  bg="brand.100"
+                />
+              </Stack>
             </Stack>
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
