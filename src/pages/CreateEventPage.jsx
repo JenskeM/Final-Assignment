@@ -60,6 +60,13 @@ export const CreateEventsPage = () => {
   const [transX, setTransX] = useState();
   const toast = useToast();
 
+  const createBgStyle = {
+    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.98), rgba(255, 228, 191, 0.82)), url("/src/assets/BackgroundEvent.jpg")`,
+    backgroundSize: "cover",
+    color: "white",
+    padding: "20px",
+  };
+
   function getCurrentDimension() {
     return {
       width: window.innerWidth,
@@ -102,7 +109,7 @@ export const CreateEventsPage = () => {
   };
 
   return (
-    <Box bg={"brand.600"} pt={5} pb={"200px"}>
+    <Box bg={"brand.600"} pt={5} pb={"200px"} style={createBgStyle}>
       <Heading mb={10} textAlign={"center"} color={"brand.200"}>
         Add a new event
       </Heading>
