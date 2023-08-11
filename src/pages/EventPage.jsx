@@ -33,12 +33,10 @@ export const loader = async ({ params }) => {
 };
 
 export const TYPES = {
-  IMAGE: "Image",
   DESCRIPTION: "Description",
   LOCATION: "Location",
   DATE: "Date",
   CATEGORIES: "Categories",
-  CREATOR: "Creator",
 };
 
 export const EventPage = () => {
