@@ -12,6 +12,9 @@ import {
   Card,
   CardBody,
   Tooltip,
+  Editable,
+  EditableTextarea,
+  EditablePreview,
 } from "@chakra-ui/react";
 import { EventSubItem } from "../components/EventSubItem";
 
@@ -114,21 +117,51 @@ export const EventPage = () => {
                 </Heading>
               </Stack>
               <Center>
-                <Box
-                  borderColor="brand.300"
-                  borderRadius="full"
-                  boxShadow="2xl"
-                  h={imageHeight * 0.2}
-                  w={imageWidth * 0.2}
-                >
-                  <Image
-                    src={event.image}
+                {isEditable ? (
+                  <Box
+                    borderColor="brand.300"
                     borderRadius="full"
+                    boxShadow="2xl"
                     h={imageHeight * 0.2}
                     w={imageWidth * 0.2}
-                    alt={event.title}
-                  />
-                </Box>
+                  >
+                    <Stack direction={"row"}>
+                      <Image
+                        src={event.image}
+                        borderRadius="full"
+                        h={imageHeight * 0.2}
+                        w={imageWidth * 0.2}
+                        alt={event.title}
+                      />
+                      <Tooltip label="Change the image url">
+                        <Editable color="black" defaultValue={event.image}>
+                          <EditablePreview />
+                          <EditableTextarea
+                            bg="brand.100"
+                            w={"200px"}
+                            h={imageHeight * 0.2}
+                          />
+                        </Editable>
+                      </Tooltip>
+                    </Stack>
+                  </Box>
+                ) : (
+                  <Box
+                    borderColor="brand.300"
+                    borderRadius="full"
+                    boxShadow="2xl"
+                    h={imageHeight * 0.2}
+                    w={imageWidth * 0.2}
+                  >
+                    <Image
+                      src={event.image}
+                      borderRadius="full"
+                      h={imageHeight * 0.2}
+                      w={imageWidth * 0.2}
+                      alt={event.title}
+                    />
+                  </Box>
+                )}
               </Center>
               <Grid
                 gridTemplateColumns={
