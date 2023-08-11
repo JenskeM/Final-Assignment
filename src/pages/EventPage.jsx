@@ -20,7 +20,7 @@ export const EventPage = () => {
 
   return (
     <Center bg="brand.700">
-      <Stack direction={"column"} spacing={"40px"}>
+      <Stack direction={"column"} spacing={"30px"}>
         <Box
           mt={5}
           borderColor="brand.300"

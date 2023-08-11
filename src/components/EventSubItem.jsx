@@ -18,7 +18,12 @@ export const EventSubItem = ({ eventItem, property, date }) => {
 
   return (
     <Stack direction="column">
-      <Text as="b" textAlign={"center"} color="brand.400">
+      <Text
+        as="b"
+        textAlign={"center"}
+        color="brand.400"
+        bgGradient={"radial(brand.100, brand.700)"}
+      >
         {property}
       </Text>
       <Text textAlign={"center"}>{getOutput(eventItem, date)}</Text>
