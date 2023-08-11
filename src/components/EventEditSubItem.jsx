@@ -11,7 +11,6 @@ import {
   EditableInput,
   EditablePreview,
   Checkbox,
-  Heading,
 } from "@chakra-ui/react";
 
 export const loader = async () => {
