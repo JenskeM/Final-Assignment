@@ -6,14 +6,14 @@ export const EventShowSubItem = ({ eventItem, imgUrl, date, alt }) => {
   const getOutput = (eventItem, date) => {
     if (date === "date") {
       const output = (
-        <div>
+        <span>
           {getDate(eventItem[0]).props.children} -{" "}
           {getTime(eventItem[0]).props.children} <br />
           until
           <br />
           {getDate(eventItem[1]).props.children} -{" "}
           {getTime(eventItem[1]).props.children}
-        </div>
+        </span>
       );
       return output;
     } else {

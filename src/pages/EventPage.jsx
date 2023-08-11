@@ -144,13 +144,15 @@ export const EventPage = () => {
                   imgUrl={"/src/assets/Info.png"}
                   alt="Description"
                   isEditable={isEditable}
-                  type={TYPES.TEXTAREA}
+                  typeInput={TYPES.TEXTAREA}
                 />{" "}
                 <EventSubItem
                   eventItem={event.location}
                   date={null}
                   imgUrl={"/src/assets/Location.png"}
                   alt="Location"
+                  isEditable={isEditable}
+                  typeInput={TYPES.INPUT}
                 />
                 <EventSubItem
                   eventItem={[event.startTime, event.endTime]}
@@ -240,7 +242,6 @@ export const EventPage = () => {
                 }}
               />
             </Tooltip>
-            {console.log(isEditable)}
           </Stack>
         </Card>
       </GridItem>

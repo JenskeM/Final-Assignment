@@ -7,18 +7,24 @@ export const EventSubItem = ({
   imgUrl,
   date,
   alt,
-  type,
+  typeInput,
 }) => {
-  {
-    isEditable ? (
-      <EventEditSubItem eventItem={eventItem} imgUrl={imgUrl} type={type} />
-    ) : (
-      <EventShowSubItem
-        eventItem={eventItem}
-        date={date}
-        imgUrl={imgUrl}
-        alt={alt}
-      />
-    );
-  }
+  return (
+    <>
+      {isEditable ? (
+        <EventEditSubItem
+          eventItem={eventItem}
+          imgUrl={imgUrl}
+          typeInput={typeInput}
+        />
+      ) : (
+        <EventShowSubItem
+          eventItem={eventItem}
+          date={date}
+          imgUrl={imgUrl}
+          alt={alt}
+        />
+      )}{" "}
+    </>
+  );
 };

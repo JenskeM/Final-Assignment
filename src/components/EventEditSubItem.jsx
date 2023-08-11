@@ -10,9 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { TYPES } from "../pages/EventPage";
 
-export const EventEditSubItem = ({ eventItem, imgUrl, alt, type }) => {
-  console.log(type);
-
+export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
   return (
     <Stack direction="row">
       <Center>
@@ -29,13 +27,11 @@ export const EventEditSubItem = ({ eventItem, imgUrl, alt, type }) => {
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
           <EditablePreview />
-          {
-            (type = TYPES.TEXTAREA ? (
-              <EditableTextarea bg="brand.100" />
-            ) : (
-              <EditableInput bg="brand.100" />
-            ))
-          }
+          {typeInput === TYPES.TEXTAREA ? (
+            <EditableTextarea bg="brand.100" />
+          ) : (
+            <EditableInput bg="brand.100" />
+          )}
         </Editable>
       </Center>
     </Stack>
