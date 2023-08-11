@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getImageSize } from "react-image-size";
 import { useLoaderData } from "react-router-dom";
+import { EventSubItem } from "../components/EventSubItem";
 import {
   Heading,
   Center,
@@ -15,9 +16,9 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  Radio,
   useToast,
 } from "@chakra-ui/react";
-import { EventSubItem } from "../components/EventSubItem";
 
 export const loader = async ({ params }) => {
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
@@ -46,6 +47,8 @@ export const EventPage = () => {
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
+  const [editCreator, setEditCreator] = useState(false);
+  const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const toast = useToast();
 
   const userToShow = users.find((user) => user.id === event.createdBy);
@@ -286,15 +289,52 @@ export const EventPage = () => {
                   >
                     Creator information:
                   </Heading>
-                  <Heading
-                    color="brand.200"
-                    size="xl"
-                    mt={5}
-                    textAlign={"center"}
-                  >
-                    {" "}
-                    {!isEditable && userToShow.name}
-                  </Heading>
+
+                  {isEditable ? (
+                    editCreator ? (
+                      <Stack spacing={3}>
+                        {users.map((user) => {
+                          return (
+                            <Radio
+                              value={user.id}
+                              key={user.id}
+                              colorScheme="orange"
+                              isChecked={selectedCreator}
+                              onClick={() => setSelectedCreator(user.id)}
+                              name="createdBy"
+                              sx={{
+                                borderColor: "brand.200",
+                                background: "brand.100",
+                                paddingLeft: "5px",
+                              }}
+                            >
+                              {user.name}
+                            </Radio>
+                          );
+                        })}
+                      </Stack>
+                    ) : (
+                      <Heading
+                        color="brand.200"
+                        size="xl"
+                        mt={5}
+                        textAlign={"center"}
+                        cursor={"crosshair"}
+                        onClick={() => setEditCreator(!editCreator)}
+                      >
+                        {userToShow.name}
+                      </Heading>
+                    )
+                  ) : (
+                    <Heading
+                      color="brand.200"
+                      size="xl"
+                      mt={5}
+                      textAlign={"center"}
+                    >
+                      {userToShow.name}
+                    </Heading>
+                  )}
                 </Stack>
                 <Center>
                   <Box

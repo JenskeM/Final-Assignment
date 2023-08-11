@@ -16,16 +16,14 @@ import {
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
-  const users = await fetch(`http://localhost:3000/users`);
 
   return {
     categories: await categories.json(),
-    users: await users.json(),
   };
 };
 
 export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
-  const { categories, users } = useLoaderData();
+  const { categories } = useLoaderData();
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(eventItem)
   );
@@ -45,17 +43,19 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   return (
     <Stack direction="row">
       <Center>
-        <Tooltip label={typeInput}>
-          <Image
-            src={imgUrl}
-            height={10}
-            p={2}
-            bg="brand.200"
-            borderRadius="full"
-            mr={5}
-            alt={typeInput}
-          />
-        </Tooltip>
+        {typeInput !== TYPES.CREATOR && (
+          <Tooltip label={typeInput}>
+            <Image
+              src={imgUrl}
+              height={10}
+              p={2}
+              bg="brand.200"
+              borderRadius="full"
+              mr={5}
+              alt={typeInput}
+            />
+          </Tooltip>
+        )}
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
           {typeInput === TYPES.DESCRIPTION ? (
             <>
