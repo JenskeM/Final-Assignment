@@ -40,6 +40,13 @@ export const EventPage = () => {
   });
   const catsToShow = catsArray.join(", ");
 
+  const showBgStyle = {
+    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.9), rgba(255, 228, 191, 0.73)), url(${event.image})`,
+    backgroundSize: "cover",
+    color: "white",
+    padding: "20px",
+  };
+
   useEffect(() => {
     getImageSize(event.image)
       .then((size) => {
@@ -78,7 +85,7 @@ export const EventPage = () => {
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
-        <Card boxShadow="2xl" bg="brand.300" m={7}>
+        <Card boxShadow="2xl" m={7} style={showBgStyle}>
           <CardBody>
             <Center>
               <Stack direction={"column"} spacing={"30px"} mb={8}>
@@ -149,7 +156,7 @@ export const EventPage = () => {
         <Card boxShadow="2xl" bg="brand.300" m={7}>
           <CardBody>
             <Center>
-              <Stack direction={"column"} spacing={"30px"} mb={8}>
+              <Stack direction={"column"} spacing={"30px"} mb={"100px"}>
                 <Stack>
                   <Heading
                     color="brand.100"
@@ -170,7 +177,6 @@ export const EventPage = () => {
                   </Heading>
                 </Stack>
                 <Box
-                  mt={5}
                   borderColor="brand.300"
                   borderRadius="full"
                   boxShadow="xl"
