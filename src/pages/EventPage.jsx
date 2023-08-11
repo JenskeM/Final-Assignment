@@ -14,6 +14,7 @@ import {
   CardBody,
   Tooltip,
 } from "@chakra-ui/react";
+import { EventEditSubItem } from "../components/EventEditSubItem";
 
 export const loader = async ({ params }) => {
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
@@ -32,6 +33,7 @@ export const EventPage = () => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
+  const [isEditable, setIsEditable] = useState(false);
 
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsArray = [];
@@ -95,6 +97,7 @@ export const EventPage = () => {
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
           <CardBody>
+            <Heading>{isEditable ? "True" : "False"}</Heading>
             <Stack direction={"column"} spacing={"30px"} mb={8}>
               <Stack>
                 <Heading color="brand.100" size="lg" textAlign={"center"}>
@@ -130,12 +133,22 @@ export const EventPage = () => {
                 p={"25px 150px 25px 150px"}
                 bg={"rgba(255, 228, 191, 0.35)"}
               >
-                <EventSubItem
-                  eventItem={event.description}
-                  date={null}
-                  imgUrl={"/src/assets/Info.png"}
-                  alt="Description"
-                />
+                {" "}
+                {isEditable ? (
+                  <EventEditSubItem
+                    eventItem={event.description}
+                    date={null}
+                    imgUrl={"/src/assets/Info.png"}
+                    alt="Description"
+                  />
+                ) : (
+                  <EventSubItem
+                    eventItem={event.description}
+                    date={null}
+                    imgUrl={"/src/assets/Info.png"}
+                    alt="Description"
+                  />
+                )}
                 <EventSubItem
                   eventItem={event.location}
                   date={null}
@@ -172,6 +185,7 @@ export const EventPage = () => {
                   filter: "auto",
                   blur: "0.5px",
                 }}
+                onClick={() => setIsEditable(!isEditable)}
               />
             </Tooltip>
             <Tooltip label={"Press to delete this event"}>
@@ -190,6 +204,7 @@ export const EventPage = () => {
                 }}
               />
             </Tooltip>
+            {console.log(isEditable)}
           </Stack>
         </Card>
       </GridItem>
