@@ -1,35 +1,14 @@
-import { getTime } from "./getTime";
-import { getDate } from "./getDate";
 import {
   Stack,
   Image,
   Center,
   Tooltip,
   Editable,
-  EditableInput,
+  EditableTextarea,
   EditablePreview,
 } from "@chakra-ui/react";
 
-export const EventEditSubItem = ({ eventItem, imgUrl, date, alt }) => {
-  const getOutput = (eventItem, date) => {
-    if (date === "date") {
-      const output = (
-        <div>
-          {getDate(eventItem[0]).props.children} -{" "}
-          {getTime(eventItem[0]).props.children} <br />
-          until
-          <br />
-          {getDate(eventItem[1]).props.children} -{" "}
-          {getTime(eventItem[1]).props.children}
-        </div>
-      );
-      return output;
-    } else {
-      const output = eventItem;
-      return output;
-    }
-  };
-
+export const EventEditSubItem = ({ eventItem, imgUrl, alt }) => {
   return (
     <Stack direction="row">
       <Center>
@@ -44,13 +23,9 @@ export const EventEditSubItem = ({ eventItem, imgUrl, date, alt }) => {
             alt={alt}
           />
         </Tooltip>
-        <Editable
-          textAlign={"center"}
-          color="black"
-          defaultValue={getOutput(eventItem, date)}
-        >
+        <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
           <EditablePreview />
-          <EditableInput />
+          <EditableTextarea bg="brand.100" />
         </Editable>
       </Center>
     </Stack>
