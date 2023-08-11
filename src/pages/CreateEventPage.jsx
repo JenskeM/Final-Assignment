@@ -143,7 +143,7 @@ export const CreateEventsPage = () => {
               />
             </Grid>
           </FormControl>
-          <FormControl>
+          <FormControl isRequired>
             <InputField
               labelText="Image url"
               nameText="image"
