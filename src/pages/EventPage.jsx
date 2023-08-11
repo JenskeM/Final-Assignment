@@ -1,7 +1,15 @@
 import React from "react";
 import { EventSubItem } from "../components/EventSubItem";
 import { useLoaderData } from "react-router-dom";
-import { Heading, Center, Box, Image, Stack } from "@chakra-ui/react";
+import {
+  Heading,
+  Center,
+  Box,
+  Image,
+  Stack,
+  Tag,
+  Text,
+} from "@chakra-ui/react";
 
 export const loader = async ({ params }) => {
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
@@ -20,7 +28,7 @@ export const EventPage = () => {
 
   return (
     <Center bg="brand.700">
-      <Stack direction={"column"} spacing={"30px"}>
+      <Stack direction={"column"} spacing={"30px"} mb={8}>
         <Box
           mt={5}
           borderColor="brand.300"
@@ -56,6 +64,35 @@ export const EventPage = () => {
           property="End date and time"
           date={"date"}
         />
+        <Stack direction="column">
+          <Text
+            as="b"
+            textAlign={"center"}
+            color="brand.400"
+            bgGradient={"radial(brand.100, brand.700)"}
+          >
+            Categories
+          </Text>
+          <Center mt={3}>
+            {event.categoryIds.map((catId) => {
+              const category = categories.find((cat) => cat.id === catId);
+              return (
+                <Tag
+                  key={catId}
+                  size={"sm"}
+                  maxBlockSize={2}
+                  bg="brand.700"
+                  textAlign={"center"}
+                  fontWeight={"semibold"}
+                  py={1}
+                  textTransform={"uppercase"}
+                >
+                  {category.name}
+                </Tag>
+              );
+            })}
+          </Center>
+        </Stack>
       </Stack>
     </Center>
   );
