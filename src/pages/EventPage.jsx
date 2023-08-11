@@ -12,6 +12,7 @@ import {
   GridItem,
   Card,
   CardBody,
+  Tooltip,
 } from "@chakra-ui/react";
 
 export const loader = async ({ params }) => {
@@ -90,7 +91,6 @@ export const EventPage = () => {
     <Grid
       bg="brand.700"
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
-      h="100vh"
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
@@ -157,6 +157,40 @@ export const EventPage = () => {
               </Grid>
             </Stack>
           </CardBody>
+          <Stack direction={"row"}>
+            <Tooltip label={"Press to edit this event"}>
+              <Image
+                src={"/src/assets/Edit.png"}
+                h={10}
+                w={10}
+                p={2}
+                bg="brand.400"
+                borderRadius="full"
+                _hover={{
+                  opacity: 0.6,
+                  transform: "scale(.95)",
+                  filter: "auto",
+                  blur: "0.5px",
+                }}
+              />
+            </Tooltip>
+            <Tooltip label={"Press to delete this event"}>
+              <Image
+                src={"/src/assets/Delete.png"}
+                h={10}
+                w={10}
+                p={2}
+                bg="brand.400"
+                borderRadius="full"
+                _hover={{
+                  opacity: 0.6,
+                  transform: "scale(.95)",
+                  filter: "auto",
+                  blur: "0.5px",
+                }}
+              />
+            </Tooltip>
+          </Stack>
         </Card>
       </GridItem>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 2}>
