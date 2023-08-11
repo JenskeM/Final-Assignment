@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getImageSize } from "react-image-size";
 import { useLoaderData } from "react-router-dom";
+import { EventEditSubItem } from "../components/EventEditSubItem";
 import {
   Heading,
   Center,
@@ -296,7 +297,7 @@ export const EventPage = () => {
                     textAlign={"center"}
                   >
                     {" "}
-                    {userToShow.name}
+                    {!isEditable && userToShow.name}
                   </Heading>
                 </Stack>
                 <Center>
