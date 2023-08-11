@@ -8,8 +8,6 @@ import {
   Box,
   Image,
   Stack,
-  Tag,
-  Text,
   Grid,
   GridItem,
   Card,
@@ -35,6 +33,12 @@ export const EventPage = () => {
   const [imageHeight, setImageHeight] = useState(null);
 
   const userToShow = users.find((user) => user.id === event.createdBy);
+  const catsArray = [];
+  event.categoryIds.map((catId) => {
+    const category = categories.find((cat) => cat.id === catId);
+    catsArray.push(category.name);
+  });
+  const catsToShow = catsArray.join(", ");
 
   useEffect(() => {
     getImageSize(event.image)
@@ -74,13 +78,13 @@ export const EventPage = () => {
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
-        <Card boxShadow="2xl" bg="brand.500" m={7}>
+        <Card boxShadow="2xl" bg="brand.300" m={7}>
           <CardBody>
             <Center>
               <Stack direction={"column"} spacing={"30px"} mb={8}>
                 <Stack>
                   <Heading
-                    color="brand.400"
+                    color="brand.100"
                     size="lg"
                     mt={5}
                     textAlign={"center"}
@@ -98,7 +102,6 @@ export const EventPage = () => {
                   </Heading>
                 </Stack>
                 <Box
-                  mt={5}
                   borderColor="brand.300"
                   borderRadius="full"
                   boxShadow="2xl"
@@ -128,50 +131,24 @@ export const EventPage = () => {
                   date={"date"}
                   imgUrl={"/src/assets/Calendar.png"}
                 />
-                <Stack direction="column">
-                  <Text
-                    as="b"
-                    textAlign={"center"}
-                    color="brand.400"
-                    bgGradient={"radial(brand.100, brand.700)"}
-                  >
-                    Categories
-                  </Text>
-                  <Center mt={3}>
-                    {event.categoryIds.map((catId) => {
-                      const category = categories.find(
-                        (cat) => cat.id === catId
-                      );
-                      return (
-                        <Tag
-                          key={catId}
-                          size={"sm"}
-                          maxBlockSize={2}
-                          bg="brand.700"
-                          textAlign={"center"}
-                          fontWeight={"semibold"}
-                          py={1}
-                          textTransform={"uppercase"}
-                        >
-                          {category.name}
-                        </Tag>
-                      );
-                    })}
-                  </Center>
-                </Stack>
+                <EventSubItem
+                  eventItem={catsToShow}
+                  date={null}
+                  imgUrl={"/src/assets/Categories.png"}
+                />
               </Stack>
             </Center>
           </CardBody>
         </Card>
       </GridItem>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 2}>
-        <Card boxShadow="2xl" bg="brand.500" m={7}>
+        <Card boxShadow="2xl" bg="brand.300" m={7}>
           <CardBody>
             <Center>
               <Stack direction={"column"} spacing={"30px"} mb={8}>
                 <Stack>
                   <Heading
-                    color="brand.400"
+                    color="brand.100"
                     size="lg"
                     mt={5}
                     textAlign={"center"}
