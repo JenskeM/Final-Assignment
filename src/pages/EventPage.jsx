@@ -299,7 +299,7 @@ export const EventPage = () => {
                               value={user.id}
                               key={user.id}
                               colorScheme="orange"
-                              isChecked={selectedCreator}
+                              isChecked={selectedCreator === user.id}
                               onClick={() => setSelectedCreator(user.id)}
                               name="createdBy"
                               sx={{
