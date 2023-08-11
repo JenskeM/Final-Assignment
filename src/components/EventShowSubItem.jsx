@@ -2,9 +2,9 @@ import { getTime } from "./getTime";
 import { getDate } from "./getDate";
 import { Stack, Text, Image, Center, Tooltip } from "@chakra-ui/react";
 
-export const EventShowSubItem = ({ eventItem, imgUrl, date, alt }) => {
-  const getOutput = (eventItem, date) => {
-    if (date === "date") {
+export const EventShowSubItem = ({ eventItem, imgUrl, alt }) => {
+  const getOutput = (eventItem, alt) => {
+    if (alt === "Date") {
       const output = (
         <span>
           {getDate(eventItem[0]).props.children} -{" "}
@@ -15,6 +15,9 @@ export const EventShowSubItem = ({ eventItem, imgUrl, date, alt }) => {
           {getTime(eventItem[1]).props.children}
         </span>
       );
+      return output;
+    } else if (alt === "Categories") {
+      const output = eventItem.join(", ");
       return output;
     } else {
       const output = eventItem;
@@ -37,7 +40,7 @@ export const EventShowSubItem = ({ eventItem, imgUrl, date, alt }) => {
           />
         </Tooltip>
         <Text textAlign={"center"} color="black">
-          {getOutput(eventItem, date)}
+          {getOutput(eventItem, alt)}
         </Text>
       </Center>
     </Stack>

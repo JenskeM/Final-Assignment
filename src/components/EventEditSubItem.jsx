@@ -1,3 +1,5 @@
+import { useLoaderData } from "react-router-dom";
+import { TYPES } from "../pages/EventPage";
 import {
   Stack,
   Image,
@@ -7,10 +9,22 @@ import {
   EditableTextarea,
   EditableInput,
   EditablePreview,
+  Select,
 } from "@chakra-ui/react";
-import { TYPES } from "../pages/EventPage";
+
+export const loader = async () => {
+  const categories = await fetch(`http://localhost:3000/categories`);
+  const users = await fetch(`http://localhost:3000/users`);
+
+  return {
+    categories: await categories.json(),
+    users: await users.json(),
+  };
+};
 
 export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
+  const { categories, users } = useLoaderData();
+
   return (
     <Stack direction="row">
       <Center>
@@ -29,6 +43,8 @@ export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
           <EditablePreview />
           {typeInput === TYPES.TEXTAREA ? (
             <EditableTextarea bg="brand.100" />
+          ) : typeInput === TYPES.INPUT ? (
+            <EditableInput bg="brand.100" />
           ) : (
             <EditableInput bg="brand.100" />
           )}

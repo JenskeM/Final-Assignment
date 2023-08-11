@@ -45,12 +45,11 @@ export const EventPage = () => {
   const [isEditable, setIsEditable] = useState(false);
 
   const userToShow = users.find((user) => user.id === event.createdBy);
-  const catsArray = [];
+  const catsToShow = [];
   event.categoryIds.map((catId) => {
     const category = categories.find((cat) => cat.id === catId);
-    catsArray.push(category.name);
+    catsToShow.push(category.name);
   });
-  const catsToShow = catsArray.join(", ");
 
   const eventBgStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.9), rgba(255, 228, 191, 0.73)), url(${event.image})`,
@@ -173,7 +172,6 @@ export const EventPage = () => {
               >
                 <EventSubItem
                   eventItem={event.description}
-                  date={null}
                   imgUrl={"/src/assets/Info.png"}
                   alt="Description"
                   isEditable={isEditable}
@@ -181,7 +179,6 @@ export const EventPage = () => {
                 />{" "}
                 <EventSubItem
                   eventItem={event.location}
-                  date={null}
                   imgUrl={"/src/assets/Location.png"}
                   alt="Location"
                   isEditable={isEditable}
@@ -189,13 +186,11 @@ export const EventPage = () => {
                 />
                 <EventSubItem
                   eventItem={[event.startTime, event.endTime]}
-                  date={"date"}
                   imgUrl={"/src/assets/Calendar.png"}
                   alt="Date"
                 />
                 <EventSubItem
                   eventItem={catsToShow}
-                  date={null}
                   imgUrl={"/src/assets/Categories.png"}
                   alt="Categories"
                 />
