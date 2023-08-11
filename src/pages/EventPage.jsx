@@ -90,6 +90,7 @@ export const EventPage = () => {
     <Grid
       bg="brand.700"
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
+      h="100vh"
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
