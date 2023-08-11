@@ -11,6 +11,7 @@ import {
   EditableInput,
   EditablePreview,
   Checkbox,
+  Text,
 } from "@chakra-ui/react";
 
 export const loader = async () => {
@@ -23,11 +24,12 @@ export const loader = async () => {
   };
 };
 
-export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
+export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   const { categories, users } = useLoaderData();
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(eventItem)
   );
+  const [editCats, setEditCats] = useState(false);
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
@@ -38,10 +40,12 @@ export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
     setSelectedCategories(new Set(selectedCategories));
   };
 
+  const catsToShow = [];
+
   return (
     <Stack direction="row">
       <Center>
-        <Tooltip label={alt}>
+        <Tooltip label={typeInput}>
           <Image
             src={imgUrl}
             height={10}
@@ -49,7 +53,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
             bg="brand.200"
             borderRadius="full"
             mr={5}
-            alt={alt}
+            alt={typeInput}
           />
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
@@ -65,28 +69,42 @@ export const EventEditSubItem = ({ eventItem, imgUrl, alt, typeInput }) => {
             </>
           ) : (
             <Stack direction={"row"}>
-              {categories.map((category) => {
-                const isChecked = selectedCategories.has(category.id);
+              {editCats ? (
+                categories.map((category) => {
+                  const isChecked = selectedCategories.has(category.id);
 
-                return (
-                  <Checkbox
-                    colorScheme="orange"
-                    key={category.id}
-                    name="categoryIds"
-                    value={Array.from(selectedCategories)}
-                    onChange={() => toggleCategory(category.id)}
-                    isChecked={isChecked}
-                    sx={{
-                      borderColor: "brand.200",
-                      backgroundColor: "brand.100",
-                      paddingLeft: "5px",
-                      borderRadius: "20px",
-                    }}
-                  >
-                    {category.name}
-                  </Checkbox>
-                );
-              })}
+                  return (
+                    <Checkbox
+                      colorScheme="orange"
+                      key={category.id}
+                      name="categoryIds"
+                      value={Array.from(selectedCategories)}
+                      onChange={() => toggleCategory(category.id)}
+                      isChecked={isChecked}
+                      sx={{
+                        borderColor: "brand.200",
+                        backgroundColor: "brand.100",
+                        paddingLeft: "5px",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      {category.name}
+                    </Checkbox>
+                  );
+                })
+              ) : (
+                <Text
+                  cursor={"crosshair"}
+                  onClick={() => setEditCats(!editCats)}
+                >
+                  {eventItem.map((catId) => {
+                    const category = categories.find((cat) => cat.id === catId);
+                    catsToShow.push(category.name);
+                  })}
+
+                  {catsToShow.join(", ")}
+                </Text>
+              )}
             </Stack>
           )}
         </Editable>
