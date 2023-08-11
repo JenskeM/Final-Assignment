@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getImageSize } from "react-image-size";
-import { EventSubItem } from "../components/EventSubItem";
 import { useLoaderData } from "react-router-dom";
 import {
   Heading,
@@ -14,7 +13,7 @@ import {
   CardBody,
   Tooltip,
 } from "@chakra-ui/react";
-import { EventEditSubItem } from "../components/EventEditSubItem";
+import { EventSubItem } from "../components/EventSubItem";
 
 export const loader = async ({ params }) => {
   const event = await fetch(`http://localhost:3000/events/${params.eventId}`);
@@ -26,6 +25,13 @@ export const loader = async ({ params }) => {
     categories: await categories.json(),
     users: await users.json(),
   };
+};
+
+export const TYPES = {
+  TEXTAREA: "text-area",
+  INPUT: "input",
+  DATE: "date",
+  SELECT: "select",
 };
 
 export const EventPage = () => {
@@ -132,22 +138,14 @@ export const EventPage = () => {
                 p={"25px 150px 25px 150px"}
                 bg={"rgba(255, 228, 191, 0.35)"}
               >
-                {" "}
-                {isEditable ? (
-                  <EventEditSubItem
-                    eventItem={event.description}
-                    date={null}
-                    imgUrl={"/src/assets/Info.png"}
-                    alt="Description"
-                  />
-                ) : (
-                  <EventSubItem
-                    eventItem={event.description}
-                    date={null}
-                    imgUrl={"/src/assets/Info.png"}
-                    alt="Description"
-                  />
-                )}
+                <EventSubItem
+                  eventItem={event.description}
+                  date={null}
+                  imgUrl={"/src/assets/Info.png"}
+                  alt="Description"
+                  isEditable={isEditable}
+                  type={TYPES.TEXTAREA}
+                />{" "}
                 <EventSubItem
                   eventItem={event.location}
                   date={null}

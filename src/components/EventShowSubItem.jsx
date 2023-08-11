@@ -2,7 +2,7 @@ import { getTime } from "./getTime";
 import { getDate } from "./getDate";
 import { Stack, Text, Image, Center, Tooltip } from "@chakra-ui/react";
 
-export const EventSubItem = ({ eventItem, imgUrl, date, alt }) => {
+export const EventShowSubItem = ({ eventItem, imgUrl, date, alt }) => {
   const getOutput = (eventItem, date) => {
     if (date === "date") {
       const output = (
