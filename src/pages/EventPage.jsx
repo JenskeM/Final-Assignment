@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getImageSize } from "react-image-size";
 import { EventSubItem } from "../components/EventSubItem";
 import { useLoaderData } from "react-router-dom";
 import {
@@ -28,6 +29,22 @@ export const loader = async ({ params }) => {
 export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
+  const [imageWidth, setImageWidth] = useState(null);
+  const [imageHeight, setImageHeight] = useState(null);
+
+  useEffect(() => {
+    getImageSize(event.image)
+      .then((size) => {
+        setImageWidth(size.width);
+        setImageHeight(size.height);
+      })
+      .catch((error) => {
+        console.error(
+          "Error when catching the measurements form the image:",
+          error
+        );
+      });
+  }, [event.image]);
 
   function getCurrentDimension() {
     return {
@@ -69,11 +86,14 @@ export const EventPage = () => {
               borderColor="brand.300"
               borderRadius="full"
               boxShadow="xl"
+              h={imageHeight * 0.2}
+              w={imageWidth * 0.2}
             >
               <Image
                 src={event.image}
                 borderRadius="full"
-                boxSize="40%"
+                h={imageHeight * 0.2}
+                w={imageWidth * 0.2}
                 alt={event.title}
               />
             </Box>
