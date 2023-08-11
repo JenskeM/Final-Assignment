@@ -36,7 +36,6 @@ export const EventSubItem = ({ eventItem, imgUrl, date, alt }) => {
             alt={alt}
           />
         </Tooltip>
-
         <Text textAlign={"center"}>{getOutput(eventItem, date)}</Text>
       </Center>
     </Stack>
