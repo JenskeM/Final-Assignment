@@ -171,23 +171,62 @@ export const EventPage = () => {
             </Stack>
           </CardBody>
           <Stack direction={"row"}>
-            <Tooltip label={"Press to edit this event"}>
-              <Image
-                src={"/src/assets/Edit.png"}
-                h={10}
-                w={10}
-                p={2}
-                bg="brand.400"
-                borderRadius="full"
-                _hover={{
-                  opacity: 0.6,
-                  transform: "scale(.95)",
-                  filter: "auto",
-                  blur: "0.5px",
-                }}
-                onClick={() => setIsEditable(!isEditable)}
-              />
-            </Tooltip>
+            {isEditable ? (
+              <Stack direction={"row"}>
+                <Tooltip label={"Press to save the editions"}>
+                  <Image
+                    src={"/src/assets/Check.png"}
+                    h={10}
+                    w={10}
+                    p={2}
+                    bg="brand.400"
+                    borderRadius="full"
+                    _hover={{
+                      opacity: 0.6,
+                      transform: "scale(.95)",
+                      filter: "auto",
+                      blur: "0.5px",
+                    }}
+                    onClick={() => setIsEditable(!isEditable)}
+                  />
+                </Tooltip>
+                <Tooltip label={"Press to cancel the edit"}>
+                  <Image
+                    src={"/src/assets/Cancel.png"}
+                    h={10}
+                    w={10}
+                    p={2}
+                    bg="brand.400"
+                    borderRadius="full"
+                    _hover={{
+                      opacity: 0.6,
+                      transform: "scale(.95)",
+                      filter: "auto",
+                      blur: "0.5px",
+                    }}
+                    onClick={() => setIsEditable(!isEditable)}
+                  />
+                </Tooltip>
+              </Stack>
+            ) : (
+              <Tooltip label={"Press to edit this event"}>
+                <Image
+                  src={"/src/assets/Edit.png"}
+                  h={10}
+                  w={10}
+                  p={2}
+                  bg="brand.400"
+                  borderRadius="full"
+                  _hover={{
+                    opacity: 0.6,
+                    transform: "scale(.95)",
+                    filter: "auto",
+                    blur: "0.5px",
+                  }}
+                  onClick={() => setIsEditable(!isEditable)}
+                />
+              </Tooltip>
+            )}
             <Tooltip label={"Press to delete this event"}>
               <Image
                 src={"/src/assets/Delete.png"}
