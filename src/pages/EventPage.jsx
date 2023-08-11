@@ -12,6 +12,8 @@ import {
   Text,
   Grid,
   GridItem,
+  Card,
+  CardBody,
 } from "@chakra-ui/react";
 
 export const loader = async ({ params }) => {
@@ -31,6 +33,8 @@ export const EventPage = () => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
+
+  const userToShow = users.find((user) => user.id === event.createdBy);
 
   useEffect(() => {
     getImageSize(event.image)
@@ -69,85 +73,139 @@ export const EventPage = () => {
       bg="brand.700"
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
     >
-      <GridItem colSpan={screenSize.width <= 700 ? 1 : 3}>
-        <Center>
-          <Stack direction={"column"} spacing={"30px"} mb={8}>
-            <Stack>
-              <Heading color="brand.400" size="lg" mt={5} textAlign={"center"}>
-                Event information:
-              </Heading>
-              <Heading color="brand.200" size="xl" mt={5} textAlign={"center"}>
-                {" "}
-                {event.title}
-              </Heading>
-            </Stack>
-            <Box
-              mt={5}
-              borderColor="brand.300"
-              borderRadius="full"
-              boxShadow="xl"
-              h={imageHeight * 0.2}
-              w={imageWidth * 0.2}
-            >
-              <Image
-                src={event.image}
-                borderRadius="full"
-                h={imageHeight * 0.2}
-                w={imageWidth * 0.2}
-                alt={event.title}
-              />
-            </Box>
-            <EventSubItem
-              eventItem={event.description}
-              property="Description"
-              date={null}
-            />
-            <EventSubItem
-              eventItem={event.location}
-              property="Location"
-              date={null}
-            />
-            <EventSubItem
-              eventItem={event.startTime}
-              property="Start date and time"
-              date={"date"}
-            />
-            <EventSubItem
-              eventItem={event.endTime}
-              property="End date and time"
-              date={"date"}
-            />
-            <Stack direction="column">
-              <Text
-                as="b"
-                textAlign={"center"}
-                color="brand.400"
-                bgGradient={"radial(brand.100, brand.700)"}
-              >
-                Categories
-              </Text>
-              <Center mt={3}>
-                {event.categoryIds.map((catId) => {
-                  const category = categories.find((cat) => cat.id === catId);
-                  return (
-                    <Tag
-                      key={catId}
-                      size={"sm"}
-                      maxBlockSize={2}
-                      bg="brand.700"
-                      textAlign={"center"}
-                      fontWeight={"semibold"}
-                      py={1}
-                      textTransform={"uppercase"}
-                    >
-                      {category.name}
-                    </Tag>
-                  );
-                })}
-              </Center>
-            </Stack>
-          </Stack>
-        </Center>
+      <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
+        <Card boxShadow="2xl" bg="brand.500" m={7}>
+          <CardBody>
+            <Center>
+              <Stack direction={"column"} spacing={"30px"} mb={8}>
+                <Stack>
+                  <Heading
+                    color="brand.400"
+                    size="lg"
+                    mt={5}
+                    textAlign={"center"}
+                  >
+                    Event information:
+                  </Heading>
+                  <Heading
+                    color="brand.200"
+                    size="xl"
+                    mt={5}
+                    textAlign={"center"}
+                  >
+                    {" "}
+                    {event.title}
+                  </Heading>
+                </Stack>
+                <Box
+                  mt={5}
+                  borderColor="brand.300"
+                  borderRadius="full"
+                  boxShadow="2xl"
+                  h={imageHeight * 0.2}
+                  w={imageWidth * 0.2}
+                >
+                  <Image
+                    src={event.image}
+                    borderRadius="full"
+                    h={imageHeight * 0.2}
+                    w={imageWidth * 0.2}
+                    alt={event.title}
+                  />
+                </Box>
+                <EventSubItem
+                  eventItem={event.description}
+                  date={null}
+                  imgUrl={"/src/assets/Info.png"}
+                />
+                <EventSubItem
+                  eventItem={event.location}
+                  date={null}
+                  imgUrl={"/src/assets/Location.png"}
+                />
+                <EventSubItem
+                  eventItem={[event.startTime, event.endTime]}
+                  date={"date"}
+                  imgUrl={"/src/assets/Calendar.png"}
+                />
+                <Stack direction="column">
+                  <Text
+                    as="b"
+                    textAlign={"center"}
+                    color="brand.400"
+                    bgGradient={"radial(brand.100, brand.700)"}
+                  >
+                    Categories
+                  </Text>
+                  <Center mt={3}>
+                    {event.categoryIds.map((catId) => {
+                      const category = categories.find(
+                        (cat) => cat.id === catId
+                      );
+                      return (
+                        <Tag
+                          key={catId}
+                          size={"sm"}
+                          maxBlockSize={2}
+                          bg="brand.700"
+                          textAlign={"center"}
+                          fontWeight={"semibold"}
+                          py={1}
+                          textTransform={"uppercase"}
+                        >
+                          {category.name}
+                        </Tag>
+                      );
+                    })}
+                  </Center>
+                </Stack>
+              </Stack>
+            </Center>
+          </CardBody>
+        </Card>
+      </GridItem>
+      <GridItem colSpan={screenSize.width <= 700 ? 1 : 2}>
+        <Card boxShadow="2xl" bg="brand.500" m={7}>
+          <CardBody>
+            <Center>
+              <Stack direction={"column"} spacing={"30px"} mb={8}>
+                <Stack>
+                  <Heading
+                    color="brand.400"
+                    size="lg"
+                    mt={5}
+                    textAlign={"center"}
+                  >
+                    User information:
+                  </Heading>
+                  <Heading
+                    color="brand.200"
+                    size="xl"
+                    mt={5}
+                    textAlign={"center"}
+                  >
+                    {" "}
+                    {userToShow.name}
+                  </Heading>
+                </Stack>
+                <Box
+                  mt={5}
+                  borderColor="brand.300"
+                  borderRadius="full"
+                  boxShadow="xl"
+                  h={imageHeight * 0.15}
+                  w={imageWidth * 0.15}
+                >
+                  <Image
+                    src={userToShow.image}
+                    borderRadius="full"
+                    alt={userToShow.name}
+                  />
+                </Box>
+              </Stack>
+            </Center>
+          </CardBody>
+        </Card>
       </GridItem>
     </Grid>
   );

@@ -1,14 +1,20 @@
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
-import { Stack, Text } from "@chakra-ui/react";
+import { Stack, Text, Image, Center } from "@chakra-ui/react";
 
-export const EventSubItem = ({ eventItem, property, date }) => {
+export const EventSubItem = ({ eventItem, imgUrl, date }) => {
   const getOutput = (eventItem, date) => {
     if (date === "date") {
-      const output =
-        getDate(eventItem).props.children +
-        " - " +
-        getTime(eventItem).props.children;
+      const output = (
+        <div>
+          {getDate(eventItem[0]).props.children} -{" "}
+          {getTime(eventItem[0]).props.children} <br />
+          until
+          <br />
+          {getDate(eventItem[1]).props.children} -{" "}
+          {getTime(eventItem[1]).props.children}
+        </div>
+      );
       return output;
     } else {
       const output = eventItem;
@@ -17,16 +23,18 @@ export const EventSubItem = ({ eventItem, property, date }) => {
   };
 
   return (
-    <Stack direction="column">
-      <Text
-        as="b"
-        textAlign={"center"}
-        color="brand.400"
-        bgGradient={"radial(brand.100, brand.700)"}
-      >
-        {property}
-      </Text>
-      <Text textAlign={"center"}>{getOutput(eventItem, date)}</Text>
+    <Stack direction="row">
+      <Center>
+        <Image
+          src={imgUrl}
+          height={10}
+          p={2}
+          bg="brand.200"
+          borderRadius="full"
+          mr={5}
+        />
+        <Text textAlign={"center"}>{getOutput(eventItem, date)}</Text>
+      </Center>
     </Stack>
   );
 };
