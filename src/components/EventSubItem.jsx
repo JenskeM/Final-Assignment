@@ -1,8 +1,8 @@
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
-import { Stack, Text, Image, Center } from "@chakra-ui/react";
+import { Stack, Text, Image, Center, Tooltip } from "@chakra-ui/react";
 
-export const EventSubItem = ({ eventItem, imgUrl, date }) => {
+export const EventSubItem = ({ eventItem, imgUrl, date, alt }) => {
   const getOutput = (eventItem, date) => {
     if (date === "date") {
       const output = (
@@ -25,14 +25,18 @@ export const EventSubItem = ({ eventItem, imgUrl, date }) => {
   return (
     <Stack direction="row">
       <Center>
-        <Image
-          src={imgUrl}
-          height={10}
-          p={2}
-          bg="brand.200"
-          borderRadius="full"
-          mr={5}
-        />
+        <Tooltip label={alt}>
+          <Image
+            src={imgUrl}
+            height={10}
+            p={2}
+            bg="brand.200"
+            borderRadius="full"
+            mr={5}
+            alt={alt}
+          />
+        </Tooltip>
+
         <Text textAlign={"center"}>{getOutput(eventItem, date)}</Text>
       </Center>
     </Stack>
