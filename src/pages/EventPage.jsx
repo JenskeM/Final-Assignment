@@ -186,6 +186,7 @@ export const EventPage = () => {
                 <EventSubItem
                   eventItem={[event.startTime, event.endTime]}
                   imgUrl={"/src/assets/Calendar.png"}
+                  isEditable={isEditable}
                   typeInput={TYPES.DATE}
                 />
                 <EventSubItem

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { TYPES } from "../pages/EventPage";
+import { getTime } from "./getTime";
+import { getDate } from "./getDate";
 import {
   Stack,
   Image,
@@ -12,6 +14,7 @@ import {
   EditablePreview,
   Checkbox,
   Text,
+  Input,
 } from "@chakra-ui/react";
 
 export const loader = async () => {
@@ -28,6 +31,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
     new Set(eventItem)
   );
   const [editCats, setEditCats] = useState(false);
+  const [editDate, setEditDate] = useState(false);
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
@@ -39,6 +43,20 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   };
 
   const catsToShow = [];
+
+  const getOutput = (eventItem) => {
+    const output = (
+      <span>
+        {getDate(eventItem[0]).props.children} -{" "}
+        {getTime(eventItem[0]).props.children} <br />
+        until
+        <br />
+        {getDate(eventItem[1]).props.children} -{" "}
+        {getTime(eventItem[1]).props.children}
+      </span>
+    );
+    return output;
+  };
 
   return (
     <Stack direction="row">
@@ -67,7 +85,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
               <EditablePreview />
               <EditableInput bg="brand.100" />
             </>
-          ) : (
+          ) : typeInput === TYPES.CATEGORIES ? (
             <Stack direction={"row"}>
               {editCats ? (
                 categories.map((category) => {
@@ -106,6 +124,23 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
                 </Text>
               )}
             </Stack>
+          ) : editDate ? (
+            <Stack direction={"column"}>
+              <Input
+                placeholder={`${getDate(eventItem[0]).props.children} 
+        ${getTime(eventItem[0]).props.children}`}
+                bg="brand.100"
+              />
+              <Input
+                placeholder={`${getDate(eventItem[1]).props.children} 
+        ${getTime(eventItem[1]).props.children}`}
+                bg="brand.100"
+              />
+            </Stack>
+          ) : (
+            <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
+              {getOutput(eventItem)}
+            </Text>
           )}
         </Editable>
       </Center>
