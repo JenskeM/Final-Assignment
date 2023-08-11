@@ -1,3 +1,5 @@
+import { getTime } from "./getTime";
+import { getDate } from "./getDate";
 import {
   Card,
   CardBody,
@@ -10,27 +12,6 @@ import {
 } from "@chakra-ui/react";
 
 export const EventItemCard = ({ event, categories }) => {
-  const getDate = (dateToChange) => {
-    const dateObject = new Date(dateToChange);
-    const year = dateObject.getFullYear();
-    const month = dateObject.getMonth() + 1;
-    const day = dateObject.getDate();
-    const formattedDate = `${day}/${month}/${year}`;
-
-    return <>{formattedDate}</>;
-  };
-
-  const getTime = (timeToChange) => {
-    const dateObject = new Date(timeToChange);
-    const hours = dateObject.getHours();
-    const minutes = dateObject.getMinutes();
-    const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}`;
-
-    return <>{formattedTime}</>;
-  };
-
   return (
     <Card
       mt={8}

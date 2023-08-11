@@ -36,8 +36,26 @@ export const EventPage = () => {
           />
         </Box>
         <Heading color="brand.200">{event.title}</Heading>
-        <EventSubItem eventItem={event.description} property="description" />
-        <EventSubItem eventItem={event.location} property="location" />
+        <EventSubItem
+          eventItem={event.description}
+          property="Description"
+          date={null}
+        />
+        <EventSubItem
+          eventItem={event.location}
+          property="Location"
+          date={null}
+        />
+        <EventSubItem
+          eventItem={event.startTime}
+          property="Start date and time"
+          date={"date"}
+        />
+        <EventSubItem
+          eventItem={event.endTime}
+          property="End date and time"
+          date={"date"}
+        />
       </Stack>
     </Center>
   );
