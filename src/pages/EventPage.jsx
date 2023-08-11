@@ -40,8 +40,15 @@ export const EventPage = () => {
   });
   const catsToShow = catsArray.join(", ");
 
-  const showBgStyle = {
+  const eventBgStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.9), rgba(255, 228, 191, 0.73)), url(${event.image})`,
+    backgroundSize: "cover",
+    color: "white",
+    padding: "20px",
+  };
+
+  const creatorBgStyle = {
+    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.9), rgba(255, 228, 191, 0.73)), url(${userToShow.image})`,
     backgroundSize: "cover",
     color: "white",
     padding: "20px",
@@ -85,29 +92,29 @@ export const EventPage = () => {
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
-        <Card boxShadow="2xl" m={7} style={showBgStyle}>
+        <Card boxShadow="2xl" m={7} style={eventBgStyle}>
           <CardBody>
-            <Center>
-              <Stack direction={"column"} spacing={"30px"} mb={8}>
-                <Stack>
-                  <Heading
-                    color="brand.100"
-                    size="lg"
-                    mt={5}
-                    textAlign={"center"}
-                  >
-                    Event information:
-                  </Heading>
-                  <Heading
-                    color="brand.200"
-                    size="xl"
-                    mt={5}
-                    textAlign={"center"}
-                  >
-                    {" "}
-                    {event.title}
-                  </Heading>
-                </Stack>
+            <Stack direction={"column"} spacing={"30px"} mb={8}>
+              <Stack>
+                <Heading
+                  color="brand.100"
+                  size="lg"
+                  mt={5}
+                  textAlign={"center"}
+                >
+                  Event information:
+                </Heading>
+                <Heading
+                  color="brand.200"
+                  size="xl"
+                  mt={5}
+                  textAlign={"center"}
+                >
+                  {" "}
+                  {event.title}
+                </Heading>
+              </Stack>
+              <Center>
                 <Box
                   borderColor="brand.300"
                   borderRadius="full"
@@ -123,6 +130,15 @@ export const EventPage = () => {
                     alt={event.title}
                   />
                 </Box>
+              </Center>
+              <Grid
+                gridTemplateColumns={
+                  screenSize.width <= 700 ? "1fr" : "repeat(2, 1fr)"
+                }
+                gap={screenSize.width <= 700 ? 2 : 8}
+                pl={"150px"}
+                pr={"150px"}
+              >
                 <EventSubItem
                   eventItem={event.description}
                   date={null}
@@ -147,13 +163,13 @@ export const EventPage = () => {
                   imgUrl={"/src/assets/Categories.png"}
                   alt="Categories"
                 />
-              </Stack>
-            </Center>
+              </Grid>
+            </Stack>
           </CardBody>
         </Card>
       </GridItem>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 2}>
-        <Card boxShadow="2xl" bg="brand.300" m={7}>
+        <Card boxShadow="2xl" m={7} style={creatorBgStyle}>
           <CardBody>
             <Center>
               <Stack direction={"column"} spacing={"30px"} mb={"100px"}>
@@ -164,7 +180,7 @@ export const EventPage = () => {
                     mt={5}
                     textAlign={"center"}
                   >
-                    User information:
+                    Creator information:
                   </Heading>
                   <Heading
                     color="brand.200"
@@ -176,19 +192,21 @@ export const EventPage = () => {
                     {userToShow.name}
                   </Heading>
                 </Stack>
-                <Box
-                  borderColor="brand.300"
-                  borderRadius="full"
-                  boxShadow="xl"
-                  h={imageHeight * 0.15}
-                  w={imageWidth * 0.15}
-                >
-                  <Image
-                    src={userToShow.image}
+                <Center>
+                  <Box
+                    borderColor="brand.300"
                     borderRadius="full"
-                    alt={userToShow.name}
-                  />
-                </Box>
+                    boxShadow="xl"
+                    h={imageHeight * 0.15}
+                    w={imageWidth * 0.15}
+                  >
+                    <Image
+                      src={userToShow.image}
+                      borderRadius="full"
+                      alt={userToShow.name}
+                    />
+                  </Box>
+                </Center>
               </Stack>
             </Center>
           </CardBody>
