@@ -57,17 +57,13 @@ export const EventPage = () => {
   });
 
   const eventBgStyle = {
-    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.9), rgba(255, 228, 191, 0.73)), url(${event.image})`,
+    backgroundImage: `linear-gradient(to bottom, rgba(180, 195, 157, 0.63),  rgba(250, 245, 233, 0.9)), url(${event.image})`,
     backgroundSize: "cover",
-    color: "white",
-    padding: "20px",
   };
 
   const creatorBgStyle = {
-    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.9), rgba(255, 228, 191, 0.73)), url(${userToShow.image})`,
+    backgroundImage: `linear-gradient(to bottom,  rgba(180, 195, 157, 0.63),  rgba(250, 245, 233, 0.9)), url(${userToShow.image})`,
     backgroundSize: "cover",
-    color: "white",
-    padding: "20px",
   };
 
   const handleClick = () => {
@@ -117,9 +113,9 @@ export const EventPage = () => {
 
   return (
     <Grid
-      bg="brand.700"
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
       h={isEditable && "100vh"}
+      bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
@@ -168,7 +164,7 @@ export const EventPage = () => {
                 }
                 gap={screenSize.width <= 700 ? 2 : 8}
                 p={"25px 150px 25px 150px"}
-                bg={"rgba(255, 228, 191, 0.35)"}
+                bg={"rgba(250, 245, 233, 0.5)"}
               >
                 <EventSubItem
                   eventItem={event.description}
@@ -199,14 +195,14 @@ export const EventPage = () => {
           </CardBody>
           <Stack direction={"row"}>
             {isEditable ? (
-              <Stack direction={"row"}>
+              <Stack direction={"row"} ml={2} mb={2}>
                 <Tooltip label={"Press to save the editions"}>
                   <Image
                     src={"/src/assets/Check.png"}
                     h={10}
                     w={10}
                     p={2}
-                    bg="brand.400"
+                    bg="brand.600"
                     borderRadius="full"
                     _hover={{
                       opacity: 0.6,
@@ -223,7 +219,7 @@ export const EventPage = () => {
                     h={10}
                     w={10}
                     p={2}
-                    bg="brand.400"
+                    bg="brand.600"
                     borderRadius="full"
                     _hover={{
                       opacity: 0.6,
@@ -242,7 +238,9 @@ export const EventPage = () => {
                   h={10}
                   w={10}
                   p={2}
-                  bg="brand.400"
+                  ml={2}
+                  mb={2}
+                  bg="brand.600"
                   borderRadius="full"
                   _hover={{
                     opacity: 0.6,
@@ -260,7 +258,7 @@ export const EventPage = () => {
                 h={10}
                 w={10}
                 p={2}
-                bg="brand.400"
+                bg="brand.600"
                 borderRadius="full"
                 _hover={{
                   opacity: 0.6,
