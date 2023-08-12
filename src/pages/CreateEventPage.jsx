@@ -282,14 +282,14 @@ export const CreateEventsPage = () => {
           <Button
             type="submit"
             mt={10}
-            bg="brand.100"
-            color="brand.400"
+            bg="brand.200"
+            color="brand.100"
             borderColor={"brand.400"}
             borderWidth={3}
             _hover={{
-              background: "brand.300",
-              color: "brand.100",
-              borderColor: "brand.100",
+              background: "brand.100",
+              color: "brand.400",
+              borderColor: "brand.400",
             }}
             onClick={() =>
               toast({
