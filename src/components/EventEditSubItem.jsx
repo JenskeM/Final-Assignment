@@ -152,19 +152,19 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
                   onChange={(e) => setStartDate(e.target.value)}
                 />
                 <Input
-                  value={getTime(eventItem[0]).props.children}
+                  value={startTime}
                   bg="brand.100"
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </Stack>
               <Stack direction={"row"}>
                 <Input
-                  value={getDate(eventItem[1]).props.children}
+                  value={endDate}
                   bg="brand.100"
                   onChange={(e) => setEndDate(e.target.value)}
                 />
                 <Input
-                  value={getTime(eventItem[1]).props.children}
+                  value={endTime}
                   bg="brand.100"
                   onChange={(e) => setEndTime(e.target.value)}
                 />
