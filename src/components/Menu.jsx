@@ -1,18 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Stack, Input, Image, Text } from "@chakra-ui/react";
+import { Link, useLoaderData } from "react-router-dom";
+import { Stack, Input, Image, Text, Radio, RadioGroup } from "@chakra-ui/react";
 import { useEvent } from "./EventContext";
 import { ACTIONS } from "./eventReducer";
 
-export const Menu = (categories) => {
+export const loader = async () => {
+  const categories = await fetch(`http://localhost:3000/categories`);
+
+  return {
+    categories: await categories.json(),
+  };
+};
+
+export const Menu = () => {
+  const { categories } = useLoaderData;
   const { dispatch } = useEvent();
   const [searchText, setSearchText] = useState("");
-
-  console.log(categories.categories);
+  const [radioValue, setRadioValue] = useState("no filter");
 
   useEffect(() => {
     dispatch({ type: ACTIONS.FILTER_EVENTS, payload: searchText });
   }, [searchText, dispatch]);
+
+  // const catsFiltered = ["no filter"];
+  // categories.map((cat) => {
+  //   catsFiltered.push(cat.name);
+  // });
+
+  console.log(categories);
 
   return (
     <Stack bg="brand.500" pl={4} pr={4} space={2} pt={2}>
@@ -42,6 +57,23 @@ export const Menu = (categories) => {
           }}
         />
       </Stack>
+      {/* <RadioGroup onChange={setRadioValue} value={radioValue} name="filterCat">
+        {catsFiltered.map((cat) => (
+          <Radio
+            key={cat}
+            value={cat}
+            pr={5}
+            colorScheme="orange"
+            sx={{
+              borderColor: "brand.200",
+              background: "brand.100",
+              paddingLeft: "5px",
+            }}
+          >
+            {cat}
+          </Radio>
+        ))}
+      </RadioGroup> */}
       <Text height={8} _hover={{ color: "brand.600" }} color="brand.100">
         <Link to="/">Events</Link>
       </Text>

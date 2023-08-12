@@ -102,45 +102,49 @@ export const EventsPage = () => {
 
   return (
     <Box pl={3} pt={1} pb={10} style={eventsBgStyle}>
-      <FilterPopUp show={showFilter} onClose={() => setShowFilter(false)}>
-        <RadioGroup
-          onChange={setRadioValue}
-          value={radioValue}
-          name="filterCat"
-        >
-          {catsFiltered.map((cat) => (
-            <Radio
-              key={cat}
-              value={cat}
-              pr={5}
-              colorScheme="orange"
-              sx={{
-                borderColor: "brand.200",
-                background: "brand.100",
-                paddingLeft: "5px",
-              }}
-              onClick={() => setShowFilter(false)}
+      {screenSize.width > 700 && (
+        <>
+          <FilterPopUp show={showFilter} onClose={() => setShowFilter(false)}>
+            <RadioGroup
+              onChange={setRadioValue}
+              value={radioValue}
+              name="filterCat"
             >
-              {cat}
-            </Radio>
-          ))}
-        </RadioGroup>
-      </FilterPopUp>
-      <Tooltip label={"Press to change the filter"}>
-        <Image
-          src="/src/assets/Filter.png"
-          h={"35px"}
-          bg="brand.400"
-          borderRadius={"50%"}
-          p={1}
-          _hover={{ backgroundColor: "brand.600" }}
-          boxShadow={"2xl"}
-          position="absolute"
-          top="80px"
-          right="20px"
-          onClick={() => setShowFilter(true)}
-        />
-      </Tooltip>
+              {catsFiltered.map((cat) => (
+                <Radio
+                  key={cat}
+                  value={cat}
+                  pr={5}
+                  colorScheme="orange"
+                  sx={{
+                    borderColor: "brand.200",
+                    background: "brand.100",
+                    paddingLeft: "5px",
+                  }}
+                  onClick={() => setShowFilter(false)}
+                >
+                  {cat}
+                </Radio>
+              ))}
+            </RadioGroup>
+          </FilterPopUp>
+          <Tooltip label={"Press to change the filter"}>
+            <Image
+              src="/src/assets/Filter.png"
+              h={"35px"}
+              bg="brand.400"
+              borderRadius={"50%"}
+              p={1}
+              _hover={{ backgroundColor: "brand.600" }}
+              boxShadow={"2xl"}
+              position="absolute"
+              top="80px"
+              right="20px"
+              onClick={() => setShowFilter(true)}
+            />
+          </Tooltip>
+        </>
+      )}
       <Heading textAlign={"center"} color="brand.100" pt={10}>
         The events you want to attend!
       </Heading>
