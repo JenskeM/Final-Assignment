@@ -42,7 +42,7 @@ export const Navigation = ({ toggleMenu }) => {
 
   return (
     <Grid
-      bg="brand.200"
+      bg="brand.500"
       templateColumns={
         screenSize.width <= 700 ? "repeat(6, 1fr)" : "repeat(11, 1fr)"
       }

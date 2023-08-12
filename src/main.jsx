@@ -18,7 +18,7 @@ const colors = {
     100: "#FAF5E9", //Sleek White
     200: "#003400", //Serpentine Shadow
     300: "#FECB00", //Philippine Yellow
-    400: "#62A89B", //Aqua Rapids
+    400: "#B4C39D", //Wasabi Peanut
     500: "#202721", //Young Night
     600: "#009B4D", //Link Green
   },

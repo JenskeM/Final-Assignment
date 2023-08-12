@@ -17,7 +17,7 @@ export const EventItemCard = ({ event, categories }) => {
       mt={8}
       width={["300px", "340px"]}
       boxShadow="2xl"
-      bg="brand.300"
+      bg="brand.200"
       cursor={"pointer"}
       _hover={{
         opacity: 0.6,
@@ -36,7 +36,7 @@ export const EventItemCard = ({ event, categories }) => {
           />
         </Center>
         <Stack mt="6" spacing="3" alignItems={"center"}>
-          <Heading size="md" textAlign={"center"} color="brand.200">
+          <Heading size="md" textAlign={"center"} color="brand.300">
             {event.title}
           </Heading>
           <Stack direction={"row"}>
@@ -85,7 +85,7 @@ export const EventItemCard = ({ event, categories }) => {
               key={category.id}
               size={"sm"}
               maxBlockSize={2}
-              bg="brand.100"
+              bg="brand.300"
               m={2}
               textAlign={"center"}
               color="brand.500"

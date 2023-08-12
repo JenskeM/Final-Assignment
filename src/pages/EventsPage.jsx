@@ -31,6 +31,13 @@ export const EventsPage = () => {
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [radioValue, setRadioValue] = useState("no filter");
 
+  const eventsBgStyle = {
+    backgroundImage: `linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73)), url("src/assets/BackgroundEvents.jpeg")`,
+    backgroundSize: "cover",
+    color: "white",
+    padding: "20px",
+  };
+
   function getCurrentDimension() {
     return {
       width: window.innerWidth,
@@ -92,7 +99,7 @@ export const EventsPage = () => {
   }, [state.searchTerm, events, radioValue]);
 
   return (
-    <Box pl={3} pt={1} bg="brand.700" pb={10}>
+    <Box pl={3} pt={1} pb={10} style={eventsBgStyle}>
       <RadioGroup onChange={setRadioValue} value={radioValue} name="filterCat">
         {catsFiltered.map((cat) => (
           <Radio
@@ -110,8 +117,8 @@ export const EventsPage = () => {
           </Radio>
         ))}
       </RadioGroup>
-      <Heading textAlign={"center"} color="brand.400" pt={10}>
-        List of events
+      <Heading textAlign={"center"} color="brand.100" pt={10}>
+        The events you want to attend!
       </Heading>
 
       <Center>
