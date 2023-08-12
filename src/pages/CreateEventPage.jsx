@@ -182,7 +182,7 @@ export const CreateEventsPage = () => {
                     <Radio
                       value={user.id}
                       key={user.id}
-                      colorScheme="orange"
+                      colorScheme="green"
                       isChecked={selectedUser === user.id}
                       onClick={() => setSelectedUser(user.id)}
                       name="createdBy"
@@ -211,7 +211,8 @@ export const CreateEventsPage = () => {
                 {categories.map((category) => {
                   return (
                     <Checkbox
-                      colorScheme="orange"
+                      colorScheme="green"
+                      color="brand.500"
                       key={category.id}
                       name="categoryIds"
                       value={Array.from(selectedCategories)}
