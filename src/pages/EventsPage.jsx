@@ -63,11 +63,11 @@ export const EventsPage = () => {
     };
   }, [screenSize]);
 
-  if (screenSize.width > 700) {
-    useEffect(() => {
+  useEffect(() => {
+    if (screenSize.width > 700) {
       dispatch({ type: ACTIONS.FILTER_CATS, payload: radioValue });
-    }, [radioValue, dispatch]);
-  }
+    }
+  }, [radioValue, dispatch, screenSize.width]);
 
   useEffect(() => {
     if (state.searchTerm === undefined || state.searchTerm === "") {
