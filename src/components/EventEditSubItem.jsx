@@ -139,7 +139,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
                 <Input
                   value={startDate}
                   bg="brand.100"
-                  onChange={() => setStartDate(startDate)}
+                  onChange={(e) => setStartDate(e.target.value)}
                 />
                 <Input
                   value={getTime(eventItem[0]).props.children}
