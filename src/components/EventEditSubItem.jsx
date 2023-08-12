@@ -32,6 +32,15 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   );
   const [editCats, setEditCats] = useState(false);
   const [editDate, setEditDate] = useState(false);
+  const [startDate, setStartDate] = useState(
+    getDate(eventItem[0]).props.children
+  );
+
+  const dateRegex = /^(6\/8\/2023|25\/8\/2023|6\/12\/2023|25\/12\/2023)$/;
+
+  function validateDate(input) {
+    return dateRegex.test(input);
+  }
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
@@ -128,8 +137,9 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
             <Stack direction={"column"}>
               <Stack direction={"row"}>
                 <Input
-                  value={getDate(eventItem[0]).props.children}
+                  value={startDate}
                   bg="brand.100"
+                  onChange={() => setStartDate(startDate)}
                 />
                 <Input
                   value={getTime(eventItem[0]).props.children}
@@ -146,6 +156,11 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
                   bg="brand.100"
                 />
               </Stack>
+              {validateDate(startDate) ? (
+                <Text>{startDate} is een geldige datum.</Text>
+              ) : (
+                <Text>{startDate} is GEEN geldige datum.</Text>
+              )}
             </Stack>
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
