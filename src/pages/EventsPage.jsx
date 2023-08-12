@@ -3,11 +3,11 @@ import {
   Heading,
   Box,
   Grid,
-  Button,
   Tooltip,
   Center,
   Radio,
   RadioGroup,
+  Image,
 } from "@chakra-ui/react";
 import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
@@ -155,15 +155,14 @@ export const EventsPage = () => {
       <Center pt={6}>
         <Tooltip label={"Press the button to go to add-event-form"}>
           <Link to={`/createEvent`}>
-            <Button
-              mt={5}
-              bg={"brand.400"}
-              color={"brand.100"}
-              boxShadow={"xl"}
+            <Image
+              src="/src/assets/New.png"
+              h={"80px"}
+              bg="brand.400"
+              borderRadius={"50%"}
               _hover={{ backgroundColor: "brand.600" }}
-            >
-              Create new event
-            </Button>
+              boxShadow={"2xl"}
+            />
           </Link>
         </Tooltip>
       </Center>
