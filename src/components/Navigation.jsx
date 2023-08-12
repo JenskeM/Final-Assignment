@@ -2,15 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useEvent } from "./EventContext";
 import { ACTIONS } from "./eventReducer";
-import {
-  Grid,
-  GridItem,
-  Text,
-  Tooltip,
-  Input,
-  Stack,
-  Image,
-} from "@chakra-ui/react";
+import { Text, Tooltip, Input, Stack, Image, Flex } from "@chakra-ui/react";
 
 export const Navigation = ({ toggleMenu }) => {
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
@@ -41,57 +33,53 @@ export const Navigation = ({ toggleMenu }) => {
   }, [searchText, dispatch]);
 
   return (
-    <Grid
+    <Flex
       bg="brand.500"
-      templateColumns={
-        screenSize.width <= 700 ? "repeat(6, 1fr)" : "repeat(11, 1fr)"
-      }
       templateRows={1}
-      height={8}
+      height={10}
       fontSize="xl"
       color="brand.100"
       boxShadow={"base"}
+      justifySelf={"right"}
+      pr={2}
+      alignItems={"center"}
+      justify={"space-between"}
     >
-      <GridItem
-        colSpan={screenSize.width <= 700 ? 4 : 6}
-        fontWeight={"bold"}
-        paddingLeft={3}
-      >
-        <Text alignSelf={"center"}>The event to attend</Text>
-      </GridItem>
+      <Text fontWeight={"bold"} paddingLeft={3} justifySelf={"flex-start"}>
+        The event to attend
+      </Text>
+
       {screenSize.width <= 700 ? (
-        <GridItem colSpan={2} justifySelf={"right"} pr={2}>
-          <Image
-            src="/src/assets/Menu.png"
-            height={8}
-            p={1}
-            _hover={{
-              background: "brand.300",
-              borderRadius: "20px",
-              cursor: "pointer",
-            }}
-            onClick={() => {
-              toggleMenu(setIsMenuOpen(!isMenuOpen));
-            }}
-          />
-          {/* {console.log(isMenuOpen)} */}
-        </GridItem>
+        <Image
+          justifySelf={"flex-end"}
+          pr={2}
+          src="/src/assets/Menu.png"
+          height={8}
+          p={1}
+          _hover={{
+            background: "brand.300",
+            borderRadius: "20px",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            toggleMenu(setIsMenuOpen(!isMenuOpen));
+          }}
+        />
       ) : (
         <>
-          <GridItem colSpan={2}>
-            <Stack direction={"row"} height={8}>
+          <Flex>
+            <Stack direction={"row"} height={8} mr={10}>
               <Input
                 type="text"
                 placeholder="Search..."
                 bg="brand.100"
                 height={6}
-                mt={1}
-                mb={1}
                 fontSize={"sm"}
-                color="black"
+                color="brand.500"
                 focusBorderColor="brand.300"
                 onChange={(e) => setSearchText(e.target.value)}
                 value={searchText}
+                alignSelf={"center"}
               />
               <Tooltip label="Click to search">
                 <Image
@@ -107,24 +95,21 @@ export const Navigation = ({ toggleMenu }) => {
                 />
               </Tooltip>
             </Stack>
-          </GridItem>
-          <GridItem colSpan={1}></GridItem>
-          <GridItem colSpan={2}>
-            <Grid templateColumns={"1fr 1fr"} templateRows={1} gap={1}>
+            <Flex justify={"space-between"}>
               <Tooltip label="Go to the list of events">
-                <Text height={8} _hover={{ color: "brand.600" }}>
+                <Text height={8} _hover={{ color: "brand.600" }} mr={5}>
                   <Link to="/">Events</Link>
                 </Text>
               </Tooltip>
               <Tooltip label="Go to an event">
-                <Text height={8} _hover={{ color: "brand.600" }}>
+                <Text height={8} _hover={{ color: "brand.600" }} mr={5}>
                   <Link to="/event/1">Event</Link>
                 </Text>
               </Tooltip>
-            </Grid>
-          </GridItem>
+            </Flex>
+          </Flex>
         </>
       )}
-    </Grid>
+    </Flex>
   );
 };

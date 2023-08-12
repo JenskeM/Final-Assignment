@@ -61,7 +61,7 @@ export const CreateEventsPage = () => {
   const toast = useToast();
 
   const createBgStyle = {
-    backgroundImage: `linear-gradient(to bottom, rgba(255, 201, 127, 0.95), rgba(255, 228, 191, 0.65)), url("/src/assets/BackgroundEvent.jpg")`,
+    backgroundImage: `linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73)), url("src/assets/Background.jpeg")`,
     backgroundSize: "cover",
     color: "white",
     padding: "20px",
@@ -110,7 +110,7 @@ export const CreateEventsPage = () => {
 
   return (
     <Box bg={"brand.600"} pt={5} pb={"200px"} style={createBgStyle}>
-      <Heading mb={10} textAlign={"center"} color={"brand.200"}>
+      <Heading mb={10} textAlign={"center"} color={"brand.100"}>
         Add a new event
       </Heading>
       <Form method="post" id="new-post-form">
@@ -121,7 +121,7 @@ export const CreateEventsPage = () => {
           justifyContent={"center"}
           gridTemplateColumns={"1fr"}
           rowGap={8}
-          color={"black"}
+          color={"brand.300"}
           sx={{
             transform: screenSize.width <= 360 && `translateX(${transX}px)`,
           }}
@@ -132,7 +132,10 @@ export const CreateEventsPage = () => {
               nameText="title"
               screenSize={screenSize}
             />
-            <FormHelperText ml={screenSize.width <= 360 ? 0 : 110}>
+            <FormHelperText
+              ml={screenSize.width <= 360 ? 0 : 110}
+              color="brand.400"
+            >
               Make it a fancy one.
             </FormHelperText>
           </FormControl>

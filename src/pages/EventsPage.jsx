@@ -32,7 +32,7 @@ export const EventsPage = () => {
   const [radioValue, setRadioValue] = useState("no filter");
 
   const eventsBgStyle = {
-    backgroundImage: `linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73)), url("src/assets/BackgroundEvents.jpeg")`,
+    backgroundImage: `linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73)), url("src/assets/Background.jpeg")`,
     backgroundSize: "cover",
     color: "white",
     padding: "20px",

@@ -15,7 +15,7 @@ export const Menu = (categories) => {
   }, [searchText, dispatch]);
 
   return (
-    <Stack bg="brand.200" pl={4} pr={4} space={2}>
+    <Stack bg="brand.500" pl={4} pr={4} space={2} pt={2}>
       <Stack direction={"row"} height={8}>
         <Input
           type="text"
