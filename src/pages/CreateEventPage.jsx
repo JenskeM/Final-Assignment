@@ -238,8 +238,9 @@ export const CreateEventsPage = () => {
                 screenSize.width <= 360 ? 300 : "110px 300px"
               }
               alignItems={"center"}
+              color="brand.500"
             >
-              <FormLabel>Start</FormLabel>
+              <FormLabel color="brand.300">Start</FormLabel>
               <div style={{ fontSize: "0.9em" }}>
                 <DatePicker
                   selectStart
@@ -249,6 +250,7 @@ export const CreateEventsPage = () => {
                   dateFormat="dd-MM-yyy HH:mm"
                   name="startTime"
                   width="300px"
+                  className="custom-datepicker-input"
                 />
               </div>
             </Grid>
@@ -257,8 +259,9 @@ export const CreateEventsPage = () => {
                 screenSize.width <= 360 ? 300 : "110px 300px"
               }
               alignItems={"center"}
+              color="brand.500"
             >
-              <FormLabel>End</FormLabel>
+              <FormLabel color="brand.300">End</FormLabel>
               <div style={{ fontSize: "0.9em" }}>
                 <DatePicker
                   selectsEnd
