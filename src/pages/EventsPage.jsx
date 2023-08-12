@@ -100,7 +100,7 @@ export const EventsPage = () => {
 
   return (
     <Box pl={3} pt={1} pb={10} style={eventsBgStyle}>
-      <RadioGroup onChange={setRadioValue} value={radioValue} name="filterCat">
+      {/* <RadioGroup onChange={setRadioValue} value={radioValue} name="filterCat">
         {catsFiltered.map((cat) => (
           <Radio
             key={cat}
@@ -116,7 +116,21 @@ export const EventsPage = () => {
             {cat}
           </Radio>
         ))}
-      </RadioGroup>
+      </RadioGroup> */}
+      <Tooltip label={"Press to change the filter"}>
+        <Image
+          src="/src/assets/Filter.png"
+          h={"35px"}
+          bg="brand.400"
+          borderRadius={"50%"}
+          p={1}
+          _hover={{ backgroundColor: "brand.600" }}
+          boxShadow={"2xl"}
+          position="absolute"
+          top="80px"
+          right="20px"
+        />
+      </Tooltip>
       <Heading textAlign={"center"} color="brand.100" pt={10}>
         The events you want to attend!
       </Heading>
