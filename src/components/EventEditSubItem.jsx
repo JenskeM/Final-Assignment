@@ -3,6 +3,8 @@ import { useLoaderData } from "react-router-dom";
 import { TYPES } from "../pages/EventPage";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
+import { validateDate } from "./validateDate";
+import { validateTime } from "./validateTime";
 import {
   Stack,
   Image,
@@ -40,17 +42,6 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   );
   const [endDate, setEndDate] = useState(getDate(eventItem[1]).props.children);
   const [endTime, setEndTime] = useState(getTime(eventItem[1]).props.children);
-
-  const dateRegex = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/;
-  const timeRegex = /^(0?[0-9]|1[0-9]|2[0-3]):(0?[0-5][0-9])$/;
-
-  function validateDate(input) {
-    return dateRegex.test(input);
-  }
-
-  function validateTime(input) {
-    return timeRegex.test(input);
-  }
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
