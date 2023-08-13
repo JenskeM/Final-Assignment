@@ -52,6 +52,7 @@ export const EventPage = () => {
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const [imageUrl, setImageUrl] = useState(event.image);
   const [showSave, setShowSave] = useState(true);
+
   const toast = useToast();
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
