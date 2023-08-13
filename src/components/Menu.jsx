@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { Stack, Input, Image, Text, Radio, RadioGroup } from "@chakra-ui/react";
 import { useEvent } from "./EventContext";
 import { ACTIONS } from "./eventReducer";
@@ -13,7 +13,7 @@ export const loader = async () => {
 };
 
 export const Menu = () => {
-  const { categories } = useLoaderData;
+  const { categories } = useLoaderData();
   const { dispatch } = useEvent();
   const [searchText, setSearchText] = useState("");
   const [radioValue, setRadioValue] = useState("no filter");
@@ -26,10 +26,10 @@ export const Menu = () => {
     dispatch({ type: ACTIONS.FILTER_CATS, payload: radioValue });
   }, [radioValue, dispatch]);
 
-  const catsFiltered = ["no filter"];
-  categories.map((cat) => {
-    catsFiltered.push(cat.name);
-  });
+  if (!categories) {
+    // Data wordt nog steeds geladen, je kunt een laadindicator weergeven of iets anders doen
+    return <div>Loading...</div>;
+  }
 
   return (
     <Stack bg="brand.500" pl={4} pr={4} space={2} pt={2}>
@@ -59,7 +59,7 @@ export const Menu = () => {
           }}
         />
       </Stack>
-      <RadioGroup
+      {/* <RadioGroup
         onChange={(e) => setRadioValue(e.target.value)}
         value={radioValue}
         name="filterCat"
@@ -79,7 +79,7 @@ export const Menu = () => {
             {cat}
           </Radio>
         ))}
-      </RadioGroup>
+      </RadioGroup> */}
       <Text height={8} _hover={{ color: "brand.600" }} color="brand.100">
         <Link to="/">Events</Link>
       </Text>

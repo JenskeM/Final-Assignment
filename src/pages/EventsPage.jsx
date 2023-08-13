@@ -121,7 +121,6 @@ export const EventsPage = () => {
                     background: "brand.100",
                     paddingLeft: "5px",
                   }}
-                  onClick={() => setShowFilter(false)}
                 >
                   {cat}
                 </Radio>

@@ -170,16 +170,24 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
                 />
               </Stack>
               {!validateDate(startDate) && (
-                <Text>{startDate} is GEEN geldige datum.</Text>
+                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
+                  *{startDate} is NOT a valid date.
+                </Text>
               )}
               {!validateTime(startTime) && (
-                <Text>{startTime} is GEEN geldig tijdstip.</Text>
+                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
+                  *{startTime} is NOT a valid time.
+                </Text>
               )}
               {!validateDate(endDate) && (
-                <Text>{endDate} is GEEN geldige datum.</Text>
+                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
+                  *{endDate} is NOT a valid date.
+                </Text>
               )}
               {!validateTime(endTime) && (
-                <Text>{endTime} is GEEN geldig tijdstip.</Text>
+                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
+                  *{endTime} is NOT a valid time.
+                </Text>
               )}
             </Stack>
           ) : (
