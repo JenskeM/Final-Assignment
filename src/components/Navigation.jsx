@@ -35,7 +35,6 @@ export const Navigation = ({ toggleMenu }) => {
   return (
     <Flex
       bg="brand.500"
-      templateRows={1}
       height={10}
       fontSize="xl"
       color="brand.100"

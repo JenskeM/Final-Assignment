@@ -22,12 +22,14 @@ export const Menu = () => {
     dispatch({ type: ACTIONS.FILTER_EVENTS, payload: searchText });
   }, [searchText, dispatch]);
 
-  // const catsFiltered = ["no filter"];
-  // categories.map((cat) => {
-  //   catsFiltered.push(cat.name);
-  // });
+  useEffect(() => {
+    dispatch({ type: ACTIONS.FILTER_CATS, payload: radioValue });
+  }, [radioValue, dispatch]);
 
-  console.log(categories);
+  const catsFiltered = ["no filter"];
+  categories.map((cat) => {
+    catsFiltered.push(cat.name);
+  });
 
   return (
     <Stack bg="brand.500" pl={4} pr={4} space={2} pt={2}>
@@ -57,7 +59,11 @@ export const Menu = () => {
           }}
         />
       </Stack>
-      {/* <RadioGroup onChange={setRadioValue} value={radioValue} name="filterCat">
+      <RadioGroup
+        onChange={(e) => setRadioValue(e.target.value)}
+        value={radioValue}
+        name="filterCat"
+      >
         {catsFiltered.map((cat) => (
           <Radio
             key={cat}
@@ -73,7 +79,7 @@ export const Menu = () => {
             {cat}
           </Radio>
         ))}
-      </RadioGroup> */}
+      </RadioGroup>
       <Text height={8} _hover={{ color: "brand.600" }} color="brand.100">
         <Link to="/">Events</Link>
       </Text>
