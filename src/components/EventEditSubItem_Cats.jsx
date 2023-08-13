@@ -18,7 +18,7 @@ export const loader = async () => {
   };
 };
 
-export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem_Cats = ({ eventItem, imgUrl, typeInput }) => {
   const { categories } = useLoaderData();
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(eventItem)

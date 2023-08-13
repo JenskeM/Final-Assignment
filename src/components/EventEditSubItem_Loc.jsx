@@ -9,7 +9,7 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 
-export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem_Loc = ({ eventItem, imgUrl, typeInput }) => {
   const [editLocation, setEditLocation] = useState(eventItem);
 
   return (

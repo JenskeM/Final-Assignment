@@ -12,7 +12,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 
-export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem_Dates = ({ eventItem, imgUrl, typeInput }) => {
   const [editDate, setEditDate] = useState(false);
   const [startDate, setStartDate] = useState(
     getDate(eventItem[0]).props.children
