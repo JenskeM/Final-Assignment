@@ -7,6 +7,7 @@ export const EventSubItem = ({
   imgUrl,
   date,
   typeInput,
+  // parentCallback,
 }) => {
   return (
     <>
@@ -15,6 +16,7 @@ export const EventSubItem = ({
           eventItem={eventItem}
           imgUrl={imgUrl}
           typeInput={typeInput}
+          // parentCallback={parentCallback}
         />
       ) : (
         <EventShowSubItem

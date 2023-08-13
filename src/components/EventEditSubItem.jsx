@@ -85,7 +85,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
             />
           </Tooltip>
         )}
-        <Editable textAlign={"center"} color="black">
+        <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
           {typeInput === TYPES.DESCRIPTION ? (
             <>
               <EditablePreview cursor={"crosshair"} />
