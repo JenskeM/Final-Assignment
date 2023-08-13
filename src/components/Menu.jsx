@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Stack, Input, Image, Text, Radio, RadioGroup } from "@chakra-ui/react";
+import {
+  Stack,
+  Input,
+  Image,
+  Text,
+  Radio,
+  RadioGroup,
+  Grid,
+} from "@chakra-ui/react";
 import { useEvent } from "./EventContext";
 import { ACTIONS } from "./eventReducer";
 
@@ -54,22 +62,25 @@ export const Menu = ({ categories }) => {
         onChange={(e) => setRadioValue(e.target.value)}
         value={radioValue}
         name="filterCat"
+        color="brand.100"
       >
-        {catsFiltered.map((cat) => (
-          <Radio
-            key={cat}
-            value={cat}
-            pr={5}
-            colorScheme="orange"
-            sx={{
-              borderColor: "brand.200",
-              background: "brand.100",
-              paddingLeft: "5px",
-            }}
-          >
-            {cat}
-          </Radio>
-        ))}
+        <Grid templateColumns={"1fr 1fr"}>
+          {catsFiltered.map((cat) => (
+            <Radio
+              key={cat}
+              value={cat}
+              pr={5}
+              colorScheme="orange"
+              sx={{
+                borderColor: "brand.200",
+                background: "brand.100",
+                paddingLeft: "5px",
+              }}
+            >
+              {cat}
+            </Radio>
+          ))}
+        </Grid>
       </RadioGroup>
       <Text height={8} _hover={{ color: "brand.600" }} color="brand.100">
         <Link to="/">Events</Link>
