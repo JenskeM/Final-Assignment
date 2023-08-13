@@ -28,6 +28,8 @@ export const loader = async () => {
 
 export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   const { categories } = useLoaderData();
+  const [editDescription, setEditDescription] = useState(eventItem);
+  const [editLocation, setEditLocation] = useState(eventItem);
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(eventItem)
   );
@@ -83,16 +85,24 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
             />
           </Tooltip>
         )}
-        <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
+        <Editable textAlign={"center"} color="black">
           {typeInput === TYPES.DESCRIPTION ? (
             <>
               <EditablePreview cursor={"crosshair"} />
-              <EditableTextarea bg="brand.100" />
+              <EditableTextarea
+                bg="brand.100"
+                value={editDescription}
+                onChange={(e) => setEditDescription(e.target.value)}
+              />
             </>
           ) : typeInput === TYPES.LOCATION ? (
             <>
               <EditablePreview cursor={"crosshair"} />
-              <EditableInput bg="brand.100" />
+              <EditableInput
+                bg="brand.100"
+                value={editLocation}
+                onChange={(e) => setEditLocation(e.target.value)}
+              />
             </>
           ) : typeInput === TYPES.CATEGORIES ? (
             <Stack direction={"row"}>
