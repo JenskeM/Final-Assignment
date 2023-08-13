@@ -19,8 +19,6 @@ export const EventEditSubItem_Descr = ({
 
   currentEvent.description = editDescription;
 
-  console.log(currentEvent);
-
   return (
     <Stack direction="row">
       <Center>
