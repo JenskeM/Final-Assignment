@@ -48,7 +48,6 @@ export const EventPage = () => {
   const [editCreator, setEditCreator] = useState(false);
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const toast = useToast();
-
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
   event.categoryIds.map((catId) => {
