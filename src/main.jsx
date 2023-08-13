@@ -9,7 +9,7 @@ import {
 import { EventPage, loader as eventDetailLoader } from "./pages/EventPage";
 import { EventsPage, loader as eventListLoader } from "./pages/EventsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Root } from "./components/Root";
+import { Root, loader as rootLoader } from "./components/Root";
 
 //extend the theme
 const colors = {
@@ -37,6 +37,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    loader: rootLoader,
     children: [
       {
         path: "/",
