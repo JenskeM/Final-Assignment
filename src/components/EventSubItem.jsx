@@ -7,7 +7,6 @@ export const EventSubItem = ({
   imgUrl,
   date,
   typeInput,
-  onGrandChildChange,
 }) => {
   return (
     <>
@@ -16,7 +15,6 @@ export const EventSubItem = ({
           eventItem={eventItem}
           imgUrl={imgUrl}
           typeInput={typeInput}
-          onGrandChildChange={onGrandChildChange}
         />
       ) : (
         <EventShowSubItem
