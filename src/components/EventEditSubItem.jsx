@@ -3,8 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import { TYPES } from "../pages/EventPage";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
-import { validateDate } from "./validateDate";
-import { validateTime } from "./validateTime";
+import { ValidationInput } from "./ValidationInput";
 import {
   Stack,
   Image,
@@ -160,26 +159,10 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
                   onChange={(e) => setEndTime(e.target.value)}
                 />
               </Stack>
-              {!validateDate(startDate) && (
-                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
-                  *{startDate} is NOT a valid date.
-                </Text>
-              )}
-              {!validateTime(startTime) && (
-                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
-                  *{startTime} is NOT a valid time.
-                </Text>
-              )}
-              {!validateDate(endDate) && (
-                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
-                  *{endDate} is NOT a valid date.
-                </Text>
-              )}
-              {!validateTime(endTime) && (
-                <Text color="darkred" fontSize={"xs"} fontWeight={"semibold"}>
-                  *{endTime} is NOT a valid time.
-                </Text>
-              )}
+              <ValidationInput input={startDate} type="date" />
+              <ValidationInput input={startTime} type="time" />
+              <ValidationInput input={endDate} type="date" />
+              <ValidationInput input={endTime} type="time" />
             </Stack>
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
