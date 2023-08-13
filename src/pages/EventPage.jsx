@@ -190,6 +190,7 @@ export const EventPage = () => {
                   imgUrl={"/src/assets/Info.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.DESCRIPTION}
+                  currentEvent={event}
                   // state={editEvent}
                   // parentCallback={setEditEvent}
                 />{" "}
@@ -198,18 +199,21 @@ export const EventPage = () => {
                   imgUrl={"/src/assets/Location.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.LOCATION}
+                  currentEvent={event}
                 />
                 <EventSubItem
                   eventItem={[event.startTime, event.endTime]}
                   imgUrl={"/src/assets/Calendar.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.DATE}
+                  currentEvent={event}
                 />
                 <EventSubItem
                   eventItem={isEditable ? event.categoryIds : catsToShow}
                   imgUrl={"/src/assets/Categories.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.CATEGORIES}
+                  currentEvent={event}
                 />
               </Grid>
             </Stack>

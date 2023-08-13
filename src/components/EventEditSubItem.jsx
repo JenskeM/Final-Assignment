@@ -26,7 +26,12 @@ export const loader = async () => {
   };
 };
 
-export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem = ({
+  eventItem,
+  imgUrl,
+  typeInput,
+  currentEvent,
+}) => {
   const { categories } = useLoaderData();
   const [editDescription, setEditDescription] = useState(eventItem);
   const [editLocation, setEditLocation] = useState(eventItem);
@@ -69,6 +74,11 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
     return output;
   };
 
+  currentEvent.description = editDescription;
+  currentEvent.location = editLocation;
+
+  console.log(currentEvent);
+
   return (
     <Stack direction="row">
       <Center>
@@ -92,7 +102,9 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
               <EditableTextarea
                 bg="brand.100"
                 value={editDescription}
-                onChange={(e) => setEditDescription(e.target.value)}
+                onChange={(e) => {
+                  setEditDescription(e.target.value);
+                }}
               />
             </>
           ) : typeInput === TYPES.LOCATION ? (
