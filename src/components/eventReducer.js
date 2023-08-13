@@ -1,11 +1,13 @@
 export const initialState = {
     searchTerm: "",
-    categorySelected: "no filter"
+    categorySelected: "no filter",
+    saveToggle: true
 }
 
 export const ACTIONS = {
     FILTER_EVENTS: "filter-events",
-    FILTER_CATS: "filter-cats"
+    FILTER_CATS: "filter-cats",
+    SHOW_SAVE: "show-save"
   };
 
 const eventReducer = (state, action) => {
@@ -23,6 +25,13 @@ const eventReducer = (state, action) => {
             return {
                 ...state,
                 categorySelected: action.payload
+            }
+
+        case ACTIONS.SHOW_SAVE:
+
+            return {
+                ...state,
+                saveToggle: action.payload
             }
 
         default:

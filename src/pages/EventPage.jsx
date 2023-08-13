@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getImageSize } from "react-image-size";
 import { useLoaderData } from "react-router-dom";
+import { useEvent } from "../components/EventContext";
 import { EventSubItem } from "../components/EventSubItem";
 import { ValidationInput } from "../components/ValidationInput";
 import {
@@ -42,6 +43,7 @@ export const TYPES = {
 
 export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
+  const { state } = useEvent();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
@@ -49,6 +51,7 @@ export const EventPage = () => {
   const [editCreator, setEditCreator] = useState(false);
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const [imageUrl, setImageUrl] = useState(event.image);
+  const [showSave, setShowSave] = useState(true);
   const toast = useToast();
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
@@ -79,6 +82,14 @@ export const EventPage = () => {
       isClosable: true,
     });
   };
+
+  useEffect(() => {
+    if (state.saveToggle) {
+      setShowSave(true);
+    } else {
+      setShowSave(false);
+    }
+  }, [state.saveToggle]);
 
   useEffect(() => {
     getImageSize(event.image)
@@ -115,7 +126,7 @@ export const EventPage = () => {
   return (
     <Grid
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
-      h={"100vh"}
+      h={isEditable && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
@@ -202,23 +213,25 @@ export const EventPage = () => {
           <Stack direction={"row"}>
             {isEditable ? (
               <Stack direction={"row"} ml={2} mb={2}>
-                <Tooltip label={"Press to save the editions"}>
-                  <Image
-                    src={"/src/assets/Check.png"}
-                    h={10}
-                    w={10}
-                    p={2}
-                    bg="brand.600"
-                    borderRadius="full"
-                    _hover={{
-                      opacity: 0.6,
-                      transform: "scale(.95)",
-                      filter: "auto",
-                      blur: "0.5px",
-                    }}
-                    onClick={() => setIsEditable(!isEditable)}
-                  />
-                </Tooltip>
+                {showSave && (
+                  <Tooltip label={"Press to save the editions"}>
+                    <Image
+                      src={"/src/assets/Check.png"}
+                      h={10}
+                      w={10}
+                      p={2}
+                      bg="brand.600"
+                      borderRadius="full"
+                      _hover={{
+                        opacity: 0.6,
+                        transform: "scale(.95)",
+                        filter: "auto",
+                        blur: "0.5px",
+                      }}
+                      onClick={() => setIsEditable(!isEditable)}
+                    />
+                  </Tooltip>
+                )}
                 <Tooltip label={"Press to cancel the edit"}>
                   <Image
                     src={"/src/assets/Cancel.png"}
