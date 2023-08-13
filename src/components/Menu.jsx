@@ -59,7 +59,9 @@ export const Menu = ({ categories }) => {
         />
       </Stack>
       <RadioGroup
-        onChange={(e) => setRadioValue(e.target.value)}
+        onChange={(value) => {
+          setRadioValue(value);
+        }}
         value={radioValue}
         name="filterCat"
         color="brand.100"
@@ -76,6 +78,7 @@ export const Menu = ({ categories }) => {
                 background: "brand.100",
                 paddingLeft: "5px",
               }}
+              onClick={() => setRadioValue(cat)}
             >
               {cat}
             </Radio>

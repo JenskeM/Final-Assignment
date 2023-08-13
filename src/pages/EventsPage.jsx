@@ -69,39 +69,81 @@ export const EventsPage = () => {
     }
   }, [radioValue, dispatch, screenSize.width]);
 
-  useEffect(() => {
-    if (state.searchTerm === undefined || state.searchTerm === "") {
-      if (radioValue === "no filter") {
-        setFilteredEvents(events);
+  useEffect(
+    () => {
+      if (state.searchTerm === undefined || state.searchTerm === "") {
+        if (screenSize.width > 700) {
+          if (radioValue === "no filter") {
+            setFilteredEvents(events);
+          } else {
+            const chosenCategory = categories.find(
+              (category) => category.name === radioValue
+            );
+            const eventsWithCategory = events.filter((event) =>
+              event.categoryIds.includes(chosenCategory.id)
+            );
+            setFilteredEvents(eventsWithCategory);
+          }
+        } else {
+          if (state.categorySelected === "no filter") {
+            setFilteredEvents(events);
+          } else {
+            const chosenCategory = categories.find(
+              (category) => category.name === state.categorySelected
+            );
+            const eventsWithCategory = events.filter((event) =>
+              event.categoryIds.includes(chosenCategory.id)
+            );
+            setFilteredEvents(eventsWithCategory);
+          }
+        }
       } else {
-        const chosenCategory = categories.find(
-          (category) => category.name === radioValue
-        );
-        const eventsWithCategory = events.filter((event) =>
-          event.categoryIds.includes(chosenCategory.id)
-        );
-        setFilteredEvents(eventsWithCategory);
+        if (screenSize.width > 700) {
+          const eventInFilters = events.filter((event) =>
+            event.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+          );
+          if (radioValue === "no filter") {
+            setFilteredEvents(eventInFilters);
+          } else {
+            const chosenCategory = categories.find(
+              (category) => category.name === radioValue
+            );
+            const eventsWithCategory = eventInFilters.filter((event) =>
+              event.categoryIds.includes(chosenCategory.id)
+            );
+            setFilteredEvents(eventsWithCategory);
+          }
+        } else {
+          const eventInFilters = events.filter((event) =>
+            event.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+          );
+          if (state.categorySelected === "no filter") {
+            setFilteredEvents(eventInFilters);
+          } else {
+            const chosenCategory = categories.find(
+              (category) => category.name === state.categorySelected
+            );
+            const eventsWithCategory = eventInFilters.filter((event) =>
+              event.categoryIds.includes(chosenCategory.id)
+            );
+            setFilteredEvents(eventsWithCategory);
+          }
+        }
       }
-    } else {
-      const eventInFilters = events.filter((event) =>
-        event.title.toLowerCase().includes(state.searchTerm.toLowerCase())
-      );
-      if (radioValue === "no filter") {
-        setFilteredEvents(eventInFilters);
-      } else {
-        const chosenCategory = categories.find(
-          (category) => category.name === radioValue
-        );
-        const eventsWithCategory = eventInFilters.filter((event) =>
-          event.categoryIds.includes(chosenCategory.id)
-        );
-        setFilteredEvents(eventsWithCategory);
-      }
-    }
-  }, [state.searchTerm, events, radioValue]);
+    },
+    screenSize.width > 700
+      ? [state.searchTerm, events, radioValue]
+      : [state.searchTerm, events, state.radioValue]
+  );
 
   return (
-    <Box pl={3} pt={1} pb={10} style={eventsBgStyle}>
+    <Box
+      pl={3}
+      pt={1}
+      pb={"300px"}
+      style={eventsBgStyle}
+      h={filteredEvents.length < 4 && "100vh"}
+    >
       {screenSize.width > 700 && (
         <>
           <FilterPopUp show={showFilter} onClose={() => setShowFilter(false)}>
