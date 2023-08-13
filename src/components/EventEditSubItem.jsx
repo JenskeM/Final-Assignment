@@ -26,12 +26,7 @@ export const loader = async () => {
   };
 };
 
-export const EventEditSubItem = ({
-  eventItem,
-  imgUrl,
-  typeInput,
-  currentEvent,
-}) => {
+export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   const { categories } = useLoaderData();
   const [editDescription, setEditDescription] = useState(eventItem);
   const [editLocation, setEditLocation] = useState(eventItem);
@@ -73,11 +68,6 @@ export const EventEditSubItem = ({
     );
     return output;
   };
-
-  currentEvent.description = editDescription;
-  currentEvent.location = editLocation;
-
-  console.log(currentEvent);
 
   return (
     <Stack direction="row">
