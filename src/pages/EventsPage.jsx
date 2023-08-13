@@ -133,7 +133,7 @@ export const EventsPage = () => {
     },
     screenSize.width > 700
       ? [state.searchTerm, events, radioValue]
-      : [state.searchTerm, events, state.radioValue]
+      : [state.searchTerm, events, state.categorySelected]
   );
 
   return (
@@ -142,7 +142,10 @@ export const EventsPage = () => {
       pt={1}
       pb={"300px"}
       style={eventsBgStyle}
-      h={filteredEvents.length < 4 && "100vh"}
+      h={
+        (filteredEvents.length < 4 && screenSize.width > 700) ||
+        (filteredEvents.length < 1 && screenSize.width <= 700 && "100vh")
+      }
     >
       {screenSize.width > 700 && (
         <>
@@ -189,7 +192,6 @@ export const EventsPage = () => {
       <Heading textAlign={"center"} color="brand.100" pt={10}>
         The events you want to attend!
       </Heading>
-
       <Center>
         <Grid
           alignContent={"center"}
