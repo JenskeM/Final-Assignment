@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getImageSize } from "react-image-size";
 import { useLoaderData } from "react-router-dom";
 import { EventSubItem } from "../components/EventSubItem";
+import { ValidationInput } from "../components/ValidationInput";
 import {
   Heading,
   Center,
@@ -47,6 +48,7 @@ export const EventPage = () => {
   const [isEditable, setIsEditable] = useState(false);
   const [editCreator, setEditCreator] = useState(false);
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
+  const [imageUrl, setImageUrl] = useState(event.image);
   const toast = useToast();
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
@@ -134,10 +136,15 @@ export const EventPage = () => {
                   <Editable
                     textAlign={"center"}
                     color="black"
-                    defaultValue={event.image}
+                    defaultValue={imageUrl}
                   >
                     <EditablePreview cursor={"crosshair"} />
-                    <EditableInput bg="brand.100" w={"50vw"} />
+                    <EditableInput
+                      bg="brand.100"
+                      w={"50vw"}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                    />
+                    <ValidationInput input={imageUrl} type="image" />
                   </Editable>
                 ) : (
                   <Box
