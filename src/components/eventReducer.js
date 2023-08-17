@@ -10,9 +10,9 @@ export const ACTIONS = {
     SHOW_SAVE: "show-save",
     EDIT_DESCR: "edit-description",
     EDIT_LOC: "edit-location",
-    EDIT_CATS: "edit_cats",
-    EDIT_START: "edit_start",
-    EDIT_END:   "edit_end"
+    EDIT_CATS: "edit-cats",
+    EDIT_START: "edit-start",
+    EDIT_END:   "edit-end"
   };
 
 const eventReducer = (state, action) => {
