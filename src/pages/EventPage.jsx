@@ -53,11 +53,12 @@ export const EventPage = () => {
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const [imageUrl, setImageUrl] = useState(event.image);
   const [showSave, setShowSave] = useState(true);
-  const [newDescr, setNewDescr] = useState("");
-  const [newLoc, setNewLoc] = useState("");
-  const [newCats, setNewCats] = useState([]);
-  const [newStart, setNewStart] = useState("");
-  const [newEnd, setNewEnd] = useState("");
+  const [newTitle, setNewTitle] = useState(event.title);
+  const [newDescr, setNewDescr] = useState(event.description);
+  const [newLoc, setNewLoc] = useState(event.location);
+  const [newCats, setNewCats] = useState(event.categoryIds);
+  const [newStart, setNewStart] = useState(event.startTime);
+  const [newEnd, setNewEnd] = useState(event.endTime);
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
   event.categoryIds.map((catId) => {
@@ -98,12 +99,20 @@ export const EventPage = () => {
   }, [state.saveToggle]);
 
   useEffect(() => {
+    setNewTitle(state.editTitle);
     setNewDescr(state.editDescription);
     setNewLoc(state.editLoc);
     setNewCats(state.editCats);
     setNewStart(state.editStart);
     setNewEnd(state.editEnd);
-  });
+  }, [
+    state.editTitle,
+    state.editDescription,
+    state.editLoc,
+    state.editCats,
+    state.editStart,
+    state.editEnd,
+  ]);
 
   useEffect(() => {
     getImageSize(event.image)
@@ -137,11 +146,45 @@ export const EventPage = () => {
     };
   }, [screenSize]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const event = {
-      selectedCreator,
+  const handleSubmit = async () => {
+    const updatedEventData = {
+      title: newTitle,
+      description: newDescr,
+      image: imageUrl,
+      location: newLoc,
+      createdBy: selectedCreator,
+      categoryIds: newCats,
+      startTime: newStart,
+      endTime: newEnd,
     };
+    try {
+      const response = await fetch(`http://localhost:3000/events/${event.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedEventData),
+      });
+
+      setIsEditable(!isEditable);
+      if (response.ok) {
+        toast({
+          title: "Succes!😄",
+          description: `The event is succesfully edited.`,
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: "Failure....!!😭",
+          description: `An error has occurred.`,
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error("An error has occurred ", error);
+    }
   };
 
   return (
@@ -256,7 +299,7 @@ export const EventPage = () => {
                         filter: "auto",
                         blur: "0.5px",
                       }}
-                      onClick={() => setIsEditable(!isEditable)}
+                      onClick={() => handleSubmit()}
                     />
                   </Tooltip>
                 )}
