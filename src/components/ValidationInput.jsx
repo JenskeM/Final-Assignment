@@ -9,7 +9,6 @@ import { ACTIONS } from "./eventReducer";
 export const ValidationInput = ({ input, type }) => {
   const { dispatch } = useEvent();
   const [saveToggle, setSaveToggle] = useState(true);
-  console.log("Validation: ", saveToggle);
 
   useEffect(() => {
     if (type === "date" && !validateDate(input)) {
