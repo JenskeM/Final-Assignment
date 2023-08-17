@@ -40,7 +40,8 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   const [editDescription, setEditDescription] = useState(eventItem);
   const [editLocation, setEditLocation] = useState(eventItem);
 
-  const [editCats, setEditCats] = useState(false);
+  const [editCats, setEditCats] = useState([]);
+  const [showEditCats, setShowEditCats] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(eventItem)
   );
@@ -85,6 +86,9 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
       dispatch({ type: ACTIONS.EDIT_DESCR, payload: editDescription });
     } else if (typeInput === TYPES.LOCATION) {
       dispatch({ type: ACTIONS.EDIT_LOC, payload: editLocation });
+    } else if (typeInput === TYPES.CATEGORIES) {
+      setEditCats(Object.values(selectedCategories));
+      dispatch({ type: ACTIONS.EDIT_CATS, payload: editCats });
     } else if (typeInput === TYPES.DATE) {
       const revertDateStart = startDate.split("/").reverse().join("-");
       setEditStart(revertDateStart + "T" + startTime + ":00.000Z");
@@ -95,7 +99,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
         { type: ACTIONS.EDIT_END, payload: editEnd }
       );
     }
-  });
+  }, [editDescription, editLocation, editCats, editDate, dispatch, eventItem]);
 
   return (
     <Stack direction="row">
@@ -136,7 +140,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
             </>
           ) : typeInput === TYPES.CATEGORIES ? (
             <Stack direction={"row"}>
-              {editCats ? (
+              {showEditCats ? (
                 categories.map((category) => {
                   const isChecked = selectedCategories.has(category.id);
 
@@ -162,7 +166,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
               ) : (
                 <Text
                   cursor={"crosshair"}
-                  onClick={() => setEditCats(!editCats)}
+                  onClick={() => setShowEditCats(!showEditCats)}
                 >
                   {eventItem.map((catId) => {
                     const category = categories.find((cat) => cat.id === catId);
