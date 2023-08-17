@@ -9,6 +9,7 @@ import { ACTIONS } from "./eventReducer";
 export const ValidationInput = ({ input, type }) => {
   const { dispatch } = useEvent();
   const [saveToggle, setSaveToggle] = useState(true);
+  console.log("Validation: ", saveToggle);
 
   useEffect(() => {
     if (type === "date" && !validateDate(input)) {
@@ -17,6 +18,8 @@ export const ValidationInput = ({ input, type }) => {
       setSaveToggle(false);
     } else if (type === "image" && !validateImage(input)) {
       setSaveToggle(false);
+    } else {
+      setSaveToggle(true);
     }
     dispatch({ type: ACTIONS.SHOW_SAVE, payload: saveToggle });
   }, [saveToggle, dispatch, input]);

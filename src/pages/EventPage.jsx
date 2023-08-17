@@ -93,6 +93,8 @@ export const EventPage = () => {
     }
   }, [state.saveToggle]);
 
+  console.log("EventPage: ", state.saveToggle);
+
   useEffect(() => {
     getImageSize(event.image)
       .then((size) => {
