@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 import { TYPES } from "../pages/EventPage";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
 import { ValidationInput } from "./ValidationInput";
+import { ACTIONS } from "./eventReducer";
+import { useEvent } from "./EventContext";
 import {
   Stack,
   Image,
@@ -33,6 +35,7 @@ export const loader = async () => {
 };
 
 export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
+  const { dispatch } = useEvent();
   const { categories } = useLoaderData();
   const [editDescription, setEditDescription] = useState(eventItem);
   const [editLocation, setEditLocation] = useState(eventItem);
@@ -50,6 +53,9 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
     setSelectedCategories(new Set(selectedCategories));
   };
   const catsToShow = [];
+
+  const [editStart, setEditStart] = useState(eventItem[0]);
+  const [editEnd, setEditEnd] = useState(eventItem[1]);
 
   const [editDate, setEditDate] = useState(false);
   const [startDate, setStartDate] = useState(
@@ -73,6 +79,23 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
     );
     return output;
   };
+
+  useEffect(() => {
+    if (typeInput === TYPES.DESCRIPTION) {
+      dispatch({ type: ACTIONS.EDIT_DESCR, payload: editDescription });
+    } else if (typeInput === TYPES.LOCATION) {
+      dispatch({ type: ACTIONS.EDIT_LOC, payload: editLocation });
+    } else if (typeInput === TYPES.DATE) {
+      const revertDateStart = startDate.split("/").reverse().join("-");
+      setEditStart(revertDateStart + "T" + startTime + ":00.000Z");
+      const revertDateEnd = endDate.split("/").reverse().join("-");
+      setEditEnd(revertDateEnd + "T" + endTime + ":00.000Z");
+      dispatch(
+        { type: ACTIONS.EDIT_START, payload: editStart },
+        { type: ACTIONS.EDIT_END, payload: editEnd }
+      );
+    }
+  });
 
   return (
     <Stack direction="row">
