@@ -102,7 +102,15 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
         { type: ACTIONS.EDIT_END, payload: editEnd }
       );
     }
-  }, [editDescription, editLocation, editCats, editDate, dispatch, eventItem]);
+  }, [
+    editTitle,
+    editDescription,
+    editLocation,
+    editCats,
+    editDate,
+    dispatch,
+    eventItem,
+  ]);
 
   return (
     <Stack direction="row">
