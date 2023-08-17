@@ -30,7 +30,7 @@ export const ValidationInput = ({ input, type }) => {
       (type === VALIDATION_TYPES.IMG && !validateImage(input))) && (
       <Text
         color="darkred"
-        fontSize={type === "image" ? "md" : "xs"}
+        fontSize={type === VALIDATION_TYPES.IMG ? "md" : "xs"}
         fontWeight={"semibold"}
       >
         {type === VALIDATION_TYPES.IMG ? "This" : `*${input}`} is NOT a valid{" "}
