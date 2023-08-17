@@ -18,6 +18,12 @@ import {
   Input,
 } from "@chakra-ui/react";
 
+export const VALIDATION_TYPES = {
+  DATE: "date",
+  TIME: "time",
+  IMG: "image",
+};
+
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
 
