@@ -35,6 +35,7 @@ export const loader = async ({ params }) => {
 };
 
 export const TYPES = {
+  TITLE: "title",
   DESCRIPTION: "Description",
   LOCATION: "Location",
   DATE: "Date",
@@ -52,6 +53,11 @@ export const EventPage = () => {
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const [imageUrl, setImageUrl] = useState(event.image);
   const [showSave, setShowSave] = useState(true);
+  const [newDescr, setNewDescr] = useState("");
+  const [newLoc, setNewLoc] = useState("");
+  const [newCats, setNewCats] = useState([]);
+  const [newStart, setNewStart] = useState("");
+  const [newEnd, setNewEnd] = useState("");
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
   event.categoryIds.map((catId) => {
@@ -92,6 +98,14 @@ export const EventPage = () => {
   }, [state.saveToggle]);
 
   useEffect(() => {
+    setNewDescr(state.editDescription);
+    setNewLoc(state.editLoc);
+    setNewCats(state.editCats);
+    setNewStart(state.editStart);
+    setNewEnd(state.editEnd);
+  });
+
+  useEffect(() => {
     getImageSize(event.image)
       .then((size) => {
         setImageWidth(size.width);
@@ -123,6 +137,13 @@ export const EventPage = () => {
     };
   }, [screenSize]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const event = {
+      selectedCreator,
+    };
+  };
+
   return (
     <Grid
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
@@ -139,7 +160,14 @@ export const EventPage = () => {
                 </Heading>
                 <Heading color="brand.200" size="xl" textAlign={"center"}>
                   {" "}
-                  {event.title}
+                  <Center>
+                    <EventSubItem
+                      eventItem={event.title}
+                      imgUrl={null}
+                      isEditable={isEditable}
+                      typeInput={TYPES.TITLE}
+                    />
+                  </Center>
                 </Heading>
               </Stack>
               <Center>
@@ -188,30 +216,24 @@ export const EventPage = () => {
                   imgUrl={"/src/assets/Info.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.DESCRIPTION}
-                  currentEvent={event}
-                  // state={editEvent}
-                  // parentCallback={setEditEvent}
                 />{" "}
                 <EventSubItem
                   eventItem={event.location}
                   imgUrl={"/src/assets/Location.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.LOCATION}
-                  currentEvent={event}
                 />
                 <EventSubItem
                   eventItem={[event.startTime, event.endTime]}
                   imgUrl={"/src/assets/Calendar.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.DATE}
-                  currentEvent={event}
                 />
                 <EventSubItem
                   eventItem={isEditable ? event.categoryIds : catsToShow}
                   imgUrl={"/src/assets/Categories.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.CATEGORIES}
-                  currentEvent={event}
                 />
               </Grid>
             </Stack>

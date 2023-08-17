@@ -37,6 +37,7 @@ export const loader = async () => {
 export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   const { dispatch } = useEvent();
   const { categories } = useLoaderData();
+  const [editTitle, setEditTitle] = useState(eventItem);
   const [editDescription, setEditDescription] = useState(eventItem);
   const [editLocation, setEditLocation] = useState(eventItem);
 
@@ -82,7 +83,9 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   };
 
   useEffect(() => {
-    if (typeInput === TYPES.DESCRIPTION) {
+    if (typeInput === TYPES.TITLE) {
+      dispatch({ type: ACTIONS.EDIT_TITLE, payload: editTitle });
+    } else if (typeInput === TYPES.DESCRIPTION) {
       dispatch({ type: ACTIONS.EDIT_DESCR, payload: editDescription });
     } else if (typeInput === TYPES.LOCATION) {
       dispatch({ type: ACTIONS.EDIT_LOC, payload: editLocation });
@@ -104,7 +107,7 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   return (
     <Stack direction="row">
       <Center>
-        {typeInput !== TYPES.CREATOR && (
+        {typeInput !== TYPES.TITLE && (
           <Tooltip label={typeInput}>
             <Image
               src={imgUrl}
@@ -118,7 +121,18 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
           </Tooltip>
         )}
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          {typeInput === TYPES.DESCRIPTION ? (
+          {typeInput === TYPES.TITLE ? (
+            <>
+              <EditablePreview cursor={"crosshair"} />
+              <EditableInput
+                bg="brand.100"
+                value={editTitle}
+                onChange={(e) => {
+                  setEditTitle(e.target.value);
+                }}
+              />
+            </>
+          ) : typeInput === TYPES.DESCRIPTION ? (
             <>
               <EditablePreview cursor={"crosshair"} />
               <EditableTextarea

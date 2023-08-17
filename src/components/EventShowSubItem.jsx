@@ -29,17 +29,19 @@ export const EventShowSubItem = ({ eventItem, imgUrl, typeInput }) => {
   return (
     <Stack direction="row">
       <Center>
-        <Tooltip label={typeInput}>
-          <Image
-            src={imgUrl}
-            height={10}
-            p={2}
-            bg="brand.200"
-            borderRadius="full"
-            mr={5}
-            alt={typeInput}
-          />
-        </Tooltip>
+        {typeInput !== TYPES.TITLE && (
+          <Tooltip label={typeInput}>
+            <Image
+              src={imgUrl}
+              height={10}
+              p={2}
+              bg="brand.200"
+              borderRadius="full"
+              mr={5}
+              alt={typeInput}
+            />
+          </Tooltip>
+        )}
         <Text textAlign={"center"} color="black">
           {getOutput(eventItem, typeInput)}
         </Text>

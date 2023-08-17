@@ -8,6 +8,7 @@ export const ACTIONS = {
     FILTER_EVENTS: "filter-events",
     FILTER_CATS: "filter-cats",
     SHOW_SAVE: "show-save",
+    EDIT_TITLE: "edit-title",
     EDIT_DESCR: "edit-description",
     EDIT_LOC: "edit-location",
     EDIT_CATS: "edit-cats",
@@ -37,6 +38,13 @@ const eventReducer = (state, action) => {
             return {
                 ...state,
                 saveToggle: action.payload
+            }
+
+        case ACTIONS.EDIT_TITLE:
+
+            return {
+                ...state,
+                editTitle: action.payload
             }
 
         case ACTIONS.EDIT_DESCR:
