@@ -7,7 +7,12 @@ export const initialState = {
 export const ACTIONS = {
     FILTER_EVENTS: "filter-events",
     FILTER_CATS: "filter-cats",
-    SHOW_SAVE: "show-save"
+    SHOW_SAVE: "show-save",
+    EDIT_DESCR: "edit-description",
+    EDIT_LOC: "edit-location",
+    EDIT_CATS: "edit_cats",
+    EDIT_START: "edit_start",
+    EDIT_END:   "edit_end"
   };
 
 const eventReducer = (state, action) => {
@@ -32,6 +37,41 @@ const eventReducer = (state, action) => {
             return {
                 ...state,
                 saveToggle: action.payload
+            }
+
+        case ACTIONS.EDIT_DESCR:
+
+            return {
+                ...state,
+                editDescription: action.payload
+            }
+
+        case ACTIONS.EDIT_LOC:
+
+            return {
+                ...state,
+                editLocation: action.payload
+            }
+
+        case ACTIONS.EDIT_CATS:
+
+            return {
+                ...state,
+                editCats: action.payload
+            }
+
+        case ACTIONS.EDIT_START:
+
+            return {
+                ...state,
+                editStart: action.payload
+            }
+
+        case ACTIONS.EDIT_END:
+
+            return {
+                ...state,
+                editEnd: action.payload
             }
 
         default:
