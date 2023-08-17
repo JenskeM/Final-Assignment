@@ -30,10 +30,21 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   const { categories } = useLoaderData();
   const [editDescription, setEditDescription] = useState(eventItem);
   const [editLocation, setEditLocation] = useState(eventItem);
+
+  const [editCats, setEditCats] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(eventItem)
   );
-  const [editCats, setEditCats] = useState(false);
+  const toggleCategory = (categoryId) => {
+    if (selectedCategories.has(categoryId)) {
+      selectedCategories.delete(categoryId);
+    } else {
+      selectedCategories.add(categoryId);
+    }
+    setSelectedCategories(new Set(selectedCategories));
+  };
+  const catsToShow = [];
+
   const [editDate, setEditDate] = useState(false);
   const [startDate, setStartDate] = useState(
     getDate(eventItem[0]).props.children
@@ -43,18 +54,6 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   );
   const [endDate, setEndDate] = useState(getDate(eventItem[1]).props.children);
   const [endTime, setEndTime] = useState(getTime(eventItem[1]).props.children);
-
-  const toggleCategory = (categoryId) => {
-    if (selectedCategories.has(categoryId)) {
-      selectedCategories.delete(categoryId);
-    } else {
-      selectedCategories.add(categoryId);
-    }
-    setSelectedCategories(new Set(selectedCategories));
-  };
-
-  const catsToShow = [];
-
   const getOutput = (eventItem) => {
     const output = (
       <span>
