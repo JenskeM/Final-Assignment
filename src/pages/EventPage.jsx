@@ -49,12 +49,9 @@ export const EventPage = () => {
   const [imageHeight, setImageHeight] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
   const [editCreator, setEditCreator] = useState(false);
-  // const [editEvent, setEditEvent] = useState(event);
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const [imageUrl, setImageUrl] = useState(event.image);
   const [showSave, setShowSave] = useState(true);
-
-  const toast = useToast();
   const userToShow = users.find((user) => user.id === event.createdBy);
   const catsToShow = [];
   event.categoryIds.map((catId) => {
@@ -72,6 +69,7 @@ export const EventPage = () => {
     backgroundSize: "cover",
   };
 
+  const toast = useToast();
   const handleClick = () => {
     setIsEditable(!isEditable);
     toast({
@@ -92,8 +90,6 @@ export const EventPage = () => {
       setShowSave(false);
     }
   }, [state.saveToggle]);
-
-  console.log("EventPage: ", state.saveToggle);
 
   useEffect(() => {
     getImageSize(event.image)
