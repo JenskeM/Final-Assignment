@@ -5,17 +5,18 @@ import { Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useEvent } from "./EventContext";
 import { ACTIONS } from "./eventReducer";
+import { VALIDATION_TYPES } from "./EventEditSubItem";
 
 export const ValidationInput = ({ input, type }) => {
   const { dispatch } = useEvent();
   const [saveToggle, setSaveToggle] = useState(true);
 
   useEffect(() => {
-    if (type === "date" && !validateDate(input)) {
+    if (type === VALIDATION_TYPES.DATE && !validateDate(input)) {
       setSaveToggle(false);
-    } else if (type === "time" && !validateTime(input)) {
+    } else if (type === VALIDATION_TYPES.TIME && !validateTime(input)) {
       setSaveToggle(false);
-    } else if (type === "image" && !validateImage(input)) {
+    } else if (type === VALIDATION_TYPES.IMG && !validateImage(input)) {
       setSaveToggle(false);
     } else {
       setSaveToggle(true);
@@ -24,16 +25,16 @@ export const ValidationInput = ({ input, type }) => {
   }, [saveToggle, dispatch, input]);
 
   return (
-    ((type === "date" && !validateDate(input)) ||
-      (type === "time" && !validateTime(input)) ||
-      (type === "image" && !validateImage(input))) && (
+    ((type === VALIDATION_TYPES.DATE && !validateDate(input)) ||
+      (type === VALIDATION_TYPES.TIME && !validateTime(input)) ||
+      (type === VALIDATION_TYPES.IMG && !validateImage(input))) && (
       <Text
         color="darkred"
         fontSize={type === "image" ? "md" : "xs"}
         fontWeight={"semibold"}
       >
-        {type === "image" ? "This" : `*${input}`} is NOT a valid {type}{" "}
-        {type === "image" && "url"}.
+        {type === VALIDATION_TYPES.IMG ? "This" : `*${input}`} is NOT a valid{" "}
+        {type} {type === VALIDATION_TYPES.IMG && "url"}.
       </Text>
     )
   );
