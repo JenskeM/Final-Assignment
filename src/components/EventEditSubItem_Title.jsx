@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ACTIONS } from "./eventReducer";
+import { useEvent } from "./EventContext";
 import {
   Stack,
   Center,
@@ -8,7 +10,12 @@ import {
 } from "@chakra-ui/react";
 
 export const EventEditSubItem_Title = ({ eventItem }) => {
-  const [editTile, setEditTitle] = useState(eventItem);
+  const { dispatch } = useEvent();
+  const [editTitle, setEditTitle] = useState(eventItem);
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.EDIT_TITLE, payload: editTitle });
+  }, [editTitle, eventItem]);
 
   return (
     <Stack direction="row">
@@ -17,7 +24,7 @@ export const EventEditSubItem_Title = ({ eventItem }) => {
           <EditablePreview cursor={"crosshair"} />
           <EditableInput
             bg="brand.100"
-            value={editTile}
+            value={editTitle}
             onChange={(e) => setEditTitle(e.target.value)}
           />
         </Editable>
