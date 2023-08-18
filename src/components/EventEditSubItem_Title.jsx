@@ -15,7 +15,7 @@ export const EventEditSubItem_Title = ({ eventItem }) => {
 
   useEffect(() => {
     dispatch({ type: ACTIONS.EDIT_TITLE, payload: editTitle });
-  }, [editTitle, eventItem]);
+  }, [editTitle, dispatch, eventItem]);
 
   return (
     <Stack direction="row">
