@@ -42,7 +42,7 @@ export const EventEditSubItem_Cats = ({ eventItem, imgUrl, typeInput }) => {
   useEffect(() => {
     setEditCats(Object.values(selectedCategories));
     dispatch({ type: ACTIONS.EDIT_CATS, payload: editCats });
-  }, [editCats, dispatch, eventItem]);
+  }, [editCats, selectedCategories, dispatch, eventItem]);
 
   return (
     <Stack direction="row">
