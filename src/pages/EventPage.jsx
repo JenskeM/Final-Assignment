@@ -38,7 +38,8 @@ export const TYPES = {
   TITLE: "title",
   DESCRIPTION: "Description",
   LOCATION: "Location",
-  DATE: "Date",
+  DATESTART: "Date-start",
+  DATEEND: "Date-end",
   CATEGORIES: "Categories",
 };
 
