@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ACTIONS } from "./eventReducer";
+import { useEvent } from "./EventContext";
 import { useLoaderData } from "react-router-dom";
 import {
   Stack,
@@ -19,6 +21,7 @@ export const loader = async () => {
 };
 
 export const EventEditSubItem_Cats = ({ eventItem, imgUrl, typeInput }) => {
+  const { dispatch } = useEvent();
   const { categories } = useLoaderData();
   const [selectedCategories, setSelectedCategories] = useState(
     new Set(eventItem)
@@ -35,6 +38,11 @@ export const EventEditSubItem_Cats = ({ eventItem, imgUrl, typeInput }) => {
   };
 
   const catsToShow = [];
+
+  useEffect(() => {
+    setEditCats(Object.values(selectedCategories));
+    dispatch({ type: ACTIONS.EDIT_CATS, payload: editCats });
+  }, [editCats, dispatch, eventItem]);
 
   return (
     <Stack direction="row">
