@@ -1,5 +1,11 @@
-import { EventEditSubItem } from "../components/EventEditSubItem";
+// import { EventEditSubItem } from "../components/EventEditSubItem";
+import { EventEditSubItem_Dates } from "../components/EventEditSubItem_Dates";
+import { EventEditSubItem_Cats } from "../components/EventEditSubItem_Cats";
+import { EventEditSubItem_Loc } from "../components/EventEditSubItem_Loc";
+import { EventEditSubItem_Descr } from "../components/EventEditSubItem_Descr";
+import { EventEditSubItem_Title } from "../components/EventEditSubItem_Title";
 import { EventShowSubItem } from "../components/EventShowSubItem";
+import { TYPES } from "../pages/EventPage";
 
 export const EventSubItem = ({
   isEditable,
@@ -10,20 +16,42 @@ export const EventSubItem = ({
 }) => {
   return (
     <>
-      {isEditable ? (
-        <EventEditSubItem
-          eventItem={eventItem}
-          imgUrl={imgUrl}
-          typeInput={typeInput}
-        />
-      ) : (
+      {!isEditable ? (
         <EventShowSubItem
           eventItem={eventItem}
           date={date}
           imgUrl={imgUrl}
           typeInput={typeInput}
         />
-      )}{" "}
+      ) : typeInput === TYPES.TITLE ? (
+        <EventEditSubItem_Title eventItem={eventItem} />
+      ) : typeInput === TYPES.DESCRIPTION ? (
+        <EventEditSubItem_Descr
+          eventItem={eventItem}
+          imgUrl={imgUrl}
+          typeInput={typeInput}
+        />
+      ) : typeInput === TYPES.LOCATION ? (
+        <EventEditSubItem_Loc
+          eventItem={eventItem}
+          imgUrl={imgUrl}
+          typeInput={typeInput}
+        />
+      ) : typeInput === TYPES.CATEGORIES ? (
+        <EventEditSubItem_Cats
+          eventItem={eventItem}
+          imgUrl={imgUrl}
+          typeInput={typeInput}
+        />
+      ) : (
+        typeInput === TYPES.DATE && (
+          <EventEditSubItem_Dates
+            eventItem={eventItem}
+            imgUrl={imgUrl}
+            typeInput={typeInput}
+          />
+        )
+      )}
     </>
   );
 };

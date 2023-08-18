@@ -9,15 +9,8 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 
-export const EventEditSubItem_Descr = ({
-  eventItem,
-  imgUrl,
-  typeInput,
-  currentEvent,
-}) => {
+export const EventEditSubItem_Descr = ({ eventItem, imgUrl, typeInput }) => {
   const [editDescription, setEditDescription] = useState(eventItem);
-
-  currentEvent.description = editDescription;
 
   return (
     <Stack direction="row">
