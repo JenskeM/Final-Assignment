@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ACTIONS } from "./eventReducer";
+import { useEvent } from "./EventContext";
 import {
   Stack,
   Image,
@@ -10,7 +12,12 @@ import {
 } from "@chakra-ui/react";
 
 export const EventEditSubItem_Descr = ({ eventItem, imgUrl, typeInput }) => {
+  const { dispatch } = useEvent();
   const [editDescription, setEditDescription] = useState(eventItem);
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.EDIT_DESCR, payload: editDescription });
+  }, [editDescription, dispatch, eventItem]);
 
   return (
     <Stack direction="row">
