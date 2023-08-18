@@ -14,6 +14,7 @@ import {
   Stack,
   Radio,
   useToast,
+  Text,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
@@ -67,13 +68,6 @@ export const CreateEventsPage = () => {
     padding: "20px",
   };
 
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
-
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
       selectedCategories.delete(categoryId);
@@ -82,6 +76,17 @@ export const CreateEventsPage = () => {
     }
     setSelectedCategories(new Set(selectedCategories));
   };
+
+  function isBefore(date1, date2) {
+    return date1 < date2;
+  }
+
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  }
 
   useEffect(() => {
     const updateDimension = () => {
@@ -279,30 +284,42 @@ export const CreateEventsPage = () => {
           </FormControl>
         </Grid>
         <Center>
-          <Button
-            type="submit"
-            mt={10}
-            bg="brand.200"
-            color="brand.100"
-            borderColor={"brand.400"}
-            borderWidth={3}
-            _hover={{
-              background: "brand.100",
-              color: "brand.400",
-              borderColor: "brand.400",
-            }}
-            onClick={() =>
-              toast({
-                title: "Whoop whoop! Done 🎉!",
-                description: "The event you created is added.",
-                status: "success",
-                duration: 3000,
-                isClosable: true,
-              })
-            }
-          >
-            Add event
-          </Button>
+          {isBefore(endDateTime, startDateTime) ? (
+            <Text
+              color="darkred"
+              fontSize={"lg"}
+              fontWeight={"semibold"}
+              mt={8}
+            >
+              The end date-time is before the start date-time. This is not
+              allowed.
+            </Text>
+          ) : (
+            <Button
+              type="submit"
+              mt={10}
+              bg="brand.200"
+              color="brand.100"
+              borderColor={"brand.400"}
+              borderWidth={3}
+              _hover={{
+                background: "brand.100",
+                color: "brand.400",
+                borderColor: "brand.400",
+              }}
+              onClick={() =>
+                toast({
+                  title: "Whoop whoop! Done 🎉!",
+                  description: "The event you created is added.",
+                  status: "success",
+                  duration: 3000,
+                  isClosable: true,
+                })
+              }
+            >
+              Add event
+            </Button>
+          )}
         </Center>
       </Form>
     </Box>

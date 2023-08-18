@@ -92,7 +92,17 @@ export const EventPage = () => {
 
   useEffect(() => {
     if (state.saveToggle) {
-      setShowSave(true);
+      if (
+        state.editTitle === "" ||
+        state.editLoc === "" ||
+        state.editCats === [] ||
+        state.editStart === "" ||
+        state.editEnd === ""
+      ) {
+        setShowSave(false);
+      } else {
+        setShowSave(true);
+      }
     } else {
       setShowSave(false);
     }
