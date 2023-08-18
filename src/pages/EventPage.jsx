@@ -111,14 +111,14 @@ export const EventPage = () => {
   useEffect(() => {
     setNewTitle(state.editTitle);
     setNewDescr(state.editDescription);
-    setNewLoc(state.editLoc);
+    setNewLoc(state.editLocation);
     setNewCats(state.editCats);
     setNewStart(state.editStart);
     setNewEnd(state.editEnd);
   }, [
     state.editTitle,
     state.editDescription,
-    state.editLoc,
+    state.editLocation,
     state.editCats,
     state.editStart,
     state.editEnd,
