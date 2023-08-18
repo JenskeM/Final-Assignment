@@ -118,6 +118,7 @@ export const CreateEventsPage = () => {
       <Heading mb={10} textAlign={"center"} color={"brand.100"}>
         Add a new event
       </Heading>
+      {console.log(startDateTime)}
       <Form method="post" id="new-post-form">
         <Grid
           ml={[0, `${marginLR}px`]}

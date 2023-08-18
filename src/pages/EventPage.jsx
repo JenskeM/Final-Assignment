@@ -208,7 +208,7 @@ export const EventPage = () => {
           <CardBody>
             <Heading>{newTitle}</Heading>
             <Heading>{newStart}</Heading>
-            {console.log(newCats, newLoc)}
+            {/* {console.log(newCats, newLoc)} */}
             <Stack direction={"column"} spacing={"30px"} mb={8}>
               <Stack>
                 <Heading color="brand.100" size="lg" textAlign={"center"}>

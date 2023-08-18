@@ -19,6 +19,8 @@ import {
   Text,
   Input,
 } from "@chakra-ui/react";
+import DatePicker from "react-datepicker";
+import "../pages/react-datepicker.css";
 
 export const VALIDATION_TYPES = {
   DATE: "date",
@@ -56,8 +58,8 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
   };
   const catsToShow = [];
 
-  const [editStart, setEditStart] = useState(eventItem[0]);
-  const [editEnd, setEditEnd] = useState(eventItem[1]);
+  const [editStart, setEditStart] = useState(new Date(eventItem[0]));
+  const [editEnd, setEditEnd] = useState(new Date(eventItem[1]));
 
   const [editDate, setEditDate] = useState(false);
   const [startDate, setStartDate] = useState(
@@ -225,6 +227,32 @@ export const EventEditSubItem = ({ eventItem, imgUrl, typeInput }) => {
                   onChange={(e) => setEndTime(e.target.value)}
                 />
               </Stack>
+              <div style={{ fontSize: "0.9em" }}>
+                <DatePicker
+                  selectStart
+                  selected={editStart}
+                  // onChange={(date) => setEditStart(date)}
+                  showTimeSelect
+                  dateFormat="dd-MM-yyy HH:mm"
+                  name="startTime"
+                  width="300px"
+                  className="custom-datepicker-input"
+                />
+              </div>
+
+              <div style={{ fontSize: "0.9em" }}>
+                <DatePicker
+                  selectsEnd
+                  selected={editEnd}
+                  // onChange={(date) => setEditEnd(date)}
+                  endDate={editEnd}
+                  startDate={editStart}
+                  minDate={editStart}
+                  showTimeSelect
+                  dateFormat="dd-MM-yyy HH:mm"
+                  name="endTime"
+                />
+              </div>
               <ValidationInput input={startDate} type="date" />
               <ValidationInput input={startTime} type="time" />
               <ValidationInput input={endDate} type="date" />
