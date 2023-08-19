@@ -21,7 +21,7 @@ export const EventEditSubItem_Title = ({ eventItem }) => {
     <Stack
       direction="row"
       style={{
-        cursor: "url(../assets/EditCursor.png), auto",
+        cursor: "url(/EditCursor.png), auto",
       }}
     >
       <Center>
