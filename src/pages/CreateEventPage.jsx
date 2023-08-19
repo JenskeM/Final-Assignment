@@ -1,5 +1,6 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
 import { InputField } from "../components/InputField";
+import { convertToLocalDate } from "../components/convertDate";
 import {
   Box,
   Grid,
@@ -117,7 +118,8 @@ export const CreateEventsPage = () => {
       <Heading mb={10} textAlign={"center"} color={"brand.100"}>
         Add a new event
       </Heading>
-      {console.log(startDateTime)}
+      {console.log("Without function:", startDateTime)}
+      {console.log("to Local:", convertToLocalDate(startDateTime))}
       <Form method="post" id="new-post-form">
         <Grid
           ml={[0, `${marginLR}px`]}

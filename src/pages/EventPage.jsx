@@ -151,7 +151,6 @@ export const EventPage = () => {
       setScreenSize(getCurrentDimension());
     };
     window.addEventListener("resize", updateDimension);
-    console.log(screenSize);
 
     return () => {
       window.removeEventListener("resize", updateDimension);
@@ -202,7 +201,7 @@ export const EventPage = () => {
   return (
     <Grid
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
-      h={isEditable || (screenSize.height > 700 && "100vh")}
+      h={(isEditable || screenSize.height > 700) && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
