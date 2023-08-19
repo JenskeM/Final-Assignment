@@ -3,13 +3,13 @@ import { Tooltip, Image, Flex, Text, Button } from "@chakra-ui/react";
 
 export const Footer = () => {
   const [playMusic, setPlayMusic] = useState(true);
-  const audio = new Audio("../assets/MandaiSounds.mp3");
+  const mandaiSound = new Audio("../assets/MandaiSounds.mp3");
 
   const toggleAudio = () => {
     if (playMusic) {
-      audio.play();
+      mandaiSound.play();
     } else {
-      audio.pause();
+      mandaiSound.pause();
     }
     setPlayMusic(!playMusic);
   };
@@ -21,7 +21,12 @@ export const Footer = () => {
       justify={{ base: "center", md: "space-between" }}
       align={{ base: "center", md: "center" }}
     >
-      <Button onClick={() => audio.play()}>Press</Button>
+      <Button
+        onClick={() => mandaiSound.play()}
+        _hover={{ backgroundColor: "brand.600" }}
+      >
+        Press
+      </Button>
       <Text color={"brand.100"}>
         © 2023 JM Productions. All rights reserved
       </Text>
