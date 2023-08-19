@@ -77,7 +77,7 @@ export const CreateEventsPage = () => {
   };
 
   function isBefore(date1, date2) {
-    return date1 < date2;
+    return date1 <= date2;
   }
 
   function getCurrentDimension() {
@@ -291,7 +291,7 @@ export const CreateEventsPage = () => {
               fontWeight={"semibold"}
               mt={8}
             >
-              The end date-time is before the start date-time. This is not
+              The end date-time is before or at the start date-time. This is not
               allowed.
             </Text>
           ) : (
