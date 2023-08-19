@@ -279,7 +279,7 @@ export const EventPage = () => {
                   typeInput={TYPES.LOCATION}
                 />
                 {isEditable ? (
-                  <>
+                  <Stack direction={"column"}>
                     <EventSubItem
                       eventItem={event.startTime}
                       imgUrl={"/src/assets/Calendar.png"}
@@ -292,7 +292,7 @@ export const EventPage = () => {
                       isEditable={isEditable}
                       typeInput={TYPES.DATE_END}
                     />{" "}
-                  </>
+                  </Stack>
                 ) : (
                   <EventSubItem
                     eventItem={[event.startTime, event.endTime]}

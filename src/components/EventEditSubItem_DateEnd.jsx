@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
+import { useEvent } from "../components/EventContext";
 import { ValidationInput } from "./ValidationInput";
+import DatePicker from "react-datepicker";
+import "../pages/react-datepicker.css";
 import {
   Stack,
   Image,
@@ -13,9 +16,17 @@ import {
 } from "@chakra-ui/react";
 
 export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
+  const { dispatch } = useEvent();
+  const { state } = useEvent();
   const [editDate, setEditDate] = useState(false);
+  const [editEnd, setEditEnd] = useState(new Date(eventItem));
+  const [editStart, setEditStart] = useState("");
   const [endDate, setEndDate] = useState(getDate(eventItem).props.children);
   const [endTime, setEndTime] = useState(getTime(eventItem).props.children);
+
+  useEffect(() => {
+    setEditStart(state.editStart);
+  }, [state.editStart, eventItem, dispatch]);
 
   const getOutput = (eventItem) => {
     const output = (
@@ -58,6 +69,17 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
               </Stack>
               <ValidationInput input={endDate} type="date" />
               <ValidationInput input={endTime} type="time" />
+              <DatePicker
+                selectsEnd
+                selected={editEnd}
+                onChange={(date) => setEditEnd(date)}
+                endDate={editEnd}
+                startDate={editStart}
+                minDate={editStart}
+                showTimeSelect
+                dateFormat="dd-MM-yyy HH:mm"
+                name="endTime"
+              />
             </Stack>
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>

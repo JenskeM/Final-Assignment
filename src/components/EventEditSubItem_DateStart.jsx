@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
-import { ValidationInput } from "./ValidationInput";
+import DatePicker from "react-datepicker";
+import "../pages/react-datepicker.css";
 import {
   Stack,
   Image,
@@ -9,7 +10,6 @@ import {
   Tooltip,
   Editable,
   Text,
-  Input,
 } from "@chakra-ui/react";
 
 export const EventEditSubItem_DateStart = ({
@@ -18,8 +18,7 @@ export const EventEditSubItem_DateStart = ({
   typeInput,
 }) => {
   const [editDate, setEditDate] = useState(false);
-  const [startDate, setStartDate] = useState(getDate(eventItem).props.children);
-  const [startTime, setStartTime] = useState(getTime(eventItem).props.children);
+  const [editStart, setEditStart] = useState(new Date(eventItem));
 
   const getOutput = (eventItem) => {
     const output = (
@@ -47,23 +46,16 @@ export const EventEditSubItem_DateStart = ({
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
           {editDate ? (
-            <Stack direction={"column"}>
-              <Stack direction={"row"}>
-                <Input
-                  value={startDate}
-                  bg="brand.100"
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-                <Input
-                  value={startTime}
-                  bg="brand.100"
-                  onChange={(e) => setStartTime(e.target.value)}
-                />
-              </Stack>
-
-              <ValidationInput input={startDate} type="date" />
-              <ValidationInput input={startTime} type="time" />
-            </Stack>
+            <DatePicker
+              selectStart
+              selected={editStart}
+              onChange={(date) => setEditStart(date)}
+              showTimeSelect
+              dateFormat="dd-MM-yyy HH:mm"
+              name="startTime"
+              width="300px"
+              className="custom-datepicker-input"
+            />
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
               {getOutput(eventItem)}
