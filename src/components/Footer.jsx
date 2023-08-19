@@ -14,7 +14,13 @@ export const Footer = () => {
       mandaiSound.pause();
       mandaiSound.currentTime = 0;
       setTest("False");
-      console.log(mandaiSound);
+      console.log(mandaiSound.src);
+      console.log(mandaiSound.currentTime);
+      console.log(mandaiSound.duration);
+      console.log(mandaiSound.volume);
+      console.log(mandaiSound.paused);
+      console.log(mandaiSound.ended);
+      console.log(mandaiSound.muted);
     }
     setPlayMusic(!playMusic);
   };
