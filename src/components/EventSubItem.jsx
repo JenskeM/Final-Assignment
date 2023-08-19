@@ -24,12 +24,7 @@ export const EventSubItem = ({
           typeInput={typeInput}
         />
       ) : typeInput === TYPES.TITLE ? (
-        <EventEditSubItem_Title
-          eventItem={eventItem}
-          style={{
-            cursor: "url(/src/assets/EditCursor.png), auto",
-          }}
-        />
+        <EventEditSubItem_Title eventItem={eventItem} />
       ) : typeInput === TYPES.DESCRIPTION ? (
         <EventEditSubItem_Descr
           eventItem={eventItem}

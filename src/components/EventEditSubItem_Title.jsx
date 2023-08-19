@@ -18,10 +18,15 @@ export const EventEditSubItem_Title = ({ eventItem }) => {
   }, [editTitle, dispatch, eventItem]);
 
   return (
-    <Stack direction="row">
+    <Stack
+      direction="row"
+      style={{
+        cursor: "url(../assets/EditCursor.png), auto",
+      }}
+    >
       <Center>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <EditablePreview cursor={"crosshair"} />
+          <EditablePreview />
           <EditableInput
             bg="brand.100"
             value={editTitle}
