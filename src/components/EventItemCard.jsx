@@ -43,12 +43,7 @@ export const EventItemCard = ({ event, categories }) => {
             <Text color="brand.400" fontSize="sm">
               Description:
             </Text>
-            <Text
-              color="brand.100"
-              fontSize="sm"
-              fontWeight={"semibold"}
-              textTransform={"capitalize"}
-            >
+            <Text color="brand.100" fontSize="sm" fontWeight={"semibold"}>
               {" "}
               {event.description}
             </Text>
