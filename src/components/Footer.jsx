@@ -5,7 +5,7 @@ export const Footer = () => {
   const [playMusic, setPlayMusic] = useState(true);
   const mandaiSound = new Audio("/src/assets/MandaiSounds.mp3");
 
-  const toggleAudio = () => {
+  const toggleSound = () => {
     if (playMusic) {
       mandaiSound.play();
     } else {
@@ -33,7 +33,7 @@ export const Footer = () => {
         }
       >
         <Image
-          onClick={toggleAudio}
+          onClick={toggleSound}
           src={playMusic ? "/src/assets/NoSound.png" : "/src/assets/Sound.png"}
           h={"30px"}
           bg="brand.100"
