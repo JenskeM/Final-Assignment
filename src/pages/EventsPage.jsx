@@ -184,6 +184,7 @@ export const EventsPage = () => {
               position="absolute"
               top="80px"
               right="20px"
+              zIndex={1000}
               onClick={() => setShowFilter(true)}
             />
           </Tooltip>
