@@ -6,7 +6,6 @@ import { EventEditSubItem_Descr } from "../components/EventEditSubItem_Descr";
 import { EventEditSubItem_Title } from "../components/EventEditSubItem_Title";
 import { EventShowSubItem } from "../components/EventShowSubItem";
 import { TYPES } from "../pages/EventPage";
-import "./mouse.css";
 
 export const EventSubItem = ({
   isEditable,
@@ -25,7 +24,7 @@ export const EventSubItem = ({
           typeInput={typeInput}
         />
       ) : typeInput === TYPES.TITLE ? (
-        <EventEditSubItem_Title eventItem={eventItem} className="edit-mouse" />
+        <EventEditSubItem_Title eventItem={eventItem} />
       ) : typeInput === TYPES.DESCRIPTION ? (
         <EventEditSubItem_Descr
           eventItem={eventItem}
