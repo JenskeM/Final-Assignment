@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tooltip, Image, Flex, Text } from "@chakra-ui/react";
+import { Tooltip, Image, Flex, Text, Button } from "@chakra-ui/react";
 
 export const Footer = () => {
   const [playMusic, setPlayMusic] = useState(true);
@@ -21,7 +21,7 @@ export const Footer = () => {
       justify={{ base: "center", md: "space-between" }}
       align={{ base: "center", md: "center" }}
     >
-      <Text color={"brand.100"}>{playMusic ? "True" : "False"}</Text>
+      <Button onClick={() => audio.play()}>Press</Button>
       <Text color={"brand.100"}>
         © 2023 JM Productions. All rights reserved
       </Text>
