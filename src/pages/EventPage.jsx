@@ -38,8 +38,8 @@ export const TYPES = {
   TITLE: "title",
   DESCRIPTION: "Description",
   LOCATION: "Location",
-  DATESTART: "Date-start",
-  DATEEND: "Date-end",
+  DATE_START: "Date-start",
+  DATE_END: "Date-end",
   CATEGORIES: "Categories",
 };
 
@@ -96,7 +96,7 @@ export const EventPage = () => {
       if (
         state.editTitle === "" ||
         state.editLoc === "" ||
-        state.editCats === [] ||
+        state.editCats == [] ||
         state.editStart === "" ||
         state.editEnd === ""
       ) {
@@ -278,12 +278,29 @@ export const EventPage = () => {
                   isEditable={isEditable}
                   typeInput={TYPES.LOCATION}
                 />
-                <EventSubItem
-                  eventItem={[event.startTime, event.endTime]}
-                  imgUrl={"/src/assets/Calendar.png"}
-                  isEditable={isEditable}
-                  typeInput={TYPES.DATE}
-                />
+                {isEditable ? (
+                  <>
+                    <EventSubItem
+                      eventItem={event.startTime}
+                      imgUrl={"/src/assets/Calendar.png"}
+                      isEditable={isEditable}
+                      typeInput={TYPES.DATE_START}
+                    />{" "}
+                    <EventSubItem
+                      eventItem={event.endTime}
+                      imgUrl={"/src/assets/Calendar.png"}
+                      isEditable={isEditable}
+                      typeInput={TYPES.DATE_END}
+                    />{" "}
+                  </>
+                ) : (
+                  <EventSubItem
+                    eventItem={[event.startTime, event.endTime]}
+                    imgUrl={"/src/assets/Calendar.png"}
+                    isEditable={isEditable}
+                    typeInput={TYPES.DATE}
+                  />
+                )}
                 <EventSubItem
                   eventItem={isEditable ? event.categoryIds : catsToShow}
                   imgUrl={"/src/assets/Categories.png"}

@@ -14,24 +14,14 @@ import {
 
 export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
   const [editDate, setEditDate] = useState(false);
-  const [startDate, setStartDate] = useState(
-    getDate(eventItem[0]).props.children
-  );
-  const [startTime, setStartTime] = useState(
-    getTime(eventItem[0]).props.children
-  );
-  const [endDate, setEndDate] = useState(getDate(eventItem[1]).props.children);
-  const [endTime, setEndTime] = useState(getTime(eventItem[1]).props.children);
+  const [endDate, setEndDate] = useState(getDate(eventItem).props.children);
+  const [endTime, setEndTime] = useState(getTime(eventItem).props.children);
 
   const getOutput = (eventItem) => {
     const output = (
       <span>
-        {getDate(eventItem[0]).props.children} -{" "}
-        {getTime(eventItem[0]).props.children} <br />
-        until
-        <br />
-        {getDate(eventItem[1]).props.children} -{" "}
-        {getTime(eventItem[1]).props.children}
+        {getDate(eventItem).props.children} -{" "}
+        {getTime(eventItem).props.children}
       </span>
     );
     return output;
@@ -56,18 +46,6 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
             <Stack direction={"column"}>
               <Stack direction={"row"}>
                 <Input
-                  value={startDate}
-                  bg="brand.100"
-                  onChange={(e) => setStartDate(e.target.value)}
-                />
-                <Input
-                  value={startTime}
-                  bg="brand.100"
-                  onChange={(e) => setStartTime(e.target.value)}
-                />
-              </Stack>
-              <Stack direction={"row"}>
-                <Input
                   value={endDate}
                   bg="brand.100"
                   onChange={(e) => setEndDate(e.target.value)}
@@ -78,8 +56,6 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
                   onChange={(e) => setEndTime(e.target.value)}
                 />
               </Stack>
-              <ValidationInput input={startDate} type="date" />
-              <ValidationInput input={startTime} type="time" />
               <ValidationInput input={endDate} type="date" />
               <ValidationInput input={endTime} type="time" />
             </Stack>

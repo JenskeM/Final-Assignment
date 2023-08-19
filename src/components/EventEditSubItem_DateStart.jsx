@@ -18,24 +18,14 @@ export const EventEditSubItem_DateStart = ({
   typeInput,
 }) => {
   const [editDate, setEditDate] = useState(false);
-  const [startDate, setStartDate] = useState(
-    getDate(eventItem[0]).props.children
-  );
-  const [startTime, setStartTime] = useState(
-    getTime(eventItem[0]).props.children
-  );
-  const [endDate, setEndDate] = useState(getDate(eventItem[1]).props.children);
-  const [endTime, setEndTime] = useState(getTime(eventItem[1]).props.children);
+  const [startDate, setStartDate] = useState(getDate(eventItem).props.children);
+  const [startTime, setStartTime] = useState(getTime(eventItem).props.children);
 
   const getOutput = (eventItem) => {
     const output = (
       <span>
-        {getDate(eventItem[0]).props.children} -{" "}
-        {getTime(eventItem[0]).props.children} <br />
-        until
-        <br />
-        {getDate(eventItem[1]).props.children} -{" "}
-        {getTime(eventItem[1]).props.children}
+        {getDate(eventItem).props.children} -{" "}
+        {getTime(eventItem).props.children}
       </span>
     );
     return output;
@@ -70,22 +60,9 @@ export const EventEditSubItem_DateStart = ({
                   onChange={(e) => setStartTime(e.target.value)}
                 />
               </Stack>
-              <Stack direction={"row"}>
-                <Input
-                  value={endDate}
-                  bg="brand.100"
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-                <Input
-                  value={endTime}
-                  bg="brand.100"
-                  onChange={(e) => setEndTime(e.target.value)}
-                />
-              </Stack>
+
               <ValidationInput input={startDate} type="date" />
               <ValidationInput input={startTime} type="time" />
-              <ValidationInput input={endDate} type="date" />
-              <ValidationInput input={endTime} type="time" />
             </Stack>
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
