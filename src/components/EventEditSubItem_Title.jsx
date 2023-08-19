@@ -26,7 +26,7 @@ export const EventEditSubItem_Title = ({ eventItem }) => {
     >
       <Center>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <EditablePreview />
+          <EditablePreview cursor={"crosshair"} />
           <EditableInput
             bg="brand.100"
             value={editTitle}
