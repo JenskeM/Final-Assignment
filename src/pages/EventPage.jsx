@@ -237,7 +237,7 @@ export const EventPage = () => {
                       w={"50vw"}
                       onChange={(e) => setImageUrl(e.target.value)}
                     />
-                    <ValidationInput input={imageUrl} type="image" />
+                    <ValidationInput input={imageUrl} />
                   </Editable>
                 ) : (
                   <Box
