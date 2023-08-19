@@ -1,6 +1,5 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
 import { InputField } from "../components/InputField";
-import { useEvent } from "../components/EventContext";
 import {
   Box,
   Grid,
@@ -40,7 +39,6 @@ export const action = async ({ request }) => {
   const getArrayEnd = formData.endTime.split(" ");
   const revertDateEnd = getArrayEnd[0].split("-").reverse().join("-");
   formData.endTime = revertDateEnd + "T" + getArrayEnd[1] + ":00.000Z";
-  console.log(formData);
   const newId = await fetch("http://localhost:3000/events", {
     method: "POST",
     body: JSON.stringify(formData),
@@ -52,7 +50,6 @@ export const action = async ({ request }) => {
 };
 
 export const CreateEventsPage = () => {
-  const { dispatch } = useEvent();
   const { categories, users } = useLoaderData();
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [selectedUser, setSelectedUser] = useState();
@@ -69,14 +66,6 @@ export const CreateEventsPage = () => {
     color: "white",
     padding: "20px",
   };
-
-  useEffect(() => {
-    console.log(startDateTime);
-    // const getArrayStart = newStart.split(" ");
-    //   const revertDateStart = getArrayStart[0].split("-").reverse().join("-");
-    //   const editStart = revertDateStart + "T" + getArrayStart[1] + ":00.000Z";
-    //   dispatch({ type: ACTIONS.EDIT_START, payload: editStart });
-  }, [startDateTime, dispatch]);
 
   const toggleCategory = (categoryId) => {
     if (selectedCategories.has(categoryId)) {
