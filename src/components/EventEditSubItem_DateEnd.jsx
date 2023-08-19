@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
 import { useEvent } from "../components/EventContext";
-import { ValidationInput } from "./ValidationInput";
 import DatePicker from "react-datepicker";
 import "../pages/react-datepicker.css";
 import {
@@ -12,7 +11,6 @@ import {
   Tooltip,
   Editable,
   Text,
-  Input,
 } from "@chakra-ui/react";
 
 export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
@@ -21,8 +19,6 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
   const [editDate, setEditDate] = useState(false);
   const [editEnd, setEditEnd] = useState(new Date(eventItem));
   const [editStart, setEditStart] = useState("");
-  const [endDate, setEndDate] = useState(getDate(eventItem).props.children);
-  const [endTime, setEndTime] = useState(getTime(eventItem).props.children);
 
   useEffect(() => {
     setEditStart(state.editStart);
@@ -55,20 +51,6 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
           {editDate ? (
             <Stack direction={"column"}>
-              <Stack direction={"row"}>
-                <Input
-                  value={endDate}
-                  bg="brand.100"
-                  onChange={(e) => setEndDate(e.target.value)}
-                />
-                <Input
-                  value={endTime}
-                  bg="brand.100"
-                  onChange={(e) => setEndTime(e.target.value)}
-                />
-              </Stack>
-              <ValidationInput input={endDate} type="date" />
-              <ValidationInput input={endTime} type="time" />
               <DatePicker
                 selectsEnd
                 selected={editEnd}
@@ -80,6 +62,7 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
                 dateFormat="dd-MM-yyy HH:mm"
                 name="endTime"
               />
+              <Text>{editStart}</Text>
             </Stack>
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>

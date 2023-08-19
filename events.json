@@ -92,6 +92,19 @@
       "startTime": "2023-08-06T11:13:00.000Z",
       "endTime": "2023-08-06T14:30:00.000Z",
       "id": 6
+    },
+    {
+      "title": "Cat Café",
+      "description": "Enjoy a tasty drink in company of many cats.",
+      "image": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_396,q_75,w_704/v1/crm/indiana/Region-Cat-Cafe-Seat-Self_8182C695-F7DB-7E59-41C12CE3223901B1-8182c417f8fc5bd_6e56b90d-e4ab-8062-ea377a3524f6d684.jpg",
+      "location": "Cat café",
+      "createdBy": 2,
+      "categoryIds": [
+        3
+      ],
+      "startTime": "2023-08-19T12:00:00.000Z",
+      "endTime": "2023-08-19T21:30:00.000Z",
+      "id": 7
     }
   ],
   "categories": [

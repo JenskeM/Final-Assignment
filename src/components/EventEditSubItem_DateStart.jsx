@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useEvent } from "./EventContext";
+import { ACTIONS } from "./eventReducer";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
 import DatePicker from "react-datepicker";
@@ -17,8 +19,9 @@ export const EventEditSubItem_DateStart = ({
   imgUrl,
   typeInput,
 }) => {
+  const { dispatch } = useEvent();
   const [editDate, setEditDate] = useState(false);
-  const [editStart, setEditStart] = useState(new Date(eventItem));
+  const [newStart, setNewStart] = useState(new Date(eventItem));
 
   const getOutput = (eventItem) => {
     const output = (
@@ -29,6 +32,14 @@ export const EventEditSubItem_DateStart = ({
     );
     return output;
   };
+
+  useEffect(() => {
+    console.log(newStart);
+    // const getArrayStart = newStart.split(" ");
+    //   const revertDateStart = getArrayStart[0].split("-").reverse().join("-");
+    //   const editStart = revertDateStart + "T" + getArrayStart[1] + ":00.000Z";
+    //   dispatch({ type: ACTIONS.EDIT_START, payload: editStart });
+  }, [newStart, dispatch, eventItem]);
 
   return (
     <Stack direction="row">
@@ -48,8 +59,8 @@ export const EventEditSubItem_DateStart = ({
           {editDate ? (
             <DatePicker
               selectStart
-              selected={editStart}
-              onChange={(date) => setEditStart(date)}
+              selected={newStart}
+              onChange={(date) => setNewStart(date)}
               showTimeSelect
               dateFormat="dd-MM-yyy HH:mm"
               name="startTime"
