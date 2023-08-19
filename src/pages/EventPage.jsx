@@ -180,8 +180,8 @@ export const EventPage = () => {
       setIsEditable(!isEditable);
       if (response.ok) {
         toast({
-          title: "Succes!😄",
-          description: `The event is succesfully edited.`,
+          title: "Success!😄",
+          description: `The event is successfully edited.`,
           duration: 3000,
           isClosable: true,
         });
