@@ -1,4 +1,3 @@
-// import { EventEditSubItem } from "../components/EventEditSubItem";
 import { EventEditSubItem_DateEnd } from "./EventEditSubItem_DateEnd";
 import { EventEditSubItem_DateStart } from "./EventEditSubItem_DateStart";
 import { EventEditSubItem_Cats } from "../components/EventEditSubItem_Cats";
@@ -25,7 +24,12 @@ export const EventSubItem = ({
           typeInput={typeInput}
         />
       ) : typeInput === TYPES.TITLE ? (
-        <EventEditSubItem_Title eventItem={eventItem} />
+        <EventEditSubItem_Title
+          eventItem={eventItem}
+          style={{
+            cursor: "url(/src/assets/EditCursor.png), auto",
+          }}
+        />
       ) : typeInput === TYPES.DESCRIPTION ? (
         <EventEditSubItem_Descr
           eventItem={eventItem}
