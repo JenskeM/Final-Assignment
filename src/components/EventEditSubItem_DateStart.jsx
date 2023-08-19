@@ -3,6 +3,7 @@ import { useEvent } from "./EventContext";
 import { ACTIONS } from "./eventReducer";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
+// import { convertToLocalDate } from "../components/convertDate";
 import DatePicker from "react-datepicker";
 import "../pages/react-datepicker.css";
 import {
@@ -34,11 +35,8 @@ export const EventEditSubItem_DateStart = ({
   };
 
   useEffect(() => {
-    console.log(newStart);
-    // const getArrayStart = newStart.split(" ");
-    //   const revertDateStart = getArrayStart[0].split("-").reverse().join("-");
-    //   const editStart = revertDateStart + "T" + getArrayStart[1] + ":00.000Z";
-    //   dispatch({ type: ACTIONS.EDIT_START, payload: editStart });
+    const editStart = newStart.toISOString();
+    dispatch({ type: ACTIONS.EDIT_START, payload: editStart });
   }, [newStart, dispatch, eventItem]);
 
   return (

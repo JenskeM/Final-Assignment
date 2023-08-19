@@ -207,7 +207,7 @@ export const EventPage = () => {
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
           <CardBody>
-            <Heading>{newStart}</Heading>
+            <Heading>{newEnd}</Heading>
             <Stack direction={"column"} spacing={"30px"} mb={8}>
               <Stack>
                 <Heading color="brand.100" size="lg" textAlign={"center"}>

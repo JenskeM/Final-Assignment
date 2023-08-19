@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { getTime } from "./getTime";
 import { getDate } from "./getDate";
 import { useEvent } from "../components/EventContext";
+import { ACTIONS } from "./eventReducer";
+import { parseISO } from "date-fns";
+
+// import { convertToLocalDate } from "../components/convertDate";
 import DatePicker from "react-datepicker";
 import "../pages/react-datepicker.css";
 import {
@@ -17,12 +21,12 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
   const { dispatch } = useEvent();
   const { state } = useEvent();
   const [editDate, setEditDate] = useState(false);
-  const [editEnd, setEditEnd] = useState(new Date(eventItem));
-  const [editStart, setEditStart] = useState("");
+  const [newEnd, setNewEnd] = useState(new Date(eventItem));
 
   useEffect(() => {
-    setEditStart(state.editStart);
-  }, [state.editStart, eventItem, dispatch]);
+    const editEnd = parseISO(newEnd.toISOString());
+    dispatch({ type: ACTIONS.EDIT_START, payload: editEnd });
+  }, [state.editStart, newEnd, dispatch, eventItem]);
 
   const getOutput = (eventItem) => {
     const output = (
@@ -53,16 +57,15 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
             <Stack direction={"column"}>
               <DatePicker
                 selectsEnd
-                selected={editEnd}
-                onChange={(date) => setEditEnd(date)}
-                endDate={editEnd}
-                startDate={editStart}
-                minDate={editStart}
+                selected={newEnd}
+                onChange={(date) => setNewEnd(date)}
+                endDate={newEnd}
+                startDate={state.editStart}
+                minDate={state.editStart}
                 showTimeSelect
                 dateFormat="dd-MM-yyy HH:mm"
                 name="endTime"
               />
-              <Text>{editStart}</Text>
             </Stack>
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
