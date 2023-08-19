@@ -45,8 +45,15 @@ export const EventSubItem = ({
           typeInput={typeInput}
         />
       ) : (
-        typeInput === TYPES.DATE && (
-          <EventEditSubItem_Dates
+        typeInput === TYPES.DATESTART ? (
+          <EventEditSubItem_DateStart
+            eventItem={eventItem}
+            imgUrl={imgUrl}
+            typeInput={typeInput}
+          />
+        ) :
+        typeInput === TYPES.DATEEND && (
+          <EventEditSubItem_DateEnd
             eventItem={eventItem}
             imgUrl={imgUrl}
             typeInput={typeInput}
