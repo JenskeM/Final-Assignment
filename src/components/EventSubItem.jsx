@@ -1,5 +1,6 @@
 // import { EventEditSubItem } from "../components/EventEditSubItem";
-import { EventEditSubItem_Dates } from "../components/EventEditSubItem_Dates";
+import { EventEditSubItem_DateEnd } from "./EventEditSubItem_DateEnd";
+import { EventEditSubItem_DateStart } from "./EventEditSubItem_DateStart";
 import { EventEditSubItem_Cats } from "../components/EventEditSubItem_Cats";
 import { EventEditSubItem_Loc } from "../components/EventEditSubItem_Loc";
 import { EventEditSubItem_Descr } from "../components/EventEditSubItem_Descr";
