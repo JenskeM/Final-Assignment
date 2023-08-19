@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Tooltip, Image, Flex, Text, Button } from "@chakra-ui/react";
+import { Tooltip, Image, Flex, Text } from "@chakra-ui/react";
 
 export const Footer = () => {
   const [playMusic, setPlayMusic] = useState(true);
-  const mandaiSound = new Audio("../assets/MandaiSounds.mp3");
+  const mandaiSound = new Audio("/src/assets/MandaiSounds.mp3");
 
   const toggleAudio = () => {
     if (playMusic) {
@@ -21,14 +21,9 @@ export const Footer = () => {
       justify={{ base: "center", md: "space-between" }}
       align={{ base: "center", md: "center" }}
     >
-      <Button
-        onClick={() => mandaiSound.play()}
-        _hover={{ backgroundColor: "brand.600" }}
-      >
-        Press
-      </Button>
       <Text color={"brand.100"}>
-        © 2023 JM Productions. All rights reserved
+        © 2023 JM Productions. All rights reserved{" "}
+        {playMusic ? "True" : "False"}
       </Text>
       <Tooltip
         label={
@@ -39,7 +34,7 @@ export const Footer = () => {
       >
         <Image
           onClick={toggleAudio}
-          src="/src/assets/Speaker.png"
+          src={playMusic ? "/src/assets/NoSound.png" : "/src/assets/Sound.png"}
           h={"30px"}
           bg="brand.100"
           borderRadius={"50%"}
