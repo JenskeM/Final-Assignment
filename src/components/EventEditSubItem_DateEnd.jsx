@@ -4,8 +4,6 @@ import { getDate } from "./getDate";
 import { useEvent } from "../components/EventContext";
 import { ACTIONS } from "./eventReducer";
 import { parseISO } from "date-fns";
-
-// import { convertToLocalDate } from "../components/convertDate";
 import DatePicker from "react-datepicker";
 import "../pages/react-datepicker.css";
 import {
