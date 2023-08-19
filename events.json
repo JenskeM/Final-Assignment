@@ -119,6 +119,19 @@
       "startTime": "2023-12-16T20:00:00.000Z",
       "endTime": "2023-12-17T00:30:00.000Z",
       "id": 8
+    },
+    {
+      "title": "Barbecue with squirrels",
+      "description": "It's going to be nuts!",
+      "image": "https://hips.hearstapps.com/hmg-prod/images/chipmunk-nature-photos-1537973822.jpg",
+      "location": "The great oak",
+      "createdBy": 2,
+      "categoryIds": [
+        3
+      ],
+      "startTime": "2023-09-24T14:00:00.000Z",
+      "endTime": "2023-09-24T17:00:00.000Z",
+      "id": 9
     }
   ],
   "categories": [

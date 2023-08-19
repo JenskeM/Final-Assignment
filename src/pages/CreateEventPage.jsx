@@ -1,6 +1,8 @@
 import { useLoaderData, redirect, Form } from "react-router-dom";
 import { InputField } from "../components/InputField";
 import { convertToLocalDate } from "../components/convertDate";
+import "moment-timezone";
+
 import {
   Box,
   Grid,
@@ -118,8 +120,6 @@ export const CreateEventsPage = () => {
       <Heading mb={10} textAlign={"center"} color={"brand.100"}>
         Add a new event
       </Heading>
-      {console.log("Without function:", startDateTime)}
-      {console.log("to Local:", convertToLocalDate(startDateTime))}
       <Form method="post" id="new-post-form">
         <Grid
           ml={[0, `${marginLR}px`]}
@@ -252,7 +252,9 @@ export const CreateEventsPage = () => {
                 <DatePicker
                   selectStart
                   selected={startDateTime}
-                  onChange={(date) => setStartDateTime(date)}
+                  onChange={(date) =>
+                    setStartDateTime(convertToLocalDate(date))
+                  }
                   showTimeSelect
                   dateFormat="dd-MM-yyy HH:mm"
                   name="startTime"
@@ -273,7 +275,7 @@ export const CreateEventsPage = () => {
                 <DatePicker
                   selectsEnd
                   selected={endDateTime}
-                  onChange={(date) => setEndDateTime(date)}
+                  onChange={(date) => setEndDateTime(convertToLocalDate(date))}
                   endDate={endDateTime}
                   startDate={startDateTime}
                   minDate={startDateTime}
