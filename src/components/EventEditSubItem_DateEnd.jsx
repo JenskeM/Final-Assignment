@@ -25,7 +25,7 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
 
   useEffect(() => {
     const editEnd = parseISO(newEnd.toISOString());
-    dispatch({ type: ACTIONS.EDIT_START, payload: editEnd });
+    dispatch({ type: ACTIONS.EDIT_END, payload: editEnd });
   }, [state.editStart, newEnd, dispatch, eventItem]);
 
   const getOutput = (eventItem) => {
