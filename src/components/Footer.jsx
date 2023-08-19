@@ -4,12 +4,16 @@ import { Tooltip, Image, Flex, Text } from "@chakra-ui/react";
 export const Footer = () => {
   const [playMusic, setPlayMusic] = useState(true);
   const mandaiSound = new Audio("/src/assets/MandaiSounds.mp3");
+  const [test, setTest] = useState("");
 
   const toggleSound = () => {
     if (playMusic) {
       mandaiSound.play();
+      setTest("True");
     } else {
       mandaiSound.pause();
+      mandaiSound.currentTime = 0;
+      setTest("False");
     }
     setPlayMusic(!playMusic);
   };
@@ -23,7 +27,8 @@ export const Footer = () => {
     >
       <Text color={"brand.100"}>
         © 2023 JM Productions. All rights reserved{" "}
-        {playMusic ? "True" : "False"}
+        {/* {playMusic ? "True" : "False"} */}
+        {test}
       </Text>
       <Tooltip
         label={
