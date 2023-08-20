@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getImageSize } from "react-image-size";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useEvent } from "../components/EventContext";
 import { EventSubItem } from "../components/EventSubItem";
 import { ValidationInput } from "../components/ValidationInput";
@@ -21,6 +21,7 @@ import {
   Radio,
   useToast,
   Text,
+  Form,
 } from "@chakra-ui/react";
 
 export const loader = async ({ params }) => {
@@ -47,6 +48,7 @@ export const TYPES = {
 export const EventPage = () => {
   const { event, categories, users } = useLoaderData();
   const { state } = useEvent();
+  const navigate = useNavigate();
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
@@ -102,7 +104,6 @@ export const EventPage = () => {
       setShowSave(false);
     } else {
       setShowSave(true);
-      console.log("ELSE - ShowSave: ", showSave);
     }
   }, [dateCheck, titleCheck, locCheck, startCheck, endCheck, showSave]);
 
@@ -192,6 +193,7 @@ export const EventPage = () => {
           duration: 3000,
           isClosable: true,
         });
+        navigate("/");
       } else {
         toast({
           title: "Failure....!!😭",
@@ -212,117 +214,138 @@ export const EventPage = () => {
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
-        <Card boxShadow="2xl" m={7} style={eventBgStyle}>
-          <CardBody>
-            <Stack direction={"column"} spacing={"30px"} mb={8}>
-              <Stack>
-                <Heading color="brand.100" size="lg" textAlign={"center"}>
-                  Event information:
-                </Heading>
-                <Heading color="brand.200" size="xl" textAlign={"center"}>
-                  {" "}
-                  <Center>
-                    <EventSubItem
-                      eventItem={event.title}
-                      imgUrl={null}
-                      isEditable={isEditable}
-                      typeInput={TYPES.TITLE}
-                    />
-                  </Center>
-                </Heading>
-              </Stack>
-              <Center>
-                {isEditable ? (
-                  <Editable
-                    textAlign={"center"}
-                    color="black"
-                    defaultValue={imageUrl}
-                  >
-                    <EditablePreview cursor={"crosshair"} />
-                    <EditableInput
-                      bg="brand.100"
-                      w={"50vw"}
-                      onChange={(e) => setImageUrl(e.target.value)}
-                    />
-                    <ValidationInput input={imageUrl} />
-                  </Editable>
-                ) : (
-                  <Box
-                    borderColor="brand.300"
-                    borderRadius="full"
-                    boxShadow="2xl"
-                    h={imageHeight * 0.2}
-                    w={imageWidth * 0.2}
-                  >
-                    <Image
-                      src={event.image}
+        <Form>
+          <Card boxShadow="2xl" m={7} style={eventBgStyle}>
+            <CardBody>
+              <Stack direction={"column"} spacing={"30px"} mb={8}>
+                <Stack>
+                  <Heading>{state.editLocation}</Heading>
+                  <Heading color="brand.100" size="lg" textAlign={"center"}>
+                    Event information:
+                  </Heading>
+                  <Heading color="brand.200" size="xl" textAlign={"center"}>
+                    {" "}
+                    <Center>
+                      <EventSubItem
+                        eventItem={event.title}
+                        imgUrl={null}
+                        isEditable={isEditable}
+                        typeInput={TYPES.TITLE}
+                      />
+                    </Center>
+                  </Heading>
+                </Stack>
+                <Center>
+                  {isEditable ? (
+                    <Editable
+                      textAlign={"center"}
+                      color="black"
+                      defaultValue={imageUrl}
+                    >
+                      <EditablePreview cursor={"crosshair"} />
+                      <EditableInput
+                        bg="brand.100"
+                        w={"50vw"}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                      />
+                      <ValidationInput input={imageUrl} />
+                    </Editable>
+                  ) : (
+                    <Box
+                      borderColor="brand.300"
                       borderRadius="full"
+                      boxShadow="2xl"
                       h={imageHeight * 0.2}
                       w={imageWidth * 0.2}
-                      alt={event.title}
-                    />
-                  </Box>
-                )}
-              </Center>
-              <Grid
-                gridTemplateColumns={
-                  screenSize.width <= 700 ? "1fr" : "repeat(2, 1fr)"
-                }
-                gap={screenSize.width <= 700 ? 2 : 8}
-                p={"25px 150px 25px 150px"}
-                bg={"rgba(250, 245, 233, 0.5)"}
-              >
-                <EventSubItem
-                  eventItem={event.description}
-                  imgUrl={"/src/assets/Info.png"}
-                  isEditable={isEditable}
-                  typeInput={TYPES.DESCRIPTION}
-                />{" "}
-                <EventSubItem
-                  eventItem={event.location}
-                  imgUrl={"/src/assets/Location.png"}
-                  isEditable={isEditable}
-                  typeInput={TYPES.LOCATION}
-                />
-                {isEditable ? (
-                  <Stack direction={"column"}>
-                    <EventSubItem
-                      eventItem={event.startTime}
-                      imgUrl={"/src/assets/Calendar.png"}
-                      isEditable={isEditable}
-                      typeInput={TYPES.DATE_START}
-                    />{" "}
-                    <EventSubItem
-                      eventItem={event.endTime}
-                      imgUrl={"/src/assets/Calendar.png"}
-                      isEditable={isEditable}
-                      typeInput={TYPES.DATE_END}
-                    />{" "}
-                  </Stack>
-                ) : (
+                    >
+                      <Image
+                        src={event.image}
+                        borderRadius="full"
+                        h={imageHeight * 0.2}
+                        w={imageWidth * 0.2}
+                        alt={event.title}
+                      />
+                    </Box>
+                  )}
+                </Center>
+                <Grid
+                  gridTemplateColumns={
+                    screenSize.width <= 700 ? "1fr" : "repeat(2, 1fr)"
+                  }
+                  gap={screenSize.width <= 700 ? 2 : 8}
+                  p={"25px 150px 25px 150px"}
+                  bg={"rgba(250, 245, 233, 0.5)"}
+                >
                   <EventSubItem
-                    eventItem={[event.startTime, event.endTime]}
-                    imgUrl={"/src/assets/Calendar.png"}
+                    eventItem={event.description}
+                    imgUrl={"/src/assets/Info.png"}
                     isEditable={isEditable}
-                    typeInput={TYPES.DATE}
+                    typeInput={TYPES.DESCRIPTION}
+                  />{" "}
+                  <EventSubItem
+                    eventItem={event.location}
+                    imgUrl={"/src/assets/Location.png"}
+                    isEditable={isEditable}
+                    typeInput={TYPES.LOCATION}
                   />
-                )}
-                <EventSubItem
-                  eventItem={isEditable ? event.categoryIds : catsToShow}
-                  imgUrl={"/src/assets/Categories.png"}
-                  isEditable={isEditable}
-                  typeInput={TYPES.CATEGORIES}
-                />
-              </Grid>
-            </Stack>
-          </CardBody>
-          <Stack direction={"row"}>
-            {isEditable ? (
-              <Stack direction={"row"} ml={2} mb={2}>
-                {showSave && (
-                  <Tooltip label={"Press to save the editions"}>
+                  {isEditable ? (
+                    <Stack direction={"column"}>
+                      <EventSubItem
+                        eventItem={event.startTime}
+                        imgUrl={"/src/assets/Calendar.png"}
+                        isEditable={isEditable}
+                        typeInput={TYPES.DATE_START}
+                      />{" "}
+                      <EventSubItem
+                        eventItem={event.endTime}
+                        imgUrl={"/src/assets/Calendar.png"}
+                        isEditable={isEditable}
+                        typeInput={TYPES.DATE_END}
+                      />{" "}
+                    </Stack>
+                  ) : (
+                    <EventSubItem
+                      eventItem={[event.startTime, event.endTime]}
+                      imgUrl={"/src/assets/Calendar.png"}
+                      isEditable={isEditable}
+                      typeInput={TYPES.DATE}
+                    />
+                  )}
+                  <EventSubItem
+                    eventItem={isEditable ? event.categoryIds : catsToShow}
+                    imgUrl={"/src/assets/Categories.png"}
+                    isEditable={isEditable}
+                    typeInput={TYPES.CATEGORIES}
+                  />
+                </Grid>
+              </Stack>
+            </CardBody>
+            <Stack direction={"row"}>
+              {isEditable ? (
+                <Stack direction={"row"} ml={2} mb={2}>
+                  {showSave && (
+                    <Tooltip label={"Press to save the editions"}>
+                      <Image
+                        type="submit"
+                        src={"/src/assets/Check.png"}
+                        h={10}
+                        w={10}
+                        p={2}
+                        bg="brand.600"
+                        borderRadius="full"
+                        _hover={{
+                          opacity: 0.6,
+                          transform: "scale(.95)",
+                          filter: "auto",
+                          blur: "0.5px",
+                        }}
+                        onClick={() => handleSubmit()}
+                      />
+                    </Tooltip>
+                  )}
+                  <Tooltip label={"Press to cancel the edit"}>
                     <Image
-                      src={"/src/assets/Check.png"}
+                      src={"/src/assets/Cancel.png"}
                       h={10}
                       w={10}
                       p={2}
@@ -334,16 +357,19 @@ export const EventPage = () => {
                         filter: "auto",
                         blur: "0.5px",
                       }}
-                      onClick={() => handleSubmit()}
+                      onClick={() => setIsEditable(!isEditable)}
                     />
                   </Tooltip>
-                )}
-                <Tooltip label={"Press to cancel the edit"}>
+                </Stack>
+              ) : (
+                <Tooltip label={"Press to edit this event"}>
                   <Image
-                    src={"/src/assets/Cancel.png"}
+                    src={"/src/assets/Edit.png"}
                     h={10}
                     w={10}
                     p={2}
+                    ml={2}
+                    mb={2}
                     bg="brand.600"
                     borderRadius="full"
                     _hover={{
@@ -352,19 +378,16 @@ export const EventPage = () => {
                       filter: "auto",
                       blur: "0.5px",
                     }}
-                    onClick={() => setIsEditable(!isEditable)}
+                    onClick={handleClick}
                   />
                 </Tooltip>
-              </Stack>
-            ) : (
-              <Tooltip label={"Press to edit this event"}>
+              )}
+              <Tooltip label={"Press to delete this event"}>
                 <Image
-                  src={"/src/assets/Edit.png"}
+                  src={"/src/assets/Delete.png"}
                   h={10}
                   w={10}
                   p={2}
-                  ml={2}
-                  mb={2}
                   bg="brand.600"
                   borderRadius="full"
                   _hover={{
@@ -373,28 +396,11 @@ export const EventPage = () => {
                     filter: "auto",
                     blur: "0.5px",
                   }}
-                  onClick={handleClick}
                 />
               </Tooltip>
-            )}
-            <Tooltip label={"Press to delete this event"}>
-              <Image
-                src={"/src/assets/Delete.png"}
-                h={10}
-                w={10}
-                p={2}
-                bg="brand.600"
-                borderRadius="full"
-                _hover={{
-                  opacity: 0.6,
-                  transform: "scale(.95)",
-                  filter: "auto",
-                  blur: "0.5px",
-                }}
-              />
-            </Tooltip>
-          </Stack>
-        </Card>
+            </Stack>
+          </Card>
+        </Form>
       </GridItem>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 2}>
         <Card boxShadow="2xl" m={7} style={creatorBgStyle}>

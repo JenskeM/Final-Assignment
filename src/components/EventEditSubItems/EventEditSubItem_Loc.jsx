@@ -18,7 +18,7 @@ export const EventEditSubItem_Loc = ({ eventItem, imgUrl, typeInput }) => {
 
   useEffect(() => {
     if (editLocation !== "" && editLocation !== eventItem) {
-      setLocCheck(locCheck.length <= 3);
+      setLocCheck(editLocation.length <= 3);
       dispatch({ type: ACTIONS.EDIT_LOC, payload: editLocation });
     }
   }, [editLocation, dispatch, eventItem]);

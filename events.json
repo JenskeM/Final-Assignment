@@ -13,16 +13,17 @@
   ],
   "events": [
     {
-      "title": "Trampoline party",
+      "title": "Trampoline jumping",
       "description": "Bounce around with your friends",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
-      "location": "The park",
+      "location": "Your backyard?",
       "createdBy": 1,
       "categoryIds": [
-        2
+        2,
+        3
       ],
       "startTime": "2023-03-10T17:00:00.000Z",
-      "endTime": "2023-03-10T18:00:00.000Z",
+      "endTime": "2023-03-10T17:30:00.000Z",
       "id": 1
     },
     {
