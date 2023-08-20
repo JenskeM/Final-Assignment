@@ -15,7 +15,7 @@ export const EventEditSubItem_Title = ({ eventItem }) => {
 
   useEffect(() => {
     if (editTitle !== "" && editTitle !== eventItem) {
-      setTitleCheck(editTitle.length <= 4);
+      setTitleCheck(editTitle.length <= 3);
       dispatch({ type: ACTIONS.EDIT_TITLE, payload: editTitle });
     }
   }, [editTitle, dispatch, eventItem]);

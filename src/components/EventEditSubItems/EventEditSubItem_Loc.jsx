@@ -42,7 +42,7 @@ export const EventEditSubItem_Loc = ({ eventItem, imgUrl, typeInput }) => {
           />
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <EditablePreview cursor={"crosshair"} />
+          <EditablePreview cursor={"crosshair"} minWidth={"100px"} />
           <EditableInput
             bg="brand.100"
             value={editLocation}
