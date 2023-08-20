@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { useEvent } from "./EventContext";
-import { ACTIONS } from "./eventReducer";
-import { getTime } from "./getTime";
-import { getDate } from "./getDate";
+import { useEvent } from "../EventContext";
+import { ACTIONS } from "../eventReducer";
+import { getTime } from "../getTime";
+import { getDate } from "../getDate";
 // import { convertToLocalDate } from "../components/convertDate";
 import DatePicker from "react-datepicker";
-import "../pages/react-datepicker.css";
+import "../../pages/react-datepicker.css";
 import {
   Stack,
   Image,

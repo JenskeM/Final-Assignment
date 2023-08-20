@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { ACTIONS } from "./eventReducer";
-import { useEvent } from "./EventContext";
+import { ACTIONS } from "../eventReducer";
+import { useEvent } from "../EventContext";
 import {
   Stack,
   Center,

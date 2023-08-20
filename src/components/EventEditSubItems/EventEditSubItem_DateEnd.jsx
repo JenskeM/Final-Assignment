@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { getTime } from "./getTime";
-import { getDate } from "./getDate";
-import { useEvent } from "../components/EventContext";
-import { ACTIONS } from "./eventReducer";
+import { getTime } from "../getTime";
+import { getDate } from "../getDate";
+import { useEvent } from "../EventContext";
+import { ACTIONS } from "../eventReducer";
 import { parseISO } from "date-fns";
 import DatePicker from "react-datepicker";
-import "../pages/react-datepicker.css";
+import { isBefore } from "../isBefore";
+import "../../pages/react-datepicker.css";
 import {
   Stack,
   Image,
@@ -68,6 +69,17 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
               {getOutput(eventItem)}
+            </Text>
+          )}
+          {isBefore(newEnd, state.editStart) && (
+            <Text
+              color="darkred"
+              fontSize={"lg"}
+              fontWeight={"semibold"}
+              mt={8}
+            >
+              The end date-time is before or at the start date-time. This is not
+              allowed.
             </Text>
           )}
         </Editable>

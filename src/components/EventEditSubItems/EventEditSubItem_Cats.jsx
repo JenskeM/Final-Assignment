@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { ACTIONS } from "./eventReducer";
-import { useEvent } from "./EventContext";
+import { ACTIONS } from "../eventReducer";
+import { useEvent } from "../EventContext";
 import { useLoaderData } from "react-router-dom";
 import {
   Stack,

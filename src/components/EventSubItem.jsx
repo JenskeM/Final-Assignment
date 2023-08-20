@@ -1,9 +1,9 @@
-import { EventEditSubItem_DateEnd } from "./EventEditSubItem_DateEnd";
-import { EventEditSubItem_DateStart } from "./EventEditSubItem_DateStart";
-import { EventEditSubItem_Cats } from "../components/EventEditSubItem_Cats";
-import { EventEditSubItem_Loc } from "../components/EventEditSubItem_Loc";
-import { EventEditSubItem_Descr } from "../components/EventEditSubItem_Descr";
-import { EventEditSubItem_Title } from "../components/EventEditSubItem_Title";
+import { EventEditSubItem_DateEnd } from "./EventEditSubItems/EventEditSubItem_DateEnd";
+import { EventEditSubItem_DateStart } from "./EventEditSubItems/EventEditSubItem_DateStart";
+import { EventEditSubItem_Cats } from "./EventEditSubItems/EventEditSubItem_Cats";
+import { EventEditSubItem_Loc } from "./EventEditSubItems/EventEditSubItem_Loc";
+import { EventEditSubItem_Descr } from "./EventEditSubItems/EventEditSubItem_Descr";
+import { EventEditSubItem_Title } from "./EventEditSubItems/EventEditSubItem_Title";
 import { EventShowSubItem } from "../components/EventShowSubItem";
 import { TYPES } from "../pages/EventPage";
 
