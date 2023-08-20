@@ -3,7 +3,10 @@ export const initialState = {
     categorySelected: "no filter",
     saveToggle: true,
     dateCheck: false,
-    titleCheck: false
+    titleCheck: false,
+    locCheck: false,
+    startCheck: false,
+    endCheck: false
 }
 
 export const ACTIONS = {
@@ -17,7 +20,10 @@ export const ACTIONS = {
     EDIT_START: "edit-start",
     EDIT_END:   "edit-end",
     DATE_CHECK: "date-check",
-    TITLE_CHECK: "title-check"
+    TITLE_CHECK: "title-check",
+    LOC_CHECK: "location-check",
+    START_CHECK: "start-check",
+    END_CHECK: "end-check"
   };
 
 const eventReducer = (state, action) => {
@@ -99,6 +105,28 @@ const eventReducer = (state, action) => {
                 ...state,
                 titleCheck: action.payload
             }
+
+        case ACTIONS.LOC_CHECK:
+
+            return {
+                ...state,
+                locCheck: action.payload
+            }
+
+        case ACTIONS.START_CHECK:
+
+            return {
+                ...state,
+                startCheck: action.payload
+            }
+
+        case ACTIONS.END_CHECK:
+
+            return {
+                ...state,
+                endCheck: action.payload
+            }
+
 
         default:
             return state

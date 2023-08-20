@@ -14,10 +14,18 @@ import {
 export const EventEditSubItem_Loc = ({ eventItem, imgUrl, typeInput }) => {
   const { dispatch } = useEvent();
   const [editLocation, setEditLocation] = useState(eventItem);
+  const [locCheck, setLocCheck] = useState(false);
 
   useEffect(() => {
-    dispatch({ type: ACTIONS.EDIT_LOC, payload: editLocation });
+    if (editLocation !== "" && editLocation !== eventItem) {
+      setLocCheck(locCheck.length <= 3);
+      dispatch({ type: ACTIONS.EDIT_LOC, payload: editLocation });
+    }
   }, [editLocation, dispatch, eventItem]);
+
+  useEffect(() => {
+    dispatch({ type: ACTIONS.LOC_CHECK, payload: locCheck });
+  }, [locCheck, dispatch]);
 
   return (
     <Stack direction="row">

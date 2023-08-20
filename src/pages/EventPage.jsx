@@ -54,6 +54,9 @@ export const EventPage = () => {
   const [editCreator, setEditCreator] = useState(false);
   const [dateCheck, setDateCheck] = useState(false);
   const [titleCheck, setTitleCheck] = useState(false);
+  const [locCheck, setLocCheck] = useState(false);
+  const [startCheck, setStartCheck] = useState(false);
+  const [endCheck, setEndCheck] = useState(false);
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const [imageUrl, setImageUrl] = useState(event.image);
   const [showSave, setShowSave] = useState(true);
@@ -96,7 +99,7 @@ export const EventPage = () => {
 
   useEffect(() => {
     if (state.saveToggle) {
-      if (!dateCheck) {
+      if (!dateCheck || !titleCheck || !locCheck || !startCheck || !endCheck) {
         setShowSave(false);
       } else {
         setShowSave(true);
@@ -115,6 +118,9 @@ export const EventPage = () => {
     setNewEnd(state.editEnd);
     setDateCheck(state.dateCheck);
     setTitleCheck(state.titleCheck);
+    setLocCheck(state.locCheck);
+    setStartCheck(state.startCheck);
+    setEndCheck(state.endCheck);
   }, [
     state.editTitle,
     state.editDescription,
@@ -124,6 +130,10 @@ export const EventPage = () => {
     state.editEnd,
     state.dateCheck,
     state.titleCheck,
+    state.locCheck,
+    state.startCheck,
+    state.endCheck,
+    dateCheck,
   ]);
 
   useEffect(() => {
@@ -157,12 +167,6 @@ export const EventPage = () => {
       window.removeEventListener("resize", updateDimension);
     };
   }, [screenSize]);
-
-  const handleCancel = () => {
-    setIsEditable(!isEditable);
-    setTitleCheck(false);
-    setNewTitle(event.title);
-  };
 
   const handleSubmit = async () => {
     const updatedEventData = {
@@ -352,7 +356,7 @@ export const EventPage = () => {
                       filter: "auto",
                       blur: "0.5px",
                     }}
-                    onClick={handleCancel}
+                    onClick={() => setIsEditable(!isEditable)}
                   />
                 </Tooltip>
               </Stack>
@@ -476,27 +480,30 @@ export const EventPage = () => {
             </Center>
           </CardBody>
         </Card>
-        <Stack
-          direction={"column"}
-          color="brand.300"
-          m={4}
-          fontSize={"md"}
-          fontWeight={"semibold"}
-          textAlign={"center"}
-        >
-          {dateCheck && isEditable && (
-            <Text>
-              The end date-time is before or at the start date-time. {<br />}{" "}
-              This is not allowed.
-            </Text>
-          )}
-          {titleCheck && isEditable && (
-            <Text>
-              The title consists out of 3 or less characters. This is not
-              allowed.
-            </Text>
-          )}
-        </Stack>
+        {isEditable && (
+          <Stack
+            direction={"column"}
+            color="brand.300"
+            m={4}
+            fontSize={"md"}
+            fontWeight={"semibold"}
+            textAlign={"center"}
+          >
+            {dateCheck && (
+              <Text>
+                The end date-time is before or at the start date-time. {<br />}{" "}
+                This is not allowed.
+              </Text>
+            )}
+            {titleCheck && (
+              <Text>
+                The title consists out of 3 or less characters. This is not
+                allowed.
+              </Text>
+            )}
+            {locCheck && <Text>The location is not valid.</Text>}
+          </Stack>
+        )}
       </GridItem>
     </Grid>
   );
