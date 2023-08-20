@@ -2,7 +2,8 @@ export const initialState = {
     searchTerm: "",
     categorySelected: "no filter",
     saveToggle: true,
-    dateCheck: false
+    dateCheck: false,
+    titleCheck: false
 }
 
 export const ACTIONS = {
@@ -15,7 +16,8 @@ export const ACTIONS = {
     EDIT_CATS: "edit-cats",
     EDIT_START: "edit-start",
     EDIT_END:   "edit-end",
-    DATE_CHECK: "date-check"
+    DATE_CHECK: "date-check",
+    TITLE_CHECK: "title-check"
   };
 
 const eventReducer = (state, action) => {
@@ -89,6 +91,13 @@ const eventReducer = (state, action) => {
             return {
                 ...state,
                 dateCheck: action.payload
+            }
+
+        case ACTIONS.TITLE_CHECK:
+
+            return {
+                ...state,
+                titleCheck: action.payload
             }
 
         default:

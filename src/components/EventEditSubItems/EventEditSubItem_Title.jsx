@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { ACTIONS } from "../eventReducer";
 import { useEvent } from "../EventContext";
 import {
-  Stack,
   Center,
   Editable,
   EditableInput,
@@ -12,28 +11,30 @@ import {
 export const EventEditSubItem_Title = ({ eventItem }) => {
   const { dispatch } = useEvent();
   const [editTitle, setEditTitle] = useState(eventItem);
+  const [titleCheck, setTitleCheck] = useState(false);
 
   useEffect(() => {
-    dispatch({ type: ACTIONS.EDIT_TITLE, payload: editTitle });
+    if (editTitle !== "" && editTitle !== eventItem) {
+      setTitleCheck(editTitle.length <= 4);
+      dispatch({ type: ACTIONS.EDIT_TITLE, payload: editTitle });
+    }
   }, [editTitle, dispatch, eventItem]);
 
+  useEffect(() => {
+    dispatch({ type: ACTIONS.TITLE_CHECK, payload: titleCheck });
+  }, [titleCheck, dispatch]);
+
   return (
-    <Stack
-      direction="row"
-      style={{
-        cursor: "url(/EditCursor.png), auto",
-      }}
-    >
-      <Center>
-        <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <EditablePreview cursor={"crosshair"} />
-          <EditableInput
-            bg="brand.100"
-            value={editTitle}
-            onChange={(e) => setEditTitle(e.target.value)}
-          />
-        </Editable>
-      </Center>
-    </Stack>
+    <Center>
+      <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
+        <EditablePreview cursor={"crosshair"} minWidth={"150px"} />
+        <EditableInput
+          bg="brand.100"
+          value={editTitle}
+          onChange={(e) => setEditTitle(e.target.value)}
+          required
+        />
+      </Editable>
+    </Center>
   );
 };
