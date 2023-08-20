@@ -3,26 +3,17 @@ import { Tooltip, Image, Flex, Text } from "@chakra-ui/react";
 
 export const Footer = () => {
   const [playMusic, setPlayMusic] = useState(true);
-  const mandaiSound = new Audio("/src/assets/MandaiSounds.mp3");
-  const [test, setTest] = useState("");
+  const [sound, setSound] = useState(new Audio("/src/assets/MandaiSounds.mp3"));
 
   const toggleSound = () => {
     if (playMusic) {
-      mandaiSound.play();
-      setTest("True");
+      sound.play();
     } else {
-      mandaiSound.pause();
-      mandaiSound.currentTime = 0;
-      setTest("False");
-      console.log(mandaiSound.src);
-      console.log(mandaiSound.currentTime);
-      console.log(mandaiSound.duration);
-      console.log(mandaiSound.volume);
-      console.log(mandaiSound.paused);
-      console.log(mandaiSound.ended);
-      console.log(mandaiSound.muted);
+      sound.pause();
+      sound.currentTime = 0;
     }
     setPlayMusic(!playMusic);
+    setSound(sound);
   };
 
   return (
@@ -34,14 +25,12 @@ export const Footer = () => {
     >
       <Text color={"brand.100"}>
         © 2023 JM Productions. All rights reserved{" "}
-        {/* {playMusic ? "True" : "False"} */}
-        {test}
       </Text>
       <Tooltip
         label={
           playMusic
-            ? "Press to turn the music off"
-            : "Press to turn the music on"
+            ? "Press to turn the music on"
+            : "Press to turn the music off"
         }
       >
         <Image
