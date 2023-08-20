@@ -98,16 +98,13 @@ export const EventPage = () => {
   };
 
   useEffect(() => {
-    if (state.saveToggle) {
-      if (!dateCheck || !titleCheck || !locCheck || !startCheck || !endCheck) {
-        setShowSave(false);
-      } else {
-        setShowSave(true);
-      }
-    } else {
+    if (dateCheck || titleCheck || locCheck || startCheck || endCheck) {
       setShowSave(false);
+    } else {
+      setShowSave(true);
+      console.log("ELSE - ShowSave: ", showSave);
     }
-  }, [state.saveToggle]);
+  }, [dateCheck, titleCheck, locCheck, startCheck, endCheck, showSave]);
 
   useEffect(() => {
     setNewTitle(state.editTitle);
@@ -133,7 +130,6 @@ export const EventPage = () => {
     state.locCheck,
     state.startCheck,
     state.endCheck,
-    dateCheck,
   ]);
 
   useEffect(() => {
