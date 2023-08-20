@@ -24,7 +24,14 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
 
   useEffect(() => {
     const editEnd = parseISO(newEnd.toISOString());
-    dispatch({ type: ACTIONS.EDIT_END, payload: editEnd });
+    if (editEnd && state.editStart && newEnd) {
+      const dateCheck = isBefore(
+        parseISO(newEnd.toISOString()),
+        parseISO(state.editStart)
+      );
+      dispatch({ type: ACTIONS.EDIT_END, payload: editEnd });
+      dispatch({ type: ACTIONS.DATE_CHECK, payload: dateCheck });
+    }
   }, [state.editStart, newEnd, dispatch, eventItem]);
 
   const getOutput = (eventItem) => {
@@ -59,8 +66,8 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
                 selected={newEnd}
                 onChange={(date) => setNewEnd(date)}
                 endDate={newEnd}
-                startDate={state.editStart}
-                minDate={state.editStart}
+                startDate={parseISO(state.editStart)}
+                minDate={parseISO(state.editStart)}
                 showTimeSelect
                 dateFormat="dd-MM-yyy HH:mm"
                 name="endTime"
@@ -69,17 +76,6 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
               {getOutput(eventItem)}
-            </Text>
-          )}
-          {isBefore(newEnd, state.editStart) && (
-            <Text
-              color="darkred"
-              fontSize={"lg"}
-              fontWeight={"semibold"}
-              mt={8}
-            >
-              The end date-time is before or at the start date-time. This is not
-              allowed.
             </Text>
           )}
         </Editable>

@@ -20,6 +20,7 @@ import {
   EditablePreview,
   Radio,
   useToast,
+  Text,
 } from "@chakra-ui/react";
 
 export const loader = async ({ params }) => {
@@ -51,6 +52,7 @@ export const EventPage = () => {
   const [imageHeight, setImageHeight] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
   const [editCreator, setEditCreator] = useState(false);
+  const [dateCheck, setDateCheck] = useState(false);
   const [selectedCreator, setSelectedCreator] = useState(event.createdBy);
   const [imageUrl, setImageUrl] = useState(event.image);
   const [showSave, setShowSave] = useState(true);
@@ -93,13 +95,7 @@ export const EventPage = () => {
 
   useEffect(() => {
     if (state.saveToggle) {
-      if (
-        state.editTitle === "" ||
-        state.editLoc === "" ||
-        state.editCats == [] ||
-        state.editStart === "" ||
-        state.editEnd === ""
-      ) {
+      if (!dateCheck) {
         setShowSave(false);
       } else {
         setShowSave(true);
@@ -116,6 +112,7 @@ export const EventPage = () => {
     setNewCats(state.editCats);
     setNewStart(state.editStart);
     setNewEnd(state.editEnd);
+    setDateCheck(state.dateCheck);
   }, [
     state.editTitle,
     state.editDescription,
@@ -123,6 +120,7 @@ export const EventPage = () => {
     state.editCats,
     state.editStart,
     state.editEnd,
+    state.dateCheck,
   ]);
 
   useEffect(() => {
@@ -386,6 +384,17 @@ export const EventPage = () => {
                 }}
               />
             </Tooltip>
+            {dateCheck && (
+              <Text
+                color="darkred"
+                fontSize={"lg"}
+                fontWeight={"semibold"}
+                mt={8}
+              >
+                The end date-time is before or at the start date-time. This is
+                not allowed.
+              </Text>
+            )}
           </Stack>
         </Card>
       </GridItem>
