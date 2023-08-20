@@ -2,7 +2,6 @@ import { useLoaderData, redirect, Form } from "react-router-dom";
 import { InputField } from "../components/InputField";
 import { convertToLocalDate } from "../components/convertDate";
 import "moment-timezone";
-
 import {
   Box,
   Grid,
@@ -22,6 +21,7 @@ import {
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
+import { isBefore } from "../components/isBefore";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
@@ -78,10 +78,6 @@ export const CreateEventsPage = () => {
     }
     setSelectedCategories(new Set(selectedCategories));
   };
-
-  function isBefore(date1, date2) {
-    return date1 <= date2;
-  }
 
   function getCurrentDimension() {
     return {
