@@ -97,7 +97,13 @@ export const EventPage = () => {
   };
 
   useEffect(() => {
-    if (dateCheck || titleCheck || locCheck) {
+    if (
+      dateCheck ||
+      titleCheck ||
+      locCheck ||
+      newTitle.length <= 3 ||
+      newLoc.length <= 3
+    ) {
       setShowSave(false);
     } else {
       setShowSave(true);
@@ -105,9 +111,17 @@ export const EventPage = () => {
   }, [dateCheck, titleCheck, locCheck, showSave]);
 
   useEffect(() => {
-    setNewTitle(state.editTitle);
+    if (state.editTitle === undefined) {
+      setNewTitle(event.title);
+    } else {
+      setNewTitle(state.editTitle);
+    }
     setNewDescr(state.editDescription);
-    setNewLoc(state.editLocation);
+    if (state.editLocation === undefined) {
+      setNewLoc(event.location);
+    } else {
+      setNewLoc(state.editLocation);
+    }
     setNewCats(state.editCats);
     setNewStart(state.editStart);
     setNewEnd(state.editEnd);
@@ -487,13 +501,15 @@ export const EventPage = () => {
                 This is not allowed.
               </Text>
             )}
-            {titleCheck && (
+            {(titleCheck || newTitle.length <= 3) && (
               <Text>
                 The title consists out of 3 or less characters. This is not
                 allowed.
               </Text>
             )}
-            {locCheck && <Text>The location is not valid.</Text>}
+            {(locCheck || newLoc.length <= 3) && (
+              <Text>The location is not valid.</Text>
+            )}
           </Stack>
         )}
       </GridItem>
