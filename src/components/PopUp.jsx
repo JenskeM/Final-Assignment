@@ -29,6 +29,7 @@ export const PopUp = ({
   borderStyle,
   borderRad,
   height,
+  showClose,
 }) => {
   if (!show) return null;
 
@@ -40,21 +41,23 @@ export const PopUp = ({
         borderRadius={borderRad}
         h={height}
       >
-        <Tooltip label="Click to close the pop-up">
-          <Image
-            bg="brand.600"
-            onClick={onClose}
-            src="/src/assets/Cancel.png"
-            h={"30px"}
-            p={1}
-            cursor={"pointer"}
-            borderRadius={"50%"}
-            _hover={{ backgroundColor: "brand.200" }}
-            position="absolute"
-            top="20px"
-            right="40px"
-          />
-        </Tooltip>
+        {showClose && (
+          <Tooltip label="Click to close the pop-up">
+            <Image
+              bg="brand.600"
+              onClick={onClose}
+              src="/src/assets/Cancel.png"
+              h={"30px"}
+              p={1}
+              cursor={"pointer"}
+              borderRadius={"50%"}
+              _hover={{ backgroundColor: "brand.200" }}
+              position="absolute"
+              top="20px"
+              right="40px"
+            />
+          </Tooltip>
+        )}
         {children}
       </Center>
     </>

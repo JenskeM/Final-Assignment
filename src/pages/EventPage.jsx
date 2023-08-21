@@ -230,6 +230,7 @@ export const EventPage = () => {
         height={"35%"}
         borderStyle={"10px solid darkred"}
         borderRad={"20px"}
+        showClose={true}
       >
         <Flex direction={"column"} alignItems="center">
           <Stack direction={"row"} mt={"50px"}>

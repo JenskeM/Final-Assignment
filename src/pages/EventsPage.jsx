@@ -154,6 +154,7 @@ export const EventsPage = () => {
             onClose={() => setShowFilter(false)}
             borderRad={"50%"}
             height={"25%"}
+            showClose={true}
           >
             <RadioGroup
               onChange={setRadioValue}

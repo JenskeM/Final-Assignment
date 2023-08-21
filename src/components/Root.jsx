@@ -41,6 +41,7 @@ export const Root = () => {
         onClose={() => setShowPopup(false)}
         height={"25%"}
         borderRad={"20px"}
+        showClose={false}
       >
         <Flex direction={"row"} alignItems={"center"}>
           <Image
