@@ -6,6 +6,7 @@ import { Box, Image, Text, Button, Stack, Flex } from "@chakra-ui/react";
 import { EventProvider } from "./EventContext";
 import { Footer } from "./Footer";
 import { PopUp } from "./PopUp";
+import { CookiesShower } from "./CookiesShower";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
@@ -18,17 +19,19 @@ export const loader = async () => {
 export const Root = () => {
   const { categories } = useLoaderData();
   const [showMenu, setShowMenu] = useState(false);
-  const [showCookies, setShowCookies] = useState(true);
+  const [ShowPopup, setShowPopup] = useState(true);
+  const [showCookies, setShowCookies] = useState(false);
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
+  const handleYes = () => {
+    setShowCookies(true);
+    setShowPopup(false);
   };
 
   return (
     <EventProvider>
       <PopUp
-        show={showCookies}
-        onClose={() => setShowCookies(false)}
+        show={ShowPopup}
+        onClose={() => setShowPopup(false)}
         height={"25%"}
         borderRad={"20px"}
       >
@@ -47,13 +50,17 @@ export const Root = () => {
               Do you also want some cookies?
             </Text>
             <Stack direction={"row"} pt={5}>
-              <Button bg="brand.600" _hover={{ backgroundColor: "brand.300" }}>
+              <Button
+                bg="brand.600"
+                _hover={{ backgroundColor: "brand.300" }}
+                onClick={handleYes}
+              >
                 Mmmm, yes please!
               </Button>
               <Button
                 bg="brand.600"
                 _hover={{ backgroundColor: "brand.300" }}
-                onClick={() => setShowCookies(false)}
+                onClick={() => setShowPopup(false)}
               >
                 No thanks, I am full
               </Button>
@@ -61,8 +68,9 @@ export const Root = () => {
           </Stack>
         </Flex>
       </PopUp>
+      {showCookies && <CookiesShower />}
       <Box>
-        <Navigation toggleMenu={toggleMenu} />
+        <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}
         <Outlet />
         <Footer />
