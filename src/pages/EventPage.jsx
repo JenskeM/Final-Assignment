@@ -222,7 +222,23 @@ export const EventPage = () => {
       h={(isEditable || screenSize.height > 700) && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
-      <PopUp show={showDelete} onClose={() => setShowDelete(false)}></PopUp>
+      <PopUp show={showDelete} onClose={() => setShowDelete(false)}>
+        <Stack direction={"column"}>
+          <Stack direction={"row"}>
+            <Image
+              src="/src/assets/Warning.png"
+              h={"55px"}
+              w={"55px"}
+              zIndex={1000}
+            />
+            <Text fontWeight={"semibold"} color="darkred">
+              Are you REALLY REALLY sure that you want to delete this event?{" "}
+              {<br />}
+              This cannot be undone...
+            </Text>
+          </Stack>
+        </Stack>
+      </PopUp>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
           <CardBody>
