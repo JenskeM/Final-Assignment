@@ -10,7 +10,6 @@ const popupStyle = {
   padding: "50px",
   zIndex: 1000,
   color: "#202721",
-  height: "25%",
 };
 
 const overlayStyle = {
@@ -23,13 +22,24 @@ const overlayStyle = {
   zIndex: 1000,
 };
 
-export const PopUp = ({ children, show, onClose, borderRad }) => {
+export const PopUp = ({
+  children,
+  show,
+  onClose,
+  borderStyle,
+  borderRad,
+  height,
+}) => {
   if (!show) return null;
 
   return (
     <>
       <Box style={overlayStyle} onClick={onClose} />
-      <Center style={popupStyle} borderRadius={borderRad}>
+      <Center
+        style={{ ...popupStyle, border: borderStyle }}
+        borderRadius={borderRad}
+        h={height}
+      >
         <Tooltip label="Click to close the pop-up">
           <Image
             bg="brand.600"

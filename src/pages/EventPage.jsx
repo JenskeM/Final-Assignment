@@ -22,6 +22,8 @@ import {
   Radio,
   useToast,
   Text,
+  Button,
+  Flex,
 } from "@chakra-ui/react";
 
 export const loader = async ({ params }) => {
@@ -222,9 +224,15 @@ export const EventPage = () => {
       h={(isEditable || screenSize.height > 700) && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
-      <PopUp show={showDelete} onClose={() => setShowDelete(false)}>
-        <Stack direction={"column"}>
-          <Stack direction={"row"}>
+      <PopUp
+        show={showDelete}
+        onClose={() => setShowDelete(false)}
+        height={"35%"}
+        borderStyle={"10px solid darkred"}
+        borderRad={"20px"}
+      >
+        <Flex direction={"column"} alignItems="center">
+          <Stack direction={"row"} mt={"50px"}>
             <Image
               src="/src/assets/Warning.png"
               h={"55px"}
@@ -237,7 +245,17 @@ export const EventPage = () => {
               This cannot be undone...
             </Text>
           </Stack>
-        </Stack>
+          <Button
+            fontWeight={"bold"}
+            bg={"brand.300"}
+            borderRadius={"20px"}
+            width={"20%"}
+            _hover={{ backgroundColor: "brand.600" }}
+            mt={5}
+          >
+            DELETE
+          </Button>
+        </Flex>
       </PopUp>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
