@@ -4,7 +4,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useEvent } from "../components/EventContext";
 import { EventSubItem } from "../components/EventSubItem";
 import { ValidationInput } from "../components/ValidationInput";
-import { DeletePopUp } from "../components/DeletePopUp";
+import { PopUp } from "../components/PopUp";
 import {
   Heading,
   Center,
@@ -222,10 +222,7 @@ export const EventPage = () => {
       h={(isEditable || screenSize.height > 700) && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
-      <DeletePopUp
-        show={showDelete}
-        onClose={() => setShowDelete(false)}
-      ></DeletePopUp>
+      <PopUp show={showDelete} onClose={() => setShowDelete(false)}></PopUp>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
           <CardBody>

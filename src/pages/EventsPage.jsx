@@ -13,7 +13,7 @@ import { useLoaderData, Link } from "react-router-dom";
 import { EventItemCard } from "../components/EventItemCard";
 import { useEvent } from "../components/EventContext";
 import { ACTIONS } from "../components/eventReducer";
-import { FilterPopUp } from "../components/FilterPopUp";
+import { PopUp } from "../components/PopUp";
 
 export const loader = async () => {
   const events = await fetch(`http://localhost:3000/events`);
@@ -149,7 +149,11 @@ export const EventsPage = () => {
     >
       {screenSize.width > 700 && (
         <>
-          <FilterPopUp show={showFilter} onClose={() => setShowFilter(false)}>
+          <PopUp
+            show={showFilter}
+            onClose={() => setShowFilter(false)}
+            borderRad={"50%"}
+          >
             <RadioGroup
               onChange={setRadioValue}
               value={radioValue}
@@ -171,7 +175,7 @@ export const EventsPage = () => {
                 </Radio>
               ))}
             </RadioGroup>
-          </FilterPopUp>
+          </PopUp>
           <Tooltip label={"Press to change the filter"}>
             <Image
               src="/src/assets/Filter.png"

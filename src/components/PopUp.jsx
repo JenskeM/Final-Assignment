@@ -23,13 +23,13 @@ const overlayStyle = {
   zIndex: 1000,
 };
 
-export const DeletePopUp = ({ children, show, onClose }) => {
+export const PopUp = ({ children, show, onClose, borderRad }) => {
   if (!show) return null;
 
   return (
     <>
       <Box style={overlayStyle} onClick={onClose} />
-      <Center style={popupStyle}>
+      <Center style={popupStyle} borderRadius={borderRad}>
         <Tooltip label="Click to close the pop-up">
           <Image
             bg="brand.600"
