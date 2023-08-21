@@ -10,9 +10,10 @@
 
 .cookie {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 30px;
+  height: 30px;
   background-image: url("/src/assets/Cookie.png");
+  background-size: cover;
   animation: cookiesShower 5s linear infinite;
 }
 

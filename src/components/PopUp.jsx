@@ -34,7 +34,7 @@ export const PopUp = ({
 
   return (
     <>
-      <Box style={overlayStyle} onClick={onClose} />
+      <Box style={overlayStyle} />
       <Center
         style={{ ...popupStyle, border: borderStyle }}
         borderRadius={borderRad}
