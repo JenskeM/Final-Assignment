@@ -8,6 +8,7 @@ import { Footer } from "./Footer";
 import { PopUp } from "./PopUp";
 import { CookiesShower } from "./CookiesShower";
 import "./cookies.css";
+import { TrashCookie } from "./TrashCookie";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
@@ -22,6 +23,7 @@ export const Root = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [ShowPopup, setShowPopup] = useState(true);
   const [showCookies, setShowCookies] = useState(false);
+  const [noCookie, setNoCookie] = useState(false);
 
   const handleYes = () => {
     setShowCookies(true);
@@ -32,6 +34,17 @@ export const Root = () => {
     setTimeout(() => {
       setShowCookies(false);
     }, 10000);
+  }
+
+  const handleNo = () => {
+    setShowPopup(false);
+    setNoCookie(true);
+  };
+
+  if (noCookie) {
+    setTimeout(() => {
+      setNoCookie(false);
+    }, 4000);
   }
 
   return (
@@ -68,7 +81,7 @@ export const Root = () => {
               <Button
                 bg="brand.600"
                 _hover={{ backgroundColor: "brand.300" }}
-                onClick={() => setShowPopup(false)}
+                onClick={handleNo}
               >
                 No thanks, I am full
               </Button>
@@ -77,6 +90,7 @@ export const Root = () => {
         </Flex>
       </PopUp>
       {showCookies && <CookiesShower show />}
+      {noCookie && <TrashCookie />}
       <Box>
         <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}

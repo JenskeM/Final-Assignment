@@ -14,7 +14,7 @@
   height: 30px;
   background-image: url("/src/assets/Cookie.png");
   background-size: cover;
-  animation: cookiesShower 5s linear infinite, fadeOut 5s linear 5s forwards;
+  animation: cookiesShower 5s linear, fadeOut 5s linear 5s forwards;
 }
 
 @keyframes cookiesShower {
