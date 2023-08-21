@@ -27,17 +27,18 @@
       "id": 1
     },
     {
-      "id": 2,
-      "createdBy": 1,
-      "title": "Laser Tag mania",
-      "description": "Let's play laser tag!",
+      "title": "Laser Tag Escape Room",
+      "description": "Play laser tag while you need to escape!",
       "image": "https://www.ctvnews.ca/polopoly_fs/1.5118552.1600965663!/httpImage/image.jpg_gen/derivatives/landscape_1020/image.jpg",
+      "location": "Blinded by the Lights Laser Tag, 16 Main St.",
+      "createdBy": 2,
       "categoryIds": [
-        2
+        2,
+        3
       ],
-      "location": "Blinded by the Lights Laser Tag, 15 Main St.",
-      "startTime": "2023-04-06T18:46",
-      "endTime": "2023-04-06T17:46"
+      "startTime": "2023-04-06T14:00:00.000Z",
+      "endTime": "2023-04-06T16:30:00.000Z",
+      "id": 2
     },
     {
       "id": 3,

@@ -4,6 +4,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useEvent } from "../components/EventContext";
 import { EventSubItem } from "../components/EventSubItem";
 import { ValidationInput } from "../components/ValidationInput";
+import { DeletePopUp } from "../components/DeletePopUp";
 import {
   Heading,
   Center,
@@ -52,6 +53,7 @@ export const EventPage = () => {
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const [editCreator, setEditCreator] = useState(false);
   const [dateCheck, setDateCheck] = useState(false);
   const [titleCheck, setTitleCheck] = useState(false);
@@ -220,6 +222,10 @@ export const EventPage = () => {
       h={(isEditable || screenSize.height > 700) && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
+      <DeletePopUp
+        show={showDelete}
+        onClose={() => setShowDelete(false)}
+      ></DeletePopUp>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
         <Card boxShadow="2xl" m={7} style={eventBgStyle}>
           <CardBody>
@@ -401,6 +407,7 @@ export const EventPage = () => {
                   filter: "auto",
                   blur: "0.5px",
                 }}
+                onClick={() => setShowDelete(true)}
               />
             </Tooltip>
           </Stack>
