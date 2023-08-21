@@ -124,8 +124,6 @@ export const EventPage = () => {
     state.dateCheck,
     state.titleCheck,
     state.locCheck,
-    state.startCheck,
-    state.endCheck,
   ]);
 
   useEffect(() => {
