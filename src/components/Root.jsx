@@ -22,7 +22,6 @@ export const Root = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [ShowPopup, setShowPopup] = useState(true);
   const [showCookies, setShowCookies] = useState(false);
-  const [isFading, setIsFading] = useState(true);
 
   const handleYes = () => {
     setShowCookies(true);
@@ -31,12 +30,8 @@ export const Root = () => {
 
   if (showCookies) {
     setTimeout(() => {
-      setIsFading(true);
-    }, 400);
-
-    setTimeout(() => {
       setShowCookies(false);
-    }, 6000);
+    }, 10000);
   }
 
   return (
@@ -80,9 +75,7 @@ export const Root = () => {
           </Stack>
         </Flex>
       </PopUp>
-      {showCookies && (
-        <CookiesShower show className={isFading ? "" : "fade-out"} />
-      )}
+      {showCookies && <CookiesShower show />}
       <Box>
         <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}
