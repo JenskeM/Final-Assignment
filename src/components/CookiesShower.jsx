@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./cookies.css";
 
-export const CookiesShower = () => {
+export const CookiesShower = ({ show }) => {
   const [cookies, setCookies] = useState([]);
+  if (!show) return null;
 
   useEffect(() => {
     const makeShower = () => {
@@ -18,7 +19,7 @@ export const CookiesShower = () => {
     };
 
     makeShower();
-  }, []);
+  }, [show]);
 
   return (
     <div className="cookie-container">

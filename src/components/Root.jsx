@@ -68,7 +68,7 @@ export const Root = () => {
           </Stack>
         </Flex>
       </PopUp>
-      {showCookies && <CookiesShower />}
+      {showCookies && <CookiesShower show />}
       <Box>
         <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}
