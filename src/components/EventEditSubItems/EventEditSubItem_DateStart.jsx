@@ -64,6 +64,8 @@ export const EventEditSubItem_DateStart = ({
               name="startTime"
               width="300px"
               className="custom-datepicker-input"
+              onKeyDown={(e) => e.preventDefault()}
+              dropdownMode="select"
             />
           ) : (
             <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>

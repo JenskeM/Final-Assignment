@@ -71,6 +71,8 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
                 showTimeSelect
                 dateFormat="dd-MM-yyy HH:mm"
                 name="endTime"
+                onKeyDown={(e) => e.preventDefault()}
+                dropdownMode="select"
               />
             </Stack>
           ) : (
