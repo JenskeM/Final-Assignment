@@ -7,6 +7,7 @@ import { EventProvider } from "./EventContext";
 import { Footer } from "./Footer";
 import { PopUp } from "./PopUp";
 import { CookiesShower } from "./CookiesShower";
+import "./cookies.css";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
@@ -21,11 +22,22 @@ export const Root = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [ShowPopup, setShowPopup] = useState(true);
   const [showCookies, setShowCookies] = useState(false);
+  const [isFading, setIsFading] = useState(true);
 
   const handleYes = () => {
     setShowCookies(true);
     setShowPopup(false);
   };
+
+  if (showCookies) {
+    setTimeout(() => {
+      setIsFading(true);
+    }, 400);
+
+    setTimeout(() => {
+      setShowCookies(false);
+    }, 6000);
+  }
 
   return (
     <EventProvider>
@@ -68,7 +80,9 @@ export const Root = () => {
           </Stack>
         </Flex>
       </PopUp>
-      {showCookies && <CookiesShower show />}
+      {showCookies && (
+        <CookiesShower show className={isFading ? "" : "fade-out"} />
+      )}
       <Box>
         <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}
