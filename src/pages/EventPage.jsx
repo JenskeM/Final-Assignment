@@ -223,6 +223,7 @@ export const EventPage = () => {
       const response = fetch(`http://localhost:3000/events/${event.id}`, {
         method: "DELETE",
       });
+      console.log(response);
 
       if (response.ok) {
         toast({
