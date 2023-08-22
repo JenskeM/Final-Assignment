@@ -218,6 +218,33 @@ export const EventPage = () => {
     }
   };
 
+  const handleDelete = async () => {
+    try {
+      const response = fetch(`http://localhost:3000/events/${event.id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        toast({
+          title: "DELETION COMPLETED",
+          description: "The event you selected has been successfully deleted.",
+          duration: 3000,
+          isClosable: true,
+        });
+        navigate("/");
+      } else {
+        toast({
+          title: "Failure....!!😭",
+          description: `An error has occurred.`,
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      console.error("An error has occurred ", error);
+    }
+  };
+
   return (
     <Grid
       gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
@@ -253,6 +280,7 @@ export const EventPage = () => {
             width={"20%"}
             _hover={{ backgroundColor: "brand.600" }}
             mt={5}
+            onClick={handleDelete}
           >
             DELETE
           </Button>
