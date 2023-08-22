@@ -218,7 +218,7 @@ export const EventPage = () => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     try {
       const response = fetch(`http://localhost:3000/events/${event.id}`, {
         method: "DELETE",
