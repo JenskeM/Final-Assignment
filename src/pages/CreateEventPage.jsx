@@ -22,13 +22,16 @@ import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "./react-datepicker.css";
 import { isBefore } from "../components/isBefore";
+import { getCurrentDimension } from "../components/getCurrentDimension";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
   const users = await fetch(`http://localhost:3000/users`);
+
   return {
     categories: await categories.json(),
     users: await users.json(),
+    screenSize: getCurrentDimension(),
   };
 };
 
@@ -53,12 +56,11 @@ export const action = async ({ request }) => {
 };
 
 export const CreateEventsPage = () => {
-  const { categories, users } = useLoaderData();
+  const { categories, users, screenSize } = useLoaderData();
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const [selectedUser, setSelectedUser] = useState();
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [marginLR, setMarginLR] = useState();
   const [transX, setTransX] = useState();
   const toast = useToast();
@@ -79,23 +81,11 @@ export const CreateEventsPage = () => {
     setSelectedCategories(new Set(selectedCategories));
   };
 
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
-
   useEffect(() => {
-    const updateDimension = () => {
-      setScreenSize(getCurrentDimension());
-    };
-    window.addEventListener("resize", updateDimension);
     changeMarginLR();
     changeX();
 
     return () => {
-      window.removeEventListener("resize", updateDimension);
       changeMarginLR();
       changeX();
     };
