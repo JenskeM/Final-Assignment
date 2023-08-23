@@ -5,6 +5,7 @@ import { useEvent } from "../components/EventContext";
 import { EventSubItem } from "../components/EventSubItem";
 import { ValidationInput } from "../components/ValidationInput";
 import { PopUp } from "../components/PopUp";
+import { getCurrentDimension } from "../components/getCurrentDimension";
 import {
   Heading,
   Center,
@@ -35,6 +36,7 @@ export const loader = async ({ params }) => {
     event: await event.json(),
     categories: await categories.json(),
     users: await users.json(),
+    screenSize: getCurrentDimension(),
   };
 };
 
@@ -48,10 +50,9 @@ export const TYPES = {
 };
 
 export const EventPage = () => {
-  const { event, categories, users } = useLoaderData();
+  const { event, categories, users, screenSize } = useLoaderData();
   const { state } = useEvent();
   const navigate = useNavigate();
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
@@ -157,24 +158,6 @@ export const EventPage = () => {
         );
       });
   }, [event.image]);
-
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
-
-  useEffect(() => {
-    const updateDimension = () => {
-      setScreenSize(getCurrentDimension());
-    };
-    window.addEventListener("resize", updateDimension);
-
-    return () => {
-      window.removeEventListener("resize", updateDimension);
-    };
-  }, [screenSize]);
 
   const handleSubmit = async () => {
     const updatedEventData = {
