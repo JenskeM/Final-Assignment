@@ -71,11 +71,15 @@ export const Root = () => {
       <PopUp
         show={ShowPopup}
         onClose={() => setShowPopup(false)}
-        height={"25%"}
+        height={screenSize.width < 700 ? "35%" : "25%"}
         borderRad={"20px"}
         showClose={false}
       >
-        <Flex direction={"row"} alignItems={"center"}>
+        <Flex
+          direction={"row"}
+          alignItems={"center"}
+          style={screenSize.width < 700 && { transform: "translate(10%, -5%)" }}
+        >
           {screenSize.width > 700 && (
             <Image
               src="/src/assets/CookieMonster.png"
