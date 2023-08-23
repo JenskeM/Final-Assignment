@@ -147,7 +147,7 @@ export const CreateEventsPage = () => {
               />
             </Grid>
           </FormControl>
-          <FormControl variant="floatingLabel" isRequired>
+          <FormControl isRequired>
             <InputField
               labelText="Image url"
               nameText="image"
