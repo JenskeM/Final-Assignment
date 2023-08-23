@@ -102,7 +102,6 @@ export const CreateEventsPage = () => {
 
   return (
     <Box bg={"brand.600"} pt={5} pb={"200px"} style={createBgStyle}>
-      <div>Screen width: {screenSize.width}</div>
       <Heading mb={10} textAlign={"center"} color={"brand.100"}>
         Add a new event
       </Heading>
