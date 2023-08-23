@@ -65,6 +65,8 @@ export const CreateEventsPage = () => {
   const [transX, setTransX] = useState();
   const toast = useToast();
 
+  console.log(marginLR);
+
   const createBgStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73)), url("src/assets/Background.jpeg")`,
     backgroundSize: "cover",
@@ -84,17 +86,14 @@ export const CreateEventsPage = () => {
   useEffect(() => {
     changeMarginLR();
     changeX();
-
-    return () => {
-      changeMarginLR();
-      changeX();
-    };
   }, [screenSize]);
 
   const changeMarginLR = () => {
-    setMarginLR((screenSize.width - 110 - 300) / 2);
-    //110 is the width of the labels in the form
-    //300 is the width of the controls in the form
+    setMarginLR(
+      (screenSize.width - (screenSize.width <= 700 ? 300 : 110 + 300)) / 2
+    );
+    // screenSize.width <= 700: 300 is the width of the controls in the form
+    // screenSize.width > 700: 110 is the width of the labels in the form
   };
 
   const changeX = () => {
@@ -103,6 +102,7 @@ export const CreateEventsPage = () => {
 
   return (
     <Box bg={"brand.600"} pt={5} pb={"200px"} style={createBgStyle}>
+      <div>Screen width: {screenSize.width}</div>
       <Heading mb={10} textAlign={"center"} color={"brand.100"}>
         Add a new event
       </Heading>
@@ -116,7 +116,7 @@ export const CreateEventsPage = () => {
           rowGap={8}
           color={"brand.300"}
           sx={{
-            transform: screenSize.width <= 360 && `translateX(${transX}px)`,
+            transform: screenSize.width <= 700 && `translateX(${transX}px)`,
           }}
         >
           <FormControl isRequired>
@@ -126,7 +126,7 @@ export const CreateEventsPage = () => {
               screenSize={screenSize}
             />
             <FormHelperText
-              ml={screenSize.width <= 360 ? 0 : 110}
+              ml={screenSize.width <= 700 ? 0 : 110}
               color="brand.400"
             >
               Make it a fancy one.
@@ -135,7 +135,7 @@ export const CreateEventsPage = () => {
           <FormControl>
             <Grid
               gridTemplateColumns={
-                screenSize.width <= 360 ? "300px" : "110px 300px"
+                screenSize.width <= 700 ? "300px" : "110px 300px"
               }
             >
               <FormLabel>Description</FormLabel>
@@ -147,7 +147,7 @@ export const CreateEventsPage = () => {
               />
             </Grid>
           </FormControl>
-          <FormControl isRequired>
+          <FormControl variant="floatingLabel" isRequired>
             <InputField
               labelText="Image url"
               nameText="image"
@@ -164,7 +164,7 @@ export const CreateEventsPage = () => {
           <FormControl isRequired>
             <Grid
               gridTemplateColumns={
-                screenSize.width <= 360 ? 300 : "110px 300px"
+                screenSize.width <= 700 ? 300 : "110px 300px"
               }
               alignItems={"center"}
             >
@@ -195,7 +195,7 @@ export const CreateEventsPage = () => {
           <FormControl>
             <Grid
               gridTemplateColumns={
-                screenSize.width <= 360 ? 300 : "110px 300px"
+                screenSize.width <= 700 ? 300 : "110px 300px"
               }
               alignItems={"center"}
             >
@@ -228,7 +228,7 @@ export const CreateEventsPage = () => {
           <FormControl isRequired>
             <Grid
               gridTemplateColumns={
-                screenSize.width <= 360 ? 300 : "110px 300px"
+                screenSize.width <= 700 ? 300 : "110px 300px"
               }
               alignItems={"center"}
               color="brand.500"
@@ -251,7 +251,7 @@ export const CreateEventsPage = () => {
             </Grid>
             <Grid
               gridTemplateColumns={
-                screenSize.width <= 360 ? 300 : "110px 300px"
+                screenSize.width <= 700 ? 300 : "110px 300px"
               }
               alignItems={"center"}
               color="brand.500"
