@@ -235,7 +235,6 @@ export const EventPage = () => {
       h={(isEditable || screenSize.height > 700) && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
-      <div>Screen width: {screenSize.width}</div>
       <PopUp
         show={showDelete}
         onClose={() => setShowDelete(false)}

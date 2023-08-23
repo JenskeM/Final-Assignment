@@ -130,7 +130,6 @@ export const EventsPage = () => {
         (filteredEvents.length < 1 && screenSize.width <= 700 && "100vh")
       }
     >
-      <div>Screen width: {screenSize.width}</div>
       {screenSize.width > 700 && (
         <>
           <PopUp
