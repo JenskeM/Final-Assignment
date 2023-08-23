@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, useLoaderData } from "react-router-dom";
 import { Navigation } from "./Navigation";
 import { Menu } from "../components/Menu";
@@ -21,6 +21,7 @@ export const loader = async () => {
 export const Root = () => {
   const { categories } = useLoaderData();
   const [showMenu, setShowMenu] = useState(false);
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [ShowPopup, setShowPopup] = useState(true);
   const [showCookies, setShowCookies] = useState(false);
   const [noCookie, setNoCookie] = useState(false);
@@ -47,6 +48,24 @@ export const Root = () => {
     }, 4000);
   }
 
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  }
+
+  useEffect(() => {
+    const updateDimension = () => {
+      setScreenSize(getCurrentDimension());
+    };
+    window.addEventListener("resize", updateDimension);
+
+    return () => {
+      window.removeEventListener("resize", updateDimension);
+    };
+  }, [screenSize]);
+
   return (
     <EventProvider>
       <PopUp
@@ -57,11 +76,13 @@ export const Root = () => {
         showClose={false}
       >
         <Flex direction={"row"} alignItems={"center"}>
-          <Image
-            src="/src/assets/CookieMonster.png"
-            h={"300px"}
-            style={{ transform: "translate(-20%)" }}
-          />
+          {screenSize.width > 700 && (
+            <Image
+              src="/src/assets/CookieMonster.png"
+              h={"300px"}
+              style={{ transform: "translate(-20%)" }}
+            />
+          )}
           <Stack
             direction={"column"}
             mt={5}
@@ -70,7 +91,7 @@ export const Root = () => {
             <Text color="brand.200" textAlign={"center"}>
               Do you also want some cookies?
             </Text>
-            <Stack direction={"row"} pt={5}>
+            <Stack direction={screenSize.width < 700 ? "column" : "row"} pt={5}>
               <Button
                 bg="brand.600"
                 _hover={{ backgroundColor: "brand.300" }}
