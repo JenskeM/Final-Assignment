@@ -14,6 +14,7 @@ import { EventItemCard } from "../components/EventItemCard";
 import { useEvent } from "../components/EventContext";
 import { ACTIONS } from "../components/eventReducer";
 import { PopUp } from "../components/PopUp";
+import { getCurrentDimension } from "../components/getCurrentDimension";
 
 export const loader = async () => {
   const events = await fetch(`http://localhost:3000/events`);
@@ -22,13 +23,13 @@ export const loader = async () => {
   return {
     events: await events.json(),
     categories: await categories.json(),
+    screenSize: getCurrentDimension(),
   };
 };
 
 export const EventsPage = () => {
-  const { events, categories } = useLoaderData();
+  const { events, categories, screenSize } = useLoaderData();
   const { dispatch, state } = useEvent();
-  const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showFilter, setShowFilter] = useState(false);
   const [radioValue, setRadioValue] = useState("no filter");
@@ -40,28 +41,10 @@ export const EventsPage = () => {
     padding: "20px",
   };
 
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
-
   const catsFiltered = ["no filter"];
   categories.map((cat) => {
     catsFiltered.push(cat.name);
   });
-
-  useEffect(() => {
-    const updateDimension = () => {
-      setScreenSize(getCurrentDimension());
-    };
-    window.addEventListener("resize", updateDimension);
-
-    return () => {
-      window.removeEventListener("resize", updateDimension);
-    };
-  }, [screenSize]);
 
   useEffect(() => {
     if (screenSize.width > 700) {

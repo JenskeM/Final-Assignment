@@ -9,12 +9,14 @@ import { PopUp } from "./PopUp";
 import { CookiesShower } from "./CookiesShower";
 import "./cookies.css";
 import { TrashCookie } from "./TrashCookie";
+import { getCurrentDimension } from "./getCurrentDimension";
 
 export const loader = async () => {
   const categories = await fetch(`http://localhost:3000/categories`);
 
   return {
     categories: await categories.json(),
+    screenSize: getCurrentDimension(),
   };
 };
 
@@ -48,13 +50,6 @@ export const Root = () => {
     }, 4000);
   }
 
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  }
-
   useEffect(() => {
     const updateDimension = () => {
       setScreenSize(getCurrentDimension());
@@ -64,7 +59,7 @@ export const Root = () => {
     return () => {
       window.removeEventListener("resize", updateDimension);
     };
-  }, [screenSize]);
+  }, []);
 
   return (
     <EventProvider>
@@ -78,7 +73,7 @@ export const Root = () => {
         <Flex
           direction={"row"}
           alignItems={"center"}
-          style={screenSize.width < 700 && { transform: "translate(10%, -5%)" }}
+          transform={screenSize.width < 700 && "translate(10%, -5%)"}
         >
           {screenSize.width > 700 && (
             <Image
@@ -119,7 +114,7 @@ export const Root = () => {
       <Box>
         <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}
-        <Outlet />
+        <Outlet screenSize={screenSize} />
         <Footer />
       </Box>
     </EventProvider>
