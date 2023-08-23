@@ -89,11 +89,9 @@ export const CreateEventsPage = () => {
   }, [screenSize]);
 
   const changeMarginLR = () => {
-    setMarginLR(
-      (screenSize.width - (screenSize.width <= 700 ? 300 : 110 + 300)) / 2
-    );
-    // screenSize.width <= 700: 300 is the width of the controls in the form
-    // screenSize.width > 700: 110 is the width of the labels in the form
+    setMarginLR((screenSize.width - 110 - 300) / 2);
+    //110 is the width of the labels in the form
+    //300 is the width of the controls in the form
   };
 
   const changeX = () => {
