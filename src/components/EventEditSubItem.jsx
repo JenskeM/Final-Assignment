@@ -1,10 +1,10 @@
 import { Stack, Image, Center, Tooltip, Editable } from "@chakra-ui/react";
-import { TYPES } from "../../pages/EventPage";
-import { EventEditSubItem_Descr } from "./EventEditSubItem_Descr";
-import { EventEditSubItem_Loc } from "./EventEditSubItem_Loc";
-import { EventEditSubItem_DateStart } from "./EventEditSubItem_DateStart";
-import { EventEditSubItem_DateEnd } from "./EventEditSubItem_DateEnd";
-import { EventEditSubItem_Cats } from "./EventEditSubItem_Cats";
+import { TYPES } from "../pages/EventPage";
+import { EventEditSubItem_Descr } from "./EventEditSubItems/EventEditSubItem_Descr";
+import { EventEditSubItem_Loc } from "./EventEditSubItems/EventEditSubItem_Loc";
+import { EventEditSubItem_DateStart } from "./EventEditSubItems/EventEditSubItem_DateStart";
+import { EventEditSubItem_DateEnd } from "./EventEditSubItems/EventEditSubItem_DateEnd";
+import { EventEditSubItem_Cats } from "./EventEditSubItems/EventEditSubItem_Cats";
 
 export const EventEditSubItem = ({
   eventItem,

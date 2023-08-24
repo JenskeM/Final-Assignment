@@ -1,5 +1,5 @@
 import { EventEditSubItem_Title } from "./EventEditSubItems/EventEditSubItem_Title";
-import { EventEditSubItem } from "./EventEditSubItems/EventEditSubItem";
+import { EventEditSubItem } from "./EventEditSubItem";
 import { EventShowSubItem } from "../components/EventShowSubItem";
 import { TYPES } from "../pages/EventPage";
 
