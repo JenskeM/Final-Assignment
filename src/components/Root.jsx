@@ -115,7 +115,7 @@ export const Root = () => {
         <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}
         <Outlet screenSize={screenSize} />
-        <Footer />
+        <Footer screenSize={screenSize} />
       </Box>
     </EventProvider>
   );

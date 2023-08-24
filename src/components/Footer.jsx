@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Tooltip, Image, Flex, Text } from "@chakra-ui/react";
 
-export const Footer = () => {
+export const Footer = ({ screenSize }) => {
   const [playMusic, setPlayMusic] = useState(true);
   const [sound, setSound] = useState(new Audio("/src/assets/MandaiSounds.mp3"));
 
@@ -23,7 +23,10 @@ export const Footer = () => {
       justify={{ base: "center", md: "space-between" }}
       align={{ base: "center", md: "center" }}
     >
-      <Text color={"brand.100"}>
+      <Text
+        color={"brand.100"}
+        fontSize={screenSize.width <= 700 && "xx-small"}
+      >
         © 2023 JM Productions. All rights reserved{" "}
       </Text>
       <Tooltip
@@ -36,7 +39,7 @@ export const Footer = () => {
         <Image
           onClick={toggleSound}
           src={playMusic ? "/src/assets/NoSound.png" : "/src/assets/Sound.png"}
-          h={"30px"}
+          h={screenSize.width <= 700 ? "20px" : "30px"}
           bg="brand.100"
           borderRadius={"50%"}
           p={1}
