@@ -1,7 +1,12 @@
+import React, { useState, useEffect } from "react";
+import { getImageSize } from "react-image-size";
 import { Box, Image, Center } from "@chakra-ui/react";
 import "./trashCookie.css";
 
 export const TrashCookie = ({ screenSize }) => {
+  const [yValue, setYValue] = useState();
+  const [imageHeight, setImageHeight] = useState(null);
+
   const overlayStyle = {
     position: "fixed",
     top: 0,
@@ -12,11 +17,22 @@ export const TrashCookie = ({ screenSize }) => {
     zIndex: 1000,
   };
 
-  console.log(screenSize.height);
+  useEffect(() => {
+    getImageSize("/src/assets/TrashCan.png")
+      .then((size) => {
+        setImageHeight(size.height);
+      })
+      .catch((error) => {
+        console.error(
+          "Error when catching the measurements form the image:",
+          error
+        );
+      });
+  });
 
-  const Yvalue = (screenSize) => {
-    return screenSize.height - 50;
-  };
+  useEffect(() => {
+    setYValue(screenSize.height - imageHeight - 120);
+  }, [screenSize, imageHeight]);
 
   return (
     <Box className="Nocookie-container" style={overlayStyle}>
@@ -31,7 +47,7 @@ export const TrashCookie = ({ screenSize }) => {
           mt={"20%"}
           src="/src/assets/TrashCan.png"
           zIndex={1000}
-          transform={screenSize.width <= 700 && `translate(15px, ${Yvalue})`}
+          transform={screenSize.width <= 700 && `translate(25px, ${yValue}px)`}
         />
       </Center>
     </Box>
