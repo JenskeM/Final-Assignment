@@ -88,7 +88,11 @@ export const Root = () => {
             direction={"column"}
             mt={5}
             transform={
-              screenSize.width > 1024 ? "translate(-10%)" : "translate(-22%)"
+              screenSize.width <= 700
+                ? "translate(-10%)"
+                : screenSize.width > 1024
+                ? "translate(-10%)"
+                : "translate(-22%)"
             }
           >
             <Text color="brand.200" textAlign={"center"}>
