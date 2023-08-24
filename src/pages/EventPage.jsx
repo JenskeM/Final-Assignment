@@ -231,7 +231,7 @@ export const EventPage = () => {
 
   return (
     <Grid
-      gridTemplateColumns={screenSize.width <= 700 ? "1fr" : "repeat(6, 1fr)"}
+      gridTemplateColumns={screenSize.width <= 1024 ? "1fr" : "repeat(6, 1fr)"}
       h={(isEditable || screenSize.height > 700) && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
@@ -271,7 +271,12 @@ export const EventPage = () => {
         </Flex>
       </PopUp>
       <GridItem colSpan={screenSize.width <= 700 ? 1 : 4}>
-        <Card boxShadow="2xl" m={7} style={eventBgStyle}>
+        <Card
+          boxShadow="2xl"
+          m={7}
+          style={eventBgStyle}
+          width={screenSize.width <= 700 && screenSize.width - 50}
+        >
           <CardBody>
             <Stack direction={"column"} spacing={"30px"} mb={8}>
               <Stack>
@@ -328,7 +333,7 @@ export const EventPage = () => {
                   screenSize.width <= 700 ? "1fr" : "repeat(2, 1fr)"
                 }
                 gap={screenSize.width <= 700 ? 2 : 8}
-                p={"25px 150px 25px 150px"}
+                p={screenSize.width <= 700 ? "5px" : "25px 150px 25px 150px"}
                 bg={"rgba(250, 245, 233, 0.5)"}
               >
                 <EventSubItem
@@ -457,7 +462,7 @@ export const EventPage = () => {
           </Stack>
         </Card>
       </GridItem>
-      <GridItem colSpan={screenSize.width <= 700 ? 1 : 2}>
+      <GridItem colSpan={screenSize.width <= 1024 ? 1 : 2}>
         <Card boxShadow="2xl" m={7} style={creatorBgStyle}>
           <CardBody>
             <Center>
