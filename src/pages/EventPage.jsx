@@ -237,7 +237,7 @@ export const EventPage = () => {
   return (
     <Grid
       gridTemplateColumns={screenSize.width <= 1024 ? "1fr" : "repeat(6, 1fr)"}
-      h={(isEditable || screenSize.height > 700) && "100vh"}
+      h={screenSize.height > 700 && "100vh"}
       bg="linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73))"
     >
       <PopUp
