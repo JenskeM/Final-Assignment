@@ -12,6 +12,12 @@ export const TrashCookie = ({ screenSize }) => {
     zIndex: 1000,
   };
 
+  console.log(screenSize.height);
+
+  const Yvalue = (screenSize) => {
+    return screenSize.height - 50;
+  };
+
   return (
     <Box className="Nocookie-container" style={overlayStyle}>
       <div
@@ -25,7 +31,7 @@ export const TrashCookie = ({ screenSize }) => {
           mt={"20%"}
           src="/src/assets/TrashCan.png"
           zIndex={1000}
-          transform={screenSize.width <= 700 && "translate(15px, 180px)"}
+          transform={screenSize.width <= 700 && `translate(15px, ${Yvalue})`}
         />
       </Center>
     </Box>
