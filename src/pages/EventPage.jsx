@@ -103,6 +103,7 @@ export const EventPage = () => {
                         You changed your mind? No worries! Just click on the Cancel-button in the bottom left corner `,
       duration: 6000,
       isClosable: true,
+      variant: "subtle",
     });
   };
 
@@ -191,6 +192,7 @@ export const EventPage = () => {
           description: `The event is successfully edited.`,
           duration: 3000,
           isClosable: true,
+          status: "success",
         });
         navigate("/");
       } else {
@@ -199,6 +201,7 @@ export const EventPage = () => {
           description: `An error has occurred.`,
           duration: 3000,
           isClosable: true,
+          status: "error",
         });
       }
     } catch (error) {
@@ -206,9 +209,9 @@ export const EventPage = () => {
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      const response = fetch(`http://localhost:3000/events/${event.id}`, {
+      const response = await fetch(`http://localhost:3000/events/${event.id}`, {
         method: "DELETE",
       });
       console.log(response);
@@ -216,22 +219,28 @@ export const EventPage = () => {
       if (response.ok) {
         toast({
           title: "DELETION COMPLETED",
-          description: "The event you selected has been successfully deleted.",
+          description: "The event you selected has been deleted.",
           duration: 3000,
           isClosable: true,
+          status: "warning",
         });
-        navigate("/");
       } else {
         toast({
           title: "Failure....!!😭",
           description: `An error has occurred.`,
           duration: 3000,
           isClosable: true,
+          status: "error",
         });
       }
     } catch (error) {
       console.error("An error has occurred ", error);
     }
+  };
+
+  const handleDeleteClick = async () => {
+    await handleDelete();
+    navigate("/");
   };
 
   return (
@@ -269,7 +278,7 @@ export const EventPage = () => {
             width={"20%"}
             _hover={{ backgroundColor: "brand.600" }}
             mt={5}
-            onClick={handleDelete}
+            onClick={handleDeleteClick}
           >
             DELETE
           </Button>
