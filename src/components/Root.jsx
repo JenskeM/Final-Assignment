@@ -66,26 +66,30 @@ export const Root = () => {
       <PopUp
         show={ShowPopup}
         onClose={() => setShowPopup(false)}
-        height={screenSize.width < 700 ? "35%" : "25%"}
+        height={screenSize.width <= 700 ? "35%" : "25%"}
         borderRad={"20px"}
         showClose={false}
       >
         <Flex
           direction={"row"}
           alignItems={"center"}
-          transform={screenSize.width < 700 && "translate(10%, -5%)"}
+          transform={screenSize.width <= 700 && "translate(10%, -5%)"}
         >
           {screenSize.width > 700 && (
             <Image
               src="/src/assets/CookieMonster.png"
-              h={"300px"}
-              style={{ transform: "translate(-20%)" }}
+              h={screenSize.width > 1024 ? "300px" : "200px"}
+              transform={
+                screenSize.width > 1024 ? "translate(-20%)" : "translate(-50%)"
+              }
             />
           )}
           <Stack
             direction={"column"}
             mt={5}
-            style={{ transform: "translate(-10%)" }}
+            transform={
+              screenSize.width > 1024 ? "translate(-10%)" : "translate(-22%)"
+            }
           >
             <Text color="brand.200" textAlign={"center"}>
               Do you also want some cookies?
