@@ -118,7 +118,7 @@ export const Root = () => {
         </Flex>
       </PopUp>
       {showCookies && <CookiesShower show />}
-      {noCookie && <TrashCookie />}
+      {noCookie && <TrashCookie screenSize={screenSize} />}
       <Box>
         <Navigation toggleMenu={() => setShowMenu(!showMenu)} />
         {showMenu && <Menu categories={categories} />}

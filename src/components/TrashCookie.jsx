@@ -1,7 +1,7 @@
 import { Box, Image, Center } from "@chakra-ui/react";
 import "./trashCookie.css";
 
-export const TrashCookie = () => {
+export const TrashCookie = ({ screenSize }) => {
   return (
     <Box className="Nocookie-container">
       <div
@@ -11,7 +11,12 @@ export const TrashCookie = () => {
         }}
       ></div>
       <Center>
-        <Image mt={"20%"} src="/src/assets/TrashCan.png" zIndex={1000} />
+        <Image
+          mt={"20%"}
+          src="/src/assets/TrashCan.png"
+          zIndex={1000}
+          transform={screenSize.width <= 700 && "translate(15px, 180px)"}
+        />
       </Center>
     </Box>
   );
