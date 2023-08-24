@@ -7,16 +7,9 @@ import { parseISO } from "date-fns";
 import DatePicker from "react-datepicker";
 import { isBefore } from "../isBefore";
 import "../../pages/react-datepicker.css";
-import {
-  Stack,
-  Image,
-  Center,
-  Tooltip,
-  Editable,
-  Text,
-} from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 
-export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem_DateEnd = ({ eventItem }) => {
   const { dispatch } = useEvent();
   const { state } = useEvent();
   const [editDate, setEditDate] = useState(false);
@@ -45,43 +38,28 @@ export const EventEditSubItem_DateEnd = ({ eventItem, imgUrl, typeInput }) => {
   };
 
   return (
-    <Stack direction="row">
-      <Center>
-        <Tooltip label={typeInput}>
-          <Image
-            src={imgUrl}
-            height={10}
-            p={2}
-            bg="brand.200"
-            borderRadius="full"
-            mr={5}
-            alt={typeInput}
+    <>
+      {editDate ? (
+        <Stack direction={"column"}>
+          <DatePicker
+            selectsEnd
+            selected={newEnd}
+            onChange={(date) => setNewEnd(date)}
+            endDate={newEnd}
+            startDate={parseISO(state.editStart)}
+            minDate={parseISO(state.editStart)}
+            showTimeSelect
+            dateFormat="dd-MM-yyy HH:mm"
+            name="endTime"
+            onKeyDown={(e) => e.preventDefault()}
+            dropdownMode="select"
           />
-        </Tooltip>
-        <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          {editDate ? (
-            <Stack direction={"column"}>
-              <DatePicker
-                selectsEnd
-                selected={newEnd}
-                onChange={(date) => setNewEnd(date)}
-                endDate={newEnd}
-                startDate={parseISO(state.editStart)}
-                minDate={parseISO(state.editStart)}
-                showTimeSelect
-                dateFormat="dd-MM-yyy HH:mm"
-                name="endTime"
-                onKeyDown={(e) => e.preventDefault()}
-                dropdownMode="select"
-              />
-            </Stack>
-          ) : (
-            <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
-              {getOutput(eventItem)}
-            </Text>
-          )}
-        </Editable>
-      </Center>
-    </Stack>
+        </Stack>
+      ) : (
+        <Text cursor={"crosshair"} onClick={() => setEditDate(!editDate)}>
+          {getOutput(eventItem)}
+        </Text>
+      )}
+    </>
   );
 };
