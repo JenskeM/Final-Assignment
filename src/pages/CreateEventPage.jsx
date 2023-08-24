@@ -62,10 +62,7 @@ export const CreateEventsPage = () => {
   const [startDateTime, setStartDateTime] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState(new Date());
   const [marginLR, setMarginLR] = useState();
-  const [transX, setTransX] = useState();
   const toast = useToast();
-
-  console.log(marginLR);
 
   const createBgStyle = {
     backgroundImage: `linear-gradient(to bottom, rgba(32, 39, 33, 0.9), rgba(0, 52, 0, 0.9), rgba(180, 195, 157, 0.73)), url("src/assets/Background.jpeg")`,
@@ -85,17 +82,12 @@ export const CreateEventsPage = () => {
 
   useEffect(() => {
     changeMarginLR();
-    changeX();
   }, [screenSize]);
 
   const changeMarginLR = () => {
     setMarginLR((screenSize.width - 110 - 300) / 2);
     //110 is the width of the labels in the form
     //300 is the width of the controls in the form
-  };
-
-  const changeX = () => {
-    setTransX((screenSize.width - 300) / 2);
   };
 
   return (
@@ -113,7 +105,7 @@ export const CreateEventsPage = () => {
           rowGap={8}
           color={"brand.300"}
           sx={{
-            transform: screenSize.width <= 700 && `translateX(${transX}px)`,
+            transform: screenSize.width <= 700 && `translateX(20px)`,
           }}
         >
           <FormControl isRequired>
