@@ -64,7 +64,7 @@ export const Root = () => {
   return (
     <EventProvider>
       <PopUp
-        // show={ShowPopup}
+        show={ShowPopup}
         onClose={() => setShowPopup(false)}
         height={screenSize.width <= 700 ? "35%" : "25%"}
         borderRad={"20px"}
