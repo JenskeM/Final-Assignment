@@ -55,6 +55,7 @@ export const EventPage = () => {
   const navigate = useNavigate();
   const [imageWidth, setImageWidth] = useState(null);
   const [imageHeight, setImageHeight] = useState(null);
+  const [imageSourceWidth, setImageSourceWidth] = useState();
   const [isEditable, setIsEditable] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [editCreator, setEditCreator] = useState(false);
@@ -86,6 +87,10 @@ export const EventPage = () => {
     backgroundImage: `linear-gradient(to bottom,  rgba(180, 195, 157, 0.63),  rgba(250, 245, 233, 0.9)), url(${userToShow.image})`,
     backgroundSize: "cover",
   };
+
+  useEffect(() => {
+    setImageSourceWidth(screenSize.width - event.image.length - 50);
+  }, [screenSize, event.image]);
 
   const toast = useToast();
   const handleClick = () => {
@@ -302,7 +307,10 @@ export const EventPage = () => {
                     color="black"
                     defaultValue={imageUrl}
                   >
-                    <EditablePreview cursor={"crosshair"} />
+                    <EditablePreview
+                      cursor={"crosshair"}
+                      width={screenSize.width <= 700 && imageSourceWidth}
+                    />
                     <EditableInput
                       bg="brand.100"
                       w={"50vw"}
@@ -341,12 +349,14 @@ export const EventPage = () => {
                   imgUrl={"/src/assets/Info.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.DESCRIPTION}
+                  width={isEditable && screenSize.width <= 700 && "200px"}
                 />{" "}
                 <EventSubItem
                   eventItem={event.location}
                   imgUrl={"/src/assets/Location.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.LOCATION}
+                  width={isEditable && screenSize.width <= 700 && "200px"}
                 />
                 {isEditable ? (
                   <Stack direction={"column"}>
@@ -376,6 +386,7 @@ export const EventPage = () => {
                   imgUrl={"/src/assets/Categories.png"}
                   isEditable={isEditable}
                   typeInput={TYPES.CATEGORIES}
+                  direction={screenSize.width <= 700 ? "column" : "row"}
                 />
               </Grid>
             </Stack>

@@ -20,7 +20,12 @@ export const loader = async () => {
   };
 };
 
-export const EventEditSubItem_Cats = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem_Cats = ({
+  eventItem,
+  imgUrl,
+  typeInput,
+  direction,
+}) => {
   const { dispatch } = useEvent();
   const { categories } = useLoaderData();
   const [selectedCategories, setSelectedCategories] = useState(
@@ -59,7 +64,7 @@ export const EventEditSubItem_Cats = ({ eventItem, imgUrl, typeInput }) => {
           />
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <Stack direction={"row"}>
+          <Stack direction={direction}>
             {editCats ? (
               categories.map((category) => {
                 const isChecked = selectedCategories.has(category.id);

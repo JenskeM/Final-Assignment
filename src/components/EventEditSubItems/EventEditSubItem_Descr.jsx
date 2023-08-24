@@ -11,7 +11,12 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 
-export const EventEditSubItem_Descr = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem_Descr = ({
+  eventItem,
+  imgUrl,
+  typeInput,
+  width,
+}) => {
   const { dispatch } = useEvent();
   const [editDescription, setEditDescription] = useState(eventItem);
 
@@ -34,7 +39,7 @@ export const EventEditSubItem_Descr = ({ eventItem, imgUrl, typeInput }) => {
           />
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <EditablePreview cursor={"crosshair"} />
+          <EditablePreview cursor={"crosshair"} width={width} />
           <EditableTextarea
             bg="brand.100"
             value={editDescription}

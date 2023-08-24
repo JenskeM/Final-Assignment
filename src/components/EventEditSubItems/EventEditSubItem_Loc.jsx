@@ -11,7 +11,12 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 
-export const EventEditSubItem_Loc = ({ eventItem, imgUrl, typeInput }) => {
+export const EventEditSubItem_Loc = ({
+  eventItem,
+  imgUrl,
+  typeInput,
+  width,
+}) => {
   const { dispatch } = useEvent();
   const [editLocation, setEditLocation] = useState(eventItem);
   const [locCheck, setLocCheck] = useState(false);
@@ -42,7 +47,11 @@ export const EventEditSubItem_Loc = ({ eventItem, imgUrl, typeInput }) => {
           />
         </Tooltip>
         <Editable textAlign={"center"} color="black" defaultValue={eventItem}>
-          <EditablePreview cursor={"crosshair"} minWidth={"100px"} />
+          <EditablePreview
+            cursor={"crosshair"}
+            minWidth={"100px"}
+            width={width}
+          />
           <EditableInput
             bg="brand.100"
             value={editLocation}

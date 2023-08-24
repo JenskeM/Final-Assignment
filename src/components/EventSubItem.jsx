@@ -13,6 +13,8 @@ export const EventSubItem = ({
   imgUrl,
   date,
   typeInput,
+  width,
+  direction,
 }) => {
   return (
     <>
@@ -30,18 +32,21 @@ export const EventSubItem = ({
           eventItem={eventItem}
           imgUrl={imgUrl}
           typeInput={typeInput}
+          width={width}
         />
       ) : typeInput === TYPES.LOCATION ? (
         <EventEditSubItem_Loc
           eventItem={eventItem}
           imgUrl={imgUrl}
           typeInput={typeInput}
+          width={width}
         />
       ) : typeInput === TYPES.CATEGORIES ? (
         <EventEditSubItem_Cats
           eventItem={eventItem}
           imgUrl={imgUrl}
           typeInput={typeInput}
+          direction={direction}
         />
       ) : typeInput === TYPES.DATE_START ? (
         <EventEditSubItem_DateStart
